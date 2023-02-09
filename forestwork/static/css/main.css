@@ -5,12 +5,15 @@
     --color-main: #181C32;
     --color-muted: #7f8b99;
     --color-border: #ebebeb;
+    --color-green: #54d226;
+    --color-green-hover: #4bbf21;
 }
 
 body{
     font-family: 'Montserrat', sans-serif;
     background: var(--main-bg);
     color: var(--color-main);
+    font-size:14px;
 }
 
 a{
@@ -21,9 +24,59 @@ a:hover{
     text-decoration: underline;
 }
 
+.form-label {
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.btn {
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 10px 15px;
+}
+
+.btn-primary{
+    background: var(--color-green);
+    color:#fff;
+}
+
+.btn-primary:hover{
+    background: var(--color-green-hover);
+    color:#fff;
+}
+
 .navbar{
     background: #fff;
     margin: 0 0 20px;
+}
+
+.navbar .navbar-brand {
+    color: var(--color-green);
+    font-weight: bold;
+    text-decoration:none
+}
+
+.navbar .nav-link {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-muted);
+    text-decoration:none;
+}
+
+.navbar .nav-link:hover {
+    color: var(--color-main);
+}
+
+a.nav-link.btn-link {
+    border-radius: 6px;
+    background: var(--color-green);
+    color: #ffffff;
+}
+
+a.nav-link.btn-link:hover {
+    background: var(--color-green-hover);
+    color: #ffffff;
 }
 
 .header{
@@ -84,11 +137,68 @@ a:hover{
     color: var(--color-muted);
 }
 
+.user-profile {
+    padding-left: 120px;
+    min-height: 100px;
+    position: relative;
+}
+
+.user-profile .avatar {
+    width: 100px;
+    height: 100px;
+    background: var(--color-green);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.user-profile .name {
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.user-profile .location {
+    font-weight: 500;
+}
+
+.user-profile .date{
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.list-contacts li{
+    display: flex;
+    padding: 5px 0;
+}
+
+.list-contacts li .left{
+    width:200px;
+    color: var(--color-muted);
+}
+
 footer{
     padding: 30px 0;
     background: #fff;
+    border-top: 3px solid var(--color-green);
 }
 
 footer .footer-menu li{
     margin-right:15px
+}
+
+footer .footer-menu li a{
+    color: var(--color-main);
+    font-weight: 500;
+}
+
+footer .footer-menu li a:hover{
+    color: var(--color-green);
 }

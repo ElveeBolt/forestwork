@@ -6,5 +6,17 @@
         <h1>{{ title }}</h1>
         <div class="subtitle">{{ subtitle }}</div>
     </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card card-user">
+                <h2><a href="{% url 'employer' user_id=1 %}">Название компании</a></h2>
+                <div class="subinfo mb-2"><div>Киев</div></div>
+                <div class="description">
+                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
+                    продукту.
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
