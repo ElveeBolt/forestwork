@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>500 $</h2>
+                    <div class="subtitle">
+                        <span>Киев</span> - <span>08.12.2022 14:26</span>
+                    </div>
+                </div>
+                <div class="description">
+                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.
+                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
+                </div>
+                <div class="comment">
+                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Контакты</h2>
+                    <div class="subtitle">Контактные данные для связи с работодателем</div>
+                </div>
+                <ul class="list-unstyled">
+                    <li><span class="left">Название компании: </span><span class="right"><a href="{% url 'employer' user_id=1 %}">Компания Soft</a></span></li>
+                    <li><span class="left">Телефон: </span><span class="right"><a href="tel: 380000000000">380000000000</a></span></li>
+                    <li><span class="left">E-mail: </span><span class="right"><a href="mailto: testmail@gmail.com">testmail@gmail.com</a></span></li>
+                    <li><span class="left">Telegram: </span><span class="right">380000000000</span></li>
+                    <li><span class="left">Whatsapp: </span><span class="right">380000000000</span></li>
+                    <li><span class="left">LinkedIn: </span><span class="right">380000000000</span></li>
+                    <li><span class="left">Веб-сайт: </span><span class="right"><a href="#">www.google.com</a></span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Компания Soft</h2>
+                    <div class="subtitle">Описание работодателя / компании</div>
+                </div>
+                <p>Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.</p>
+                <a href="{% url 'employer' user_id=1 %}" class="btn btn-primary">Смотреть профиль</a>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

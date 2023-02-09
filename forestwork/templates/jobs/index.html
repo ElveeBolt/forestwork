@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card card-job">
+                <h2><a href="{% url 'job' job_id=1 %}">Название вакансии</a></h2>
+                <div class="salary">500$</div>
+                <div class="description">
+                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
+                    продукту.
+                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
+                </div>
+                <div class="subinfo">
+                    <div>Киев</div>
+                    <div>08.12.2022 14:26</div>
+                </div>
+            </div>
+            <div class="card card-job">
+                <h2><a href="{% url 'job' job_id=1 %}">Название вакансии</a></h2>
+                <div class="salary">500$</div>
+                <div class="description">
+                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
+                    продукту.
+                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
+                </div>
+                <div class="subinfo">
+                    <div>Киев</div>
+                    <div>08.12.2022 14:26</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+
+        </div>
+    </div>
+</div>
+{% endblock content %}

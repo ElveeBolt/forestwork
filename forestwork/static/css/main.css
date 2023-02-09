@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
+:root{
+    --main-bg: #eff2f6;
+    --color-main: #181C32;
+    --color-muted: #7f8b99;
+    --color-border: #ebebeb;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    background: var(--main-bg);
+    color: var(--color-main);
+}
+
+a{
+    text-decoration: none;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+.navbar{
+    background: #fff;
+    margin: 0 0 20px;
+}
+
+.header{
+    margin-bottom: 20px
+}
+
+.header h1{
+    font-size: 30px;
+}
+
+.header .subtitle {
+    color: var(--color-muted);
+    font-weight: 500;
+}
+
+.card {
+    padding: 20px;
+    border: none;
+    margin-bottom: 20px;
+    -webkit-box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
+    box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
+    border-radius: 10px;
+}
+
+.card .card-heading {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.card .card-heading .subtitle{
+    color: var(--color-muted);
+}
+
+.card h2 {
+    font-size: 22px;
+}
+
+.card .salary {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.card .description {
+    margin-bottom: 10px;
+}
+
+.card .subinfo {
+    color: var(--color-muted);
+    font-weight: 500;
+}
+
+.comment {
+    border-top: 1px solid var(--color-border);
+    padding-top: 15px;
+    margin-top: 15px;
+    color: var(--color-muted);
+}
+
+footer{
+    padding: 30px 0;
+    background: #fff;
+}
+
+footer .footer-menu li{
+    margin-right:15px
+}

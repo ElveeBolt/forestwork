@@ -1,2 +1,2 @@
 # 🌳 ForestWork
-**Forestwork** - please see the <code>**DEV** branch</code>.
+**Forestwork** - job search service for developers.
