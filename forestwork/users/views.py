@@ -70,3 +70,23 @@ def profile_edit(request):
         'subtitle': 'Страница редактирования профиля'
     }
     return render(request, 'profile/edit.html', context=context)
+
+
+def login(request):
+    # TODO: add functionality login page.
+
+    context = {
+        'title': 'Авторизация',
+        'subtitle': 'Страница авторизации пользователя'
+    }
+    return render(request, 'users/login.html', context=context)
+
+
+def register(request):
+    # TODO: add functionality register page.
+
+    context = {
+        'title': 'Редактирование профиля',
+        'subtitle': 'Страница регистрации пользователя'
+    }
+    return render(request, 'users/register.html', context=context)

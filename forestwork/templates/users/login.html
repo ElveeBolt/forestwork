@@ -1,0 +1,22 @@
+{% extends 'base_blank.html' %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <h2>Авторизация</h2>
+        </div>
+        <form action="POST">
+            <div class="mb-3">
+                <label for="login" class="form-label">Логин:</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите логин...">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль:</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите пароль...">
+            </div>
+            <button class="btn btn-primary" type="submit">Войти</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}

@@ -1,0 +1,49 @@
+{% extends 'base_blank.html' %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <h2>Регистрация</h2>
+        </div>
+        <form action="POST">
+            <div class="mb-3">
+                <label for="login" class="form-label">Логин:</label>
+                <input type="text" class="form-control" id="login" placeholder="Введите логин...">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">E-mail:</label>
+                <input type="email" class="form-control" id="email" placeholder="Введите e-mail...">
+            </div>
+            <div class="mb-3">
+                <label for="name" class="form-label">Имя:</label>
+                <input type="text" class="form-control" id="name" placeholder="Введите имя или название компании...">
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Выберите тип аккаунта:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                        Работодатель
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
+                    <label class="form-check-label" for="flexRadioDefault2">
+                        Разработчик
+                    </label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Пароль:</label>
+                <input type="password" class="form-control" id="password" placeholder="Введите пароль...">
+            </div>
+            <div class="mb-3">
+                <label for="password2" class="form-label">Повторите пароль:</label>
+                <input type="password" class="form-control" id="password2" placeholder="Повторите пароль...">
+            </div>
+            <button class="btn btn-primary" type="submit">Регистрация</button>
+        </form>
+    </div>
+</section>
+{% endblock content %}

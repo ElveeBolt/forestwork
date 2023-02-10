@@ -130,6 +130,11 @@ a.nav-link.btn-link:hover {
     font-weight: 500;
 }
 
+.card-box{
+    width:400px;
+    margin:0;
+}
+
 .comment {
     border-top: 1px solid var(--color-border);
     padding-top: 15px;
@@ -182,6 +187,13 @@ a.nav-link.btn-link:hover {
 .list-contacts li .left{
     width:200px;
     color: var(--color-muted);
+}
+
+section.blank {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 footer{
