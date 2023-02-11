@@ -13,42 +13,43 @@
                     <h2>Добавить вакансию</h2>
                     <div class="subtitle">Чтобы добавить вакансию заполните форму нижу</div>
                 </div>
-                <form>
+                <form method="POST">
+                    {% csrf_token %}
                     <div class="mb-3">
-                        <label for="title" class="form-label">Название:</label>
-                        <input type="text" class="form-control" id="title" placeholder="Введите название...">
+                        <label for="{{ form.title.auto_id }}" class="form-label">{{ form.title.label }}</label>
+                        {{ form.title }}
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="form-label">Описание:</label>
-                        <textarea class="form-control" id="description" rows="3" placeholder="Введите описание к вакансии..."></textarea>
+                        <label for="{{ form.description.auto_id }}" class="form-label">{{ form.description.label }}</label>
+                        {{ form.description }}
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="country" class="form-label">Страна:</label>
-                                <input type="text" class="form-control" id="country" placeholder="Укажите страну...">
+                                <label for="{{ form.country.auto_id }}" class="form-label">{{ form.country.label }}</label>
+                                {{ form.country }}
                             </div>
                         </div>
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="city" class="form-label">Город:</label>
-                                <input type="text" class="form-control" id="city" placeholder="Укажите город...">
+                                <label for="{{ form.city.auto_id }}" class="form-label">{{ form.city.label }}</label>
+                                {{ form.city }}
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
                             <div class="mb-3">
-                                <label for="salary" class="form-label">Зарплата:</label>
-                                <input type="number" class="form-control" id="salary">
-                                <div class="form-text">Учтите, зарплата указывается в долларах</div>
+                                <label for="{{ form.salary.auto_id }}" class="form-label">{{ form.salary.label }}</label>
+                                {{ form.salary }}
+                                <div class="form-text">{{ form.salary.help_text }}</div>
                             </div>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="comment" class="form-label">Комментарий:</label>
-                        <textarea class="form-control" id="comment" rows="3" placeholder="Дополнительная информация..."></textarea>
-                        <div class="form-text">Укажите дополнительную информацию, которая так или иначе относится к вашему предложению.</div>
+                        <label for="{{ form.comment.auto_id }}" class="form-label">{{ form.comment.label }}</label>
+                        {{ form.comment }}
+                        <div class="form-text">{{ form.comment.help_text }}</div>
                     </div>
                     <button type="submit" class="btn btn-primary">Добавить вакансию</button>
                 </form>

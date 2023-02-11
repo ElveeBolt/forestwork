@@ -3,25 +3,20 @@
 {% block content %}
 <div class="container">
     <div class="header">
-        <h1>{{ title }}</h1>
+        <h1>{{ job.title }}</h1>
         <div class="subtitle">{{ subtitle }}</div>
     </div>
     <div class="row">
         <div class="col-8">
             <div class="card">
                 <div class="card-heading">
-                    <h2>500 $</h2>
+                    <h2>{{ job.salary }} $</h2>
                     <div class="subtitle">
-                        <span>Киев</span> - <span>08.12.2022 14:26</span>
+                        <span>{{ job.country }} {{ job.city }}</span> - <span>{{ job.date_publish }}</span>
                     </div>
                 </div>
-                <div class="description">
-                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.
-                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
-                </div>
-                <div class="comment">
-                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.
-                </div>
+                <div class="description">{{ job.description }}</div>
+                <div class="comment">{{ job.comment }}</div>
             </div>
             <div class="card">
                 <div class="card-heading">

@@ -8,32 +8,52 @@
     </div>
     <div class="row">
         <div class="col-8">
+            {% for job in page_obj %}
             <div class="card card-job">
-                <h2><a href="{% url 'job' job_id=1 %}">Название вакансии</a></h2>
-                <div class="salary">500$</div>
-                <div class="description">
-                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
-                    продукту.
-                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
-                </div>
+                <h2><a href="{% url 'job' job_id=job.id %}">{{ job.title }}</a></h2>
+                <div class="salary">{{ job.salary }}$</div>
+                <div class="description">{{ job.description | truncatewords:20 }}</div>
                 <div class="subinfo">
-                    <div>Киев</div>
-                    <div>08.12.2022 14:26</div>
+                    <div>{{ job.country }} {{ job.city }}</div>
+                    <div>{{ job.date_publish }}</div>
                 </div>
             </div>
-            <div class="card card-job">
-                <h2><a href="{% url 'job' job_id=1 %}">Название вакансии</a></h2>
-                <div class="salary">500$</div>
-                <div class="description">
-                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
-                    продукту.
-                    Зараз ми шукаємо у свою команду QA manager-a у відділ Email-маркетингу.
-                </div>
-                <div class="subinfo">
-                    <div>Киев</div>
-                    <div>08.12.2022 14:26</div>
-                </div>
-            </div>
+            {% endfor %}
+            <nav>
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <i class="fi fi-rr-angle-small-left"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#">
+                            <i class="fi fi-rr-angle-small-left"></i>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for i in page_obj.paginator.page_range %}
+                    {% if page_obj.number == i %}
+                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <i class="fi fi-rr-angle-small-right"></i>
+                        </a>
+                    </li>
+                    {% else %}
+                    <li class="page-item disabled">
+                        <a class="page-link" href="#"><i class="fi fi-rr-angle-small-right"></i></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
         </div>
         <div class="col-4">
             <div class="card">
@@ -42,7 +62,7 @@
                 </div>
                 <p>Самый простой способ найти новых сотрудника — создать вакансию.</p>
                 <div>
-                    <a class="btn btn-primary" href="{% url 'job_add' %}">Добавить вакансию</a>
+                    <a class="btn btn-primary btn-with-icon" href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a>
                 </div>
             </div>
         </div>
