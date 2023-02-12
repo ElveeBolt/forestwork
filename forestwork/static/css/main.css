@@ -57,6 +57,8 @@ a:hover{
 .navbar{
     background: #fff;
     margin: 0 0 20px;
+    -webkit-box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
+    box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
 }
 
 .navbar .navbar-brand {
@@ -238,6 +240,55 @@ section.blank {
 .page-item:first-child .page-link,
 .page-item:last-child .page-link {
     border-radius: 10px
+}
+
+section{
+    padding: 80px 0;
+}
+
+#home {
+    margin-top: -30px;
+    background: url('../img/home_bg.jpg');
+    background-size: cover;
+    background-position: center;
+    padding: 200px;
+    text-align: center;
+}
+
+#home h1{
+     color: var(--color-green);
+    font-weight: bold;
+}
+
+#home .subtitle {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+#features .card{
+        padding-left: 100px;
+}
+
+#features .card .title{
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+#features .card i {
+    font-size: 34px;
+    width: 60px;
+    height: 60px;
+    background: var(--main-bg);
+    text-align: center;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-green);
+    position: absolute;
+    left: 20px;
+    top: 20px;
 }
 
 footer{

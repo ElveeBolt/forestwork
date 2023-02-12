@@ -1,7 +1,45 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container">
-    Главная страница
-</div>
+<section id="home">
+    <div class="container">
+        <h1>ForestWork</h1>
+        <div class="subtitle text-muted mb-3">Сервис поиска работы и кандидатов</div>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'job_add' %}" class="btn btn-primary btn-with-icon" style="margin-right: 20px"><i class="fi fi-rr-add"></i>Добавить вакансию</a>
+            <a href="{% url 'jobs' %}" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-briefcase"></i>Смотреть вакансии</a>
+        </div>
+
+    </div>
+</section>
+<section id="features">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Создайте профиль и начните поиск работы</h2>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="card">
+                    <i class="fi fi-rr-briefcase"></i>
+                    <div class="title">Работодатели сами предлагают работу</div>
+                    <div class="text-muted">Работодатели видят ваш профиль на сайте и могут сами связываться с вами и
+                        предложить работу.
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card">
+                    <i class="fi fi-rr-form"></i>
+                    <div class="title">Все контакты в одном месте</div>
+                    <div class="text-muted">Не важно, работодатель вы или разработчик, смотрите контакты потенциальных
+                        партнеров на страницах профиля
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock content %}
+
+
+
