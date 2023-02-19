@@ -1,4 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.models import auth
+from .forms import LoginForm, RegisterForm
 
 
 # Create your views here.
@@ -73,20 +75,46 @@ def profile_edit(request):
 
 
 def login(request):
-    # TODO: add functionality login page.
-
     context = {
         'title': 'Авторизация',
-        'subtitle': 'Страница авторизации пользователя'
+        'subtitle': 'Страница авторизации пользователя',
+        'form': LoginForm()
     }
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = request.POST['username']
+            password = request.POST['password']
+            user = auth.authenticate(username=username, password=password)
+
+            if user is not None:
+                auth.login(request, user)
+                return redirect('/')
+            else:
+                form.add_error(None, 'Пользователь с таким именем и паролем не найден')
+
+        context['form'] = form
+
     return render(request, 'users/login.html', context=context)
 
 
 def register(request):
-    # TODO: add functionality register page.
-
     context = {
-        'title': 'Редактирование профиля',
-        'subtitle': 'Страница регистрации пользователя'
+        'title': 'Регистрация профиля',
+        'subtitle': 'Страница регистрации пользователя',
+        'form': RegisterForm()
     }
+
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.username = user.username.lower()
+            user.save()
+            auth.login(request, user)
+            return redirect('/')
+        else:
+            context['form'] = form
+
     return render(request, 'users/register.html', context=context)

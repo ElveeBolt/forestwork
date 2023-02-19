@@ -6,15 +6,21 @@
         <div class="card-heading">
             <h2>Авторизация</h2>
         </div>
-        <form action="POST">
+        <form method="POST">
+            {% csrf_token %}
             <div class="mb-3">
-                <label for="login" class="form-label">Логин:</label>
-                <input type="text" class="form-control" id="login" placeholder="Введите логин...">
+                <label for="{{ form.username.auto_id }}" class="form-label">{{ form.username.label }}</label>
+                {{ form.username }}
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Пароль:</label>
-                <input type="password" class="form-control" id="password" placeholder="Введите пароль...">
+                <label for="{{ form.password.auto_id }}" class="form-label">{{ form.password.label }}</label>
+                {{ form.password }}
             </div>
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="text-danger">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
             <button class="btn btn-primary" type="submit">Войти</button>
         </form>
     </div>

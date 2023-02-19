@@ -6,41 +6,51 @@
         <div class="card-heading">
             <h2>Регистрация</h2>
         </div>
-        <form action="POST">
+        <form method="POST">
+            {% csrf_token %}
             <div class="mb-3">
-                <label for="login" class="form-label">Логин:</label>
-                <input type="text" class="form-control" id="login" placeholder="Введите логин...">
+                <label for="{{ form.username.auto_id }}" class="form-label">{{ form.username.label }}</label>
+                {{ form.username }}
+                {% if form.username.errors %}
+                    {% for error in form.username.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="mb-3">
-                <label for="email" class="form-label">E-mail:</label>
-                <input type="email" class="form-control" id="email" placeholder="Введите e-mail...">
+                <label for="{{ form.email.auto_id }}" class="form-label">{{ form.email.label }}</label>
+                {{ form.email }}
+                {% if form.email.errors %}
+                    {% for error in form.email.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
             <div class="mb-3">
-                <label for="name" class="form-label">Имя:</label>
-                <input type="text" class="form-control" id="name" placeholder="Введите имя или название компании...">
+                <label for="{{ form.name.auto_id }}" class="form-label">{{ form.name.label }}</label>
+                {{ form.name }}
             </div>
             <div class="mb-3">
-                <label class="form-label">Выберите тип аккаунта:</label>
+                <label for="{{ form.type.auto_id }}" class="form-label">{{ form.type.label }}</label>
+                {% for radio in form.type %}
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                        Работодатель
-                    </label>
+                    {{ radio.tag }}
+                    <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
                 </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                    <label class="form-check-label" for="flexRadioDefault2">
-                        Разработчик
-                    </label>
-                </div>
+                {% endfor %}
             </div>
             <div class="mb-3">
-                <label for="password" class="form-label">Пароль:</label>
-                <input type="password" class="form-control" id="password" placeholder="Введите пароль...">
+                <label for="{{ form.password1.auto_id }}" class="form-label">{{ form.password1.label }}</label>
+                {{ form.password1 }}
             </div>
             <div class="mb-3">
-                <label for="password2" class="form-label">Повторите пароль:</label>
-                <input type="password" class="form-control" id="password2" placeholder="Повторите пароль...">
+                <label for="{{ form.password2.auto_id }}" class="form-label">{{ form.password2.label }}</label>
+                {{ form.password2 }}
+                {% if form.password2.errors %}
+                    {% for error in form.password2.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
             </div>
             <button class="btn btn-primary" type="submit">Регистрация</button>
         </form>
