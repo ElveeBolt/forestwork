@@ -13,8 +13,29 @@
                 <li class="nav-item"><a class="nav-link" href="{% url 'developers' %}">Разработчики</a></li>
             </ul>
             <ul class="navbar-nav ms-auto ">
+                {% if user.type == 1 %}
                 <li class="nav-item"><a class="nav-link btn-link btn-with-icon" href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a></li>
-                <li class="nav-item"><a class="nav-link btn-icon" href="{% url 'profile' %}"><i class="fi fi-rr-user"></i></a></li>
+                {% endif %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn-icon dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fi fi-rr-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end mini-profile">
+                        {% if user.is_authenticated %}
+                        <li class="main-profile">
+                            <span class="avatar">{{ user.username|slice:":2" }}</span>
+                            <span class="name">{{ user.name }}</span>
+                            <span class="emails text-muted">{{ user.email }}</span>
+                        </li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fi fi-rr-user"></i>Мой профиль</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile_edit' %}"><i class="fi fi-rr-settings"></i>Настройки</a></li>
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fi fi-rr-sign-out-alt"></i>Выход</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'login' %}"><i class="fi fi-rr-sign-in-alt"></i>Авторизация</a></li>
+                        <li><a class="dropdown-item" href="{% url 'register' %}"><i class="fi fi-rr-enter"></i>Зарегистрироватся</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
