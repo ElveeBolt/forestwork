@@ -6,5 +6,59 @@
         <h1>{{ title }}</h1>
         <div class="subtitle">{{ subtitle }}</div>
     </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="user-profile">
+                    <div class="avatar">{{ user.username|slice:"2" }}</div>
+                    <div class="name">{{ user.name }}</div>
+                    <div class="location text-muted">{{ user.country }}, {{ user.city }}</div>
+                    <div class="date text-muted">На сервисе с: {{ user.date_joined }}</div>
+                    <a href="{% url 'profile_edit' %}">Редактировать</a>
+                </div>
+            </div>
+            {% if user.about %}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>О себе</h2>
+                    <div class="subtitle">Дополнительная информация</div>
+                </div>
+                {{ user.about }}
+            </div>
+            {% endif %}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Контактная информация</h2>
+                    <div class="subtitle">Список доступных контактов пользователя</div>
+                </div>
+                <ul class="list-unstyled list-contacts mb-0">
+                    {% if user.phone %}
+                    <li><span class="left">Телефон:</span><span class="right"><a href="tel:{{ user.phone }}">{{ user.phone }}</a></span></li>
+                    {% endif %}
+                    {% if user.email %}
+                    <li><span class="left">E-mail:</span><span class="right"><a href="mailto:{{ user.email }}">{{ user.email }}</a></span></li>
+                    {% endif %}
+                    {% if user.telegram %}
+                    <li><span class="left">Telegram:</span><span class="right">{{ user.telegram }}</span></li>
+                    {% endif %}
+                    {% if user.whatsapp %}
+                    <li><span class="left">Whatsapp:</span><span class="right">{{ user.whatsapp }}</span></li>
+                    {% endif %}
+                    {% if user.linkedin %}
+                    <li><span class="left">LinkedIn:</span><span class="right"><a href="{{ user.linkedin }}">{{ user.linkedin }}</a></span></li>
+                    {% endif %}
+                    {% if user.github %}
+                    <li><span class="left">GitHub:</span><span class="right"><a href="{{ user.github }}">{{ user.github }}</a></span></li>
+                    {% endif %}
+                    {% if user.website %}
+                    <li><span class="left">Веб-сайт:</span><span class="right"><a href="{{ user.website }}">{{ user.website }}</a></span></li>
+                    {% endif %}
+                    {% if user.portfolio %}
+                    <li><span class="left">Портфолио:</span><span class="right"><a href="{{ user.portfolio }}">{{ user.portfolio }}</a></span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
