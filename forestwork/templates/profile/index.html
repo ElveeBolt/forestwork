@@ -12,9 +12,15 @@
                 <div class="user-profile">
                     <div class="avatar">{{ user.username|slice:"2" }}</div>
                     <div class="name">{{ user.name }}</div>
-                    <div class="location text-muted">{{ user.country }}, {{ user.city }}</div>
+                    <div class="location text-muted">
+                        <i class="fi fi-rr-marker"></i>
+                        {% if not user.country and not user.city %}
+                            Не указано
+                        {% else %}
+                            {{ user.country }} {{ user.city }}
+                        {% endif %}
+                    </div>
                     <div class="date text-muted">На сервисе с: {{ user.date_joined }}</div>
-                    <a href="{% url 'profile_edit' %}">Редактировать</a>
                 </div>
             </div>
             {% if user.about %}
@@ -58,6 +64,9 @@
                     {% endif %}
                 </ul>
             </div>
+        </div>
+        <div class="col-4">
+            {% include 'profile/menu.html' %}
         </div>
     </div>
 </div>

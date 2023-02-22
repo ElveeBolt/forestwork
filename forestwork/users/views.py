@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout
+from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import auth
-from .forms import LoginForm, RegisterForm
+from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 
 
 # Create your views here.
@@ -65,14 +65,83 @@ def profile(request):
     return render(request, 'profile/index.html', context=context)
 
 
-def profile_edit(request):
-    # TODO: add functionality edit profile page.
-
+def profile_main(request):
     context = {
         'title': 'Редактирование профиля',
-        'subtitle': 'Страница редактирования профиля'
+        'subtitle': 'Страница редактирования профиля',
+        'form': UserAboutForm(initial={
+            'name': request.user.name,
+            'about': request.user.about
+        })
     }
-    return render(request, 'profile/edit.html', context=context)
+
+    if request.method == 'POST':
+        form = UserAboutForm(request.POST)
+        user = request.user
+        if form.is_valid():
+            about = form.save(commit=False)
+            user.about = about.about
+            user.name = about.name
+            user.save()
+            return redirect('/users/profile')
+
+    return render(request, 'profile/main.html', context=context)
+
+
+def profile_contacts(request):
+    context = {
+        'title': 'Редактирование профиля',
+        'subtitle': 'Страница редактирования профиля',
+        'form': UserContactForm(initial={
+            'country': request.user.country,
+            'city': request.user.city,
+            'phone': request.user.phone,
+            'telegram': request.user.telegram,
+            'whatsapp': request.user.whatsapp,
+            'linkedin': request.user.linkedin,
+            'github': request.user.github,
+            'website': request.user.website,
+            'portfolio': request.user.portfolio,
+        })
+    }
+
+    if request.method == 'POST':
+        form = UserContactForm(request.POST)
+        user = request.user
+        if form.is_valid():
+            contacts = form.save(commit=False)
+            user.country = contacts.country
+            user.city = contacts.city
+            user.phone = contacts.phone
+            user.telegram = contacts.telegram
+            user.whatsapp = contacts.whatsapp
+            user.linkedin = contacts.linkedin
+            user.github = contacts.github
+            user.website = contacts.website
+            user.portfolio = contacts.portfolio
+            user.save()
+            return redirect('/users/profile')
+
+    return render(request, 'profile/contacts.html', context=context)
+
+
+def profile_password(request):
+    context = {
+        'title': 'Редактирование профиля',
+        'subtitle': 'Страница редактирования профиля',
+        'form': UserPasswordForm(request.user)
+    }
+
+    if request.method == 'POST':
+        form = UserPasswordForm(request.user, request.POST)
+        if form.is_valid():
+            form.save()
+            update_session_auth_hash(request, form.user)
+            return redirect('/users/profile')
+
+        context['form'] = form
+
+    return render(request, 'profile/password.html', context=context)
 
 
 def login(request):

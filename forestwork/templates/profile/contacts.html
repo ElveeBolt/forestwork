@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Контактная информация</h2>
+                    <div class="subtitle">Чтобы внести изменения в контактную информацию заполните форму ниже</div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="mb-3">
+                        <legend>Локация</legend>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.country.auto_id }}" class="form-label">{{ form.country.label }}</label>
+                                    {{ form.country }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.city.auto_id }}" class="form-label">{{ form.city.label }}</label>
+                                    {{ form.city }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <legend>Контактные данные</legend>
+                        <div class="mb-3">
+                            <label for="{{ form.phone.auto_id }}" class="form-label">{{ form.phone.label }}</label>
+                            {{ form.phone }}
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.telegram.auto_id }}" class="form-label">{{ form.telegram.label }}</label>
+                                    {{ form.telegram }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.whatsapp.auto_id }}" class="form-label">{{ form.whatsapp.label }}</label>
+                                    {{ form.whatsapp }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <legend>Другие ресурсы</legend>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.linkedin.auto_id }}" class="form-label">{{ form.linkedin.label }}</label>
+                                    {{ form.linkedin }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.github.auto_id }}" class="form-label">{{ form.github.label }}</label>
+                                    {{ form.github }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.website.auto_id }}" class="form-label">{{ form.website.label }}</label>
+                                    {{ form.website }}
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.portfolio.auto_id }}" class="form-label">{{ form.portfolio.label }}</label>
+                                    {{ form.portfolio }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-disk"></i>Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

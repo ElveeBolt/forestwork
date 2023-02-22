@@ -24,6 +24,14 @@ a:hover{
     text-decoration: underline;
 }
 
+legend {
+    background: var(--main-bg);
+    font-size: 14px;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
 .form-label {
     margin-bottom: 5px;
     font-weight: 500;
@@ -237,6 +245,7 @@ width: 50px;
     position: absolute;
     top: 0;
     left: 0;
+    text-transform: uppercase;
 }
 
 .user-profile .name {
@@ -342,6 +351,28 @@ section{
     position: absolute;
     left: 20px;
     top: 20px;
+}
+
+.list-menu li {
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.list-menu li:last-child{
+    padding-bottom:0;
+    border:none;
+}
+
+.list-menu a {
+    color: var(--color-main);
+}
+
+.list-menu a i{
+    font-size: 18px;
+    float: left;
+    margin-right: 5px;
+    line-height: 1;
 }
 
 footer{
