@@ -3,8 +3,6 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import JobForm
 from .models import Job
-from django.forms.models import model_to_dict
-
 
 
 # Create your views here.
@@ -31,14 +29,12 @@ def index(request):
 
 
 def job(request, job_id):
-    # TODO: add functionality Job details page.
-
     context = {
         'title': 'Название вакансии',
-        'subtitle': 'Детальная информация касательно вакансии'
+        'subtitle': 'Детальная информация касательно вакансии',
+        'job': Job.objects.get(id=job_id)
     }
-    job = Job.objects.get(id=job_id)
-    context['job'] = job
+
     return render(request, 'jobs/job.html', context=context)
 
 
