@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Список вакансий</h2>
+                    <div class="subtitle">Список опубликованных вами вакансий</div>
+                </div>
+                <div class="profile-job-list">
+                    {% for job in jobs %}
+                    <div class="job">
+                        <h2><a href="{% url 'job' job_id=job.id %}">{{ job.title }}</a></h2>
+                        <div class="buttons">
+                            <a href="{% url 'job_edit' job_id=job.id %}" class="btn btn-sm">Редактировать</a>
+                            <button type="button" class="btn btn-sm btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' job_id=job.id %}" data-title="{{ job.title }}">Удалить</button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="delete-vacancy" tabindex="-1" aria-labelledby="delete-vacancy-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="delete-vacancy-label"></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Данная операция приведет к удалению вакансии без возможности восстановления. Подтвердите это действие.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+          <form method="post" action="">
+              {% csrf_token %}
+              <button type="submit" class="btn">Подтвердить</button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}
+{% block scripts %}
+<script>
+$(".btn-delete-vacancy").click(function () {
+    var url = $(this).attr('data-url');
+    var title = $(this).attr('data-title');
+
+    $('#delete-vacancy-label').text(title);
+    $('form').attr('action', url);
+});
+</script>
+{% endblock scripts %}
