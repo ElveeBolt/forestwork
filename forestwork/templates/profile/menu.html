@@ -5,6 +5,9 @@
     </div>
     <ul class="list-group list-menu">
         <li class="list-group-item"><a href="{% url 'profile' %}"><i class="fi fi-rr-user"></i>Мой профиль</a></li>
+        {% if user.type == 1 %}
+        <li class="list-group-item"><a href="{% url 'profile_jobs' %}"><i class="fi fi-rr-lock"></i>Мои вакансии</a></li>
+        {% endif %}
         <li class="list-group-item"><a href="{% url 'profile_main' %}"><i class="fi fi-rr-document"></i>Общее</a></li>
         <li class="list-group-item"><a href="{% url 'profile_contacts' %}"><i class="fi fi-rr-at"></i>Контактные данные</a></li>
         <li class="list-group-item"><a href="{% url 'profile_password' %}"><i class="fi fi-rr-lock"></i>Сменить пароль</a></li>

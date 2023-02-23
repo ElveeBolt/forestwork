@@ -42,6 +42,13 @@ legend {
     font-size: 14px;
     font-weight: 500;
     padding: 10px 15px;
+    background: var(--main-bg);
+    color: var(--color-main);
+}
+
+.btn:hover{
+    background: var(--color-green);
+    color:#fff;
 }
 
 .btn-primary{
@@ -60,6 +67,11 @@ legend {
     float: left;
     margin-right: 5px;
     padding-top: 2px;
+}
+
+.btn-sm {
+    font-size: 13px;
+    padding: 5px 15px;
 }
 
 .navbar{
@@ -373,6 +385,18 @@ section{
     float: left;
     margin-right: 5px;
     line-height: 1;
+}
+
+.profile-job-list .job {
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.profile-job-list .job:last-child{
+    padding-bottom:0;
+    margin-bottom:0;
+    border:none;
 }
 
 footer{

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import auth
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
+from jobs.models import Job
 
 
 # Create your views here.
@@ -63,6 +64,16 @@ def profile(request):
         'subtitle': 'Страница профиля'
     }
     return render(request, 'profile/index.html', context=context)
+
+
+def profile_jobs(request):
+    context = {
+        'title': 'Мои вакансии',
+        'subtitle': 'Опубликованные вами вакансии',
+        'jobs': Job.objects.filter(user=request.user).all().values()
+    }
+
+    return render(request, 'profile/jobs.html', context=context)
 
 
 def profile_main(request):
