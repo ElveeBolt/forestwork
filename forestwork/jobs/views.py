@@ -67,3 +67,11 @@ def job_edit(request, job_id):
         'subtitle': 'Страница редактирования вакансии'
     }
     return render(request, 'jobs/job_edit.html', context=context)
+
+
+def job_delete(request, job_id):
+    if request.method == 'POST':
+        job = Job.objects.get(id=job_id)
+        if job.user == request.user:
+            Job.objects.filter(id=job_id).delete()
+            return redirect('/users/profile/jobs')
