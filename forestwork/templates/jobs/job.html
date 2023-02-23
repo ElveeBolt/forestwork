@@ -24,13 +24,13 @@
                     <div class="subtitle">Контактные данные для связи с работодателем</div>
                 </div>
                 <ul class="list-unstyled list-contacts">
-                    <li><span class="left">Название компании: </span><span class="right"><a href="{% url 'employer' user_id=1 %}">Компания Soft</a></span></li>
-                    <li><span class="left">Телефон: </span><span class="right"><a href="tel: 380000000000">380000000000</a></span></li>
-                    <li><span class="left">E-mail: </span><span class="right"><a href="mailto: testmail@gmail.com">testmail@gmail.com</a></span></li>
-                    <li><span class="left">Telegram: </span><span class="right">380000000000</span></li>
-                    <li><span class="left">Whatsapp: </span><span class="right">380000000000</span></li>
-                    <li><span class="left">LinkedIn: </span><span class="right">380000000000</span></li>
-                    <li><span class="left">Веб-сайт: </span><span class="right"><a href="#">www.google.com</a></span>
+                    <li><span class="left">Название компании: </span><span class="right"><a href="{% url 'employer' user_id=1 %}">{{ job.user.name }}</a></span></li>
+                    <li><span class="left">Телефон: </span><span class="right"><a href="tel:{{ job.user.phone }}">{{ job.user.phone }}</a></span></li>
+                    <li><span class="left">E-mail: </span><span class="right"><a href="mailto:{{ job.user.email }}">{{ job.user.email }}</a></span></li>
+                    <li><span class="left">Telegram: </span><span class="right">{{ job.user.telegram }}</span></li>
+                    <li><span class="left">Whatsapp: </span><span class="right">{{ job.user.whatsapp }}</span></li>
+                    <li><span class="left">LinkedIn: </span><span class="right"><a href="{{ job.user.linkedin }}">{{ job.user.linkedin }}</a></span></li>
+                    <li><span class="left">Веб-сайт: </span><span class="right"><a href="{{ job.user.website }}">{{ job.user.website }}</a></span>
                     </li>
                 </ul>
             </div>
@@ -38,14 +38,13 @@
         <div class="col-4">
             <div class="card">
                 <div class="card-heading">
-                    <h2>Компания Soft</h2>
+                    <h2>{{ job.user.name }}</h2>
                     <div class="subtitle">Описание работодателя / компании</div>
                 </div>
-                <p>Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного продукту.</p>
-                <a href="{% url 'employer' user_id=1 %}" class="btn btn-primary">Смотреть профиль</a>
+                <p>{{ job.user.about }}</p>
+                <a href="{% url 'employer' user_id=job.user.id %}" class="btn btn-primary">Смотреть профиль</a>
             </div>
         </div>
     </div>
-
 </div>
 {% endblock content %}
