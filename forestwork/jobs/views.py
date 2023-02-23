@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import JobForm
 from .models import Job
+from django.forms.models import model_to_dict
+
 
 
 # Create your views here.
@@ -52,21 +54,30 @@ def job_add(request):
             job = form.save(commit=False)
             job.user = request.user
             job.save()
-            return redirect('/jobs')
+            return redirect('/users/profile/jobs')
     else:
         context['form'] = JobForm()
 
-    return render(request, 'jobs/job_add.html', context=context)
+    return render(request, 'jobs/job_form.html', context=context)
 
 
 def job_edit(request, job_id):
-    # TODO: add functionality Job edit page.
-
     context = {
         'title': 'Редактирование вакансии',
-        'subtitle': 'Страница редактирования вакансии'
+        'subtitle': 'Страница редактирования вакансии',
     }
-    return render(request, 'jobs/job_edit.html', context=context)
+
+    instance = Job.objects.get(id=job_id)
+
+    if request.method == 'POST':
+        form = JobForm(request.POST, instance=instance)
+        if form.is_valid():
+            form.save()
+            return redirect('/users/profile/jobs')
+    else:
+        context['form'] = JobForm(instance=instance)
+
+    return render(request, 'jobs/job_form.html', context=context)
 
 
 def job_delete(request, job_id):
