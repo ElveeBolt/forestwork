@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-8">
+            <div class="card">
+                <div class="user-profile">
+                    <div class="avatar">{{ user_info.username|slice:"2" }}</div>
+                    <div class="name">{{ user_info.name }}</div>
+                    <div class="location text-muted">
+                        <i class="fi fi-rr-marker"></i>
+                        {% if not user_info.country and not user_info.city %}
+                            Не указано
+                        {% else %}
+                            {{ user_info.country }} {{ user_info.city }}
+                        {% endif %}
+                    </div>
+                    <div class="date text-muted">На сервисе с: {{ user_info.date_joined }}</div>
+                </div>
+            </div>
+            {% if user_info.about %}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>О себе</h2>
+                    <div class="subtitle">Дополнительная информация</div>
+                </div>
+                {{ user_info.about }}
+            </div>
+            {% endif %}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Контактная информация</h2>
+                    <div class="subtitle">Список доступных контактов пользователя</div>
+                </div>
+                <ul class="list-unstyled list-contacts mb-0">
+                    {% if user_info.phone %}
+                    <li><span class="left">Телефон:</span><span class="right"><a href="tel:{{ user_info.phone }}">{{ user_info.phone }}</a></span></li>
+                    {% endif %}
+                    {% if user_info.email %}
+                    <li><span class="left">E-mail:</span><span class="right"><a href="mailto:{{ user_info.email }}">{{ user_info.email }}</a></span></li>
+                    {% endif %}
+                    {% if user_info.telegram %}
+                    <li><span class="left">Telegram:</span><span class="right">{{ user_info.telegram }}</span></li>
+                    {% endif %}
+                    {% if user_info.whatsapp %}
+                    <li><span class="left">Whatsapp:</span><span class="right">{{ user_info.whatsapp }}</span></li>
+                    {% endif %}
+                    {% if user_info.linkedin %}
+                    <li><span class="left">LinkedIn:</span><span class="right"><a href="{{ user_info.linkedin }}">{{ user_info.linkedin }}</a></span></li>
+                    {% endif %}
+                    {% if user_info.github %}
+                    <li><span class="left">GitHub:</span><span class="right"><a href="{{ user_info.github }}">{{ user_info.github }}</a></span></li>
+                    {% endif %}
+                    {% if user_info.website %}
+                    <li><span class="left">Веб-сайт:</span><span class="right"><a href="{{ user_info.website }}">{{ user_info.website }}</a></span></li>
+                    {% endif %}
+                    {% if user_info.portfolio %}
+                    <li><span class="left">Портфолио:</span><span class="right"><a href="{{ user_info.portfolio }}">{{ user_info.portfolio }}</a></span></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -3,6 +3,7 @@ from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import auth
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
+from .models import User
 
 
 # Create your views here.
@@ -17,48 +18,42 @@ def index(request):
 
 
 def employers(request):
-    # TODO: add functionality employers list page.
-
     context = {
         'title': 'Работодатели',
-        'subtitle': 'Список работодателей и компаний'
+        'subtitle': 'Список работодателей и компаний',
+        'users': User.objects.filter(type=1).all().values()
     }
     return render(request, 'users/employers.html', context=context)
 
 
 def employer(request, user_id):
-    # TODO: add functionality employer details page.
-
     context = {
         'title': 'Информация о пользователе',
-        'subtitle': 'Дополнительная информация о работодателе или компании'
+        'subtitle': 'Дополнительная информация о работодателе или компании',
+        'user_info': User.objects.get(id=user_id)
     }
-    return render(request, 'users/employer.html', context=context)
+    return render(request, 'users/user.html', context=context)
 
 
 def developers(request):
-    # TODO: add functionality developers list page.
-
     context = {
         'title': 'Разработчики',
-        'subtitle': 'Список разработчиков'
+        'subtitle': 'Список разработчиков',
+        'users': User.objects.filter(type=0).all().values()
     }
     return render(request, 'users/developers.html', context=context)
 
 
 def developer(request, user_id):
-    # TODO: add functionality developer details page.
-
     context = {
         'title': 'Информация о пользователе',
-        'subtitle': 'Дополнительная информация о разработчике'
+        'subtitle': 'Дополнительная информация о разработчике',
+        'user_info': User.objects.get(id=user_id)
     }
-    return render(request, 'users/developer.html', context=context)
+    return render(request, 'users/user.html', context=context)
 
 
 def profile(request):
-    # TODO: add functionality profile page.
-
     context = {
         'title': 'Профиль',
         'subtitle': 'Страница профиля'

@@ -8,14 +8,13 @@
     </div>
     <div class="row">
         <div class="col-8">
+            {% for user in users %}
             <div class="card card-user">
-                <h2><a href="{% url 'employer' user_id=1 %}">Название компании</a></h2>
-                <div class="subinfo mb-2"><div>Киев</div></div>
-                <div class="description">
-                    Soft — продуктова IT-компанія, яка займається не тільки розробкою, але і просуванням власного
-                    продукту.
-                </div>
+                <h2><a href="{% url 'employer' user_id=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
+                <div class="description">{{ user.about | truncatewords:20 }}</div>
             </div>
+            {% endfor %}
         </div>
     </div>
 </div>
