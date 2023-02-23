@@ -80,20 +80,14 @@ def profile_main(request):
     context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
-        'form': UserAboutForm(initial={
-            'name': request.user.name,
-            'about': request.user.about
-        })
+        'form': UserAboutForm(instance=request.user)
     }
 
     if request.method == 'POST':
-        form = UserAboutForm(request.POST)
-        user = request.user
+        form = UserAboutForm(request.POST, instance=request.user)
         if form.is_valid():
-            about = form.save(commit=False)
-            user.about = about.about
-            user.name = about.name
-            user.save()
+            form = form.save(commit=False)
+            form.save()
             return redirect('/users/profile')
 
     return render(request, 'profile/main.html', context=context)
@@ -103,34 +97,14 @@ def profile_contacts(request):
     context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
-        'form': UserContactForm(initial={
-            'country': request.user.country,
-            'city': request.user.city,
-            'phone': request.user.phone,
-            'telegram': request.user.telegram,
-            'whatsapp': request.user.whatsapp,
-            'linkedin': request.user.linkedin,
-            'github': request.user.github,
-            'website': request.user.website,
-            'portfolio': request.user.portfolio,
-        })
+        'form': UserContactForm(instance=request.user)
     }
 
     if request.method == 'POST':
-        form = UserContactForm(request.POST)
-        user = request.user
+        form = UserContactForm(request.POST, instance=request.user)
         if form.is_valid():
-            contacts = form.save(commit=False)
-            user.country = contacts.country
-            user.city = contacts.city
-            user.phone = contacts.phone
-            user.telegram = contacts.telegram
-            user.whatsapp = contacts.whatsapp
-            user.linkedin = contacts.linkedin
-            user.github = contacts.github
-            user.website = contacts.website
-            user.portfolio = contacts.portfolio
-            user.save()
+            form = form.save(commit=False)
+            form.save()
             return redirect('/users/profile')
 
     return render(request, 'profile/contacts.html', context=context)
