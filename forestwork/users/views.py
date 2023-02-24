@@ -1,6 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout, update_session_auth_hash
 from django.contrib.auth.models import auth
+from django.conf import settings
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
@@ -18,10 +20,22 @@ def index(request):
 
 
 def employers(request):
+    page = request.GET.get('page', 1)
+
+    users = User.objects.filter(type=1).all().values()
+
+    paginator = Paginator(users, settings.RESULTS_PER_PAGE)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1),
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
     context = {
         'title': 'Работодатели',
         'subtitle': 'Список работодателей и компаний',
-        'users': User.objects.filter(type=1).all().values()
+        'page_obj': page_obj
     }
     return render(request, 'users/employers.html', context=context)
 
