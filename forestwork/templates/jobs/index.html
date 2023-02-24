@@ -12,48 +12,21 @@
             <div class="card card-job">
                 <h2><a href="{% url 'job' job_id=job.id %}">{{ job.title }}</a></h2>
                 <div class="salary">{{ job.salary }}$</div>
-                <div class="description">{{ job.description | truncatewords:20 }}</div>
-                <div class="subinfo">
-                    <div>{{ job.country }} {{ job.city }}</div>
-                    <div>{{ job.date_publish }}</div>
+                <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
+                <div class="subinfo text-muted d-flex">
+                    <div class="location text-icon">
+                    <i class="fi fi-rr-marker"></i>
+                    {% if not job.country and not job.city %}
+                        Не указано
+                    {% else %}
+                        {{ job.country }} {{ job.city }}
+                    {% endif %}
+                    </div>
+                    <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
                 </div>
             </div>
             {% endfor %}
-            <nav>
-                <ul class="pagination">
-                    {% if page_obj.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
-                            <i class="fi fi-rr-angle-small-left"></i>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#">
-                            <i class="fi fi-rr-angle-small-left"></i>
-                        </a>
-                    </li>
-                    {% endif %}
-                    {% for i in page_obj.paginator.page_range %}
-                    {% if page_obj.number == i %}
-                    <li class="page-item active" aria-current="page"><a class="page-link" href="#">{{ i }}</a></li>
-                    {% else %}
-                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                    {% endif %}
-                    {% endfor %}
-                    {% if page_obj.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
-                            <i class="fi fi-rr-angle-small-right"></i>
-                        </a>
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#"><i class="fi fi-rr-angle-small-right"></i></a>
-                    </li>
-                    {% endif %}
-                </ul>
-            </nav>
+            {% include 'pagination.html' %}
         </div>
         <div class="col-4">
             {% if user.type == 1 %}

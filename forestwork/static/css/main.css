@@ -74,6 +74,16 @@ legend {
     padding: 5px 15px;
 }
 
+.text-muted{
+    color: var(--color-muted)!important;
+}
+
+.text-icon i {
+    margin-right: 5px;
+    font-size: 16px;
+    float: left;
+}
+
 .navbar{
     background: #fff;
     margin: 0 0 20px;
@@ -205,7 +215,7 @@ width: 50px;
 }
 
 .card h2 {
-    font-size: 22px;
+    font-size: 20px;
 }
 
 .card .salary {
@@ -215,14 +225,16 @@ width: 50px;
     color: var(--color-green);
 }
 
-.card .description {
-    margin-bottom: 10px;
-}
 
 .card .subinfo {
-    color: var(--color-muted);
     font-weight: 500;
 }
+
+.card .subinfo div{
+    margin-right: 20px;
+}
+
+
 
 .card-box{
     width:400px;
