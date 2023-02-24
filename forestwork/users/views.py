@@ -50,10 +50,22 @@ def employer(request, user_id):
 
 
 def developers(request):
+    page = request.GET.get('page', 1)
+
+    users = User.objects.filter(type=0).all().values()
+
+    paginator = Paginator(users, settings.RESULTS_PER_PAGE)
+    try:
+        page_obj = paginator.page(page)
+    except PageNotAnInteger:
+        page_obj = paginator.page(1),
+    except EmptyPage:
+        page_obj = paginator.page(paginator.num_pages)
+
     context = {
         'title': 'Разработчики',
         'subtitle': 'Список разработчиков',
-        'users': User.objects.filter(type=0).all().values()
+        'page_obj': page_obj
     }
     return render(request, 'users/developers.html', context=context)
 
