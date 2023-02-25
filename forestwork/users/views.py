@@ -1,15 +1,11 @@
-from django.shortcuts import render, redirect
-from django.contrib.auth import logout
-from django.contrib.auth.models import auth
-from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
 from django.conf import settings
 from django.urls import reverse_lazy
-
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.shortcuts import render
+from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
-from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
 
 
 # Create your views here.
