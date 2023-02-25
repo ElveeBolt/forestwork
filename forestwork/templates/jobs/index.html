@@ -8,7 +8,7 @@
     </div>
     <div class="row">
         <div class="col-8">
-            {% for job in page_obj %}
+            {% for job in job_list %}
             <div class="card card-job">
                 <h2><a href="{% url 'job' job_id=job.id %}">{{ job.title }}</a></h2>
                 <div class="salary">{{ job.salary }}$</div>

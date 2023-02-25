@@ -1,31 +1,20 @@
 from django.conf import settings
 from django.shortcuts import render, redirect
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import JobForm
 from .models import Job
+from django.views.generic import ListView
 
 
-# Create your views here.
-def index(request):
-    page = request.GET.get('page', 1)
-
-    jobs = Job.objects.all().values().order_by('-date_publish')
-
-    paginator = Paginator(jobs, settings.RESULTS_PER_PAGE)
-    try:
-        page_obj = paginator.page(page)
-    except PageNotAnInteger:
-        page_obj = paginator.page(1),
-    except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
-
-    context = {
+class JobListView(ListView):
+    model = Job
+    paginate_by = settings.RESULTS_PER_PAGE
+    template_name = 'jobs/index.html'
+    context_object_name = 'job_list'
+    ordering = ['-date_publish']
+    extra_context = {
         'title': 'Список вакансий',
-        'subtitle': 'Доступные вакансии от работодателей',
-        'page_obj': page_obj
+        'subtitle': 'Доступные вакансии от работодателей'
     }
-
-    return render(request, 'jobs/index.html', context=context)
 
 
 def job(request, job_id):
