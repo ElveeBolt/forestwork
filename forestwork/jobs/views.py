@@ -1,8 +1,8 @@
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from .forms import JobForm
 from .models import Job
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 class JobListView(ListView):
@@ -50,9 +50,19 @@ class JobUpdateView(UpdateView):
     }
 
 
-def job_delete(request, job_id):
-    if request.method == 'POST':
-        job = Job.objects.get(id=job_id)
-        if job.user == request.user:
-            Job.objects.filter(id=job_id).delete()
-            return redirect('/users/profile/jobs')
+class JobDeleteView(DeleteView):
+    model = Job
+    success_url = "/users/profile/jobs"
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).filter(
+            user=self.request.user
+        )
+
+
+# def job_delete(request, job_id):
+#     if request.method == 'POST':
+#         job = Job.objects.get(id=job_id)
+#         if job.user == request.user:
+#             Job.objects.filter(id=job_id).delete()
+#             return redirect('/users/profile/jobs')
