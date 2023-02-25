@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import JobForm
 from .models import Job
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 class JobListView(ListView):
@@ -17,14 +17,13 @@ class JobListView(ListView):
     }
 
 
-def job(request, job_id):
-    context = {
+class JobDetailView(DetailView):
+    model = Job
+    template_name = 'jobs/job.html'
+    extra_context = {
         'title': 'Название вакансии',
         'subtitle': 'Детальная информация касательно вакансии',
-        'job': Job.objects.get(id=job_id)
     }
-
-    return render(request, 'jobs/job.html', context=context)
 
 
 def job_add(request):
