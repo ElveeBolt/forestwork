@@ -9,7 +9,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
-from django.views.generic import ListView, DetailView, TemplateView, UpdateView
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
 
 
 # Create your views here.
@@ -141,25 +141,14 @@ class UserLoginView(LoginView):
     }
 
 
-def register(request):
-    context = {
+class UserRegisterView(CreateView):
+    form_class = RegisterForm
+    template_name = 'users/register.html'
+    success_url = reverse_lazy('login')
+    extra_context = {
         'title': 'Регистрация профиля',
         'subtitle': 'Создайте профиль для того, чтобы использовать преимущества ForestWork',
-        'form': RegisterForm()
     }
-
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.username = user.username.lower()
-            user.save()
-            auth.login(request, user)
-            return redirect('/')
-        else:
-            context['form'] = form
-
-    return render(request, 'users/register.html', context=context)
 
 
 def logout_view(request):

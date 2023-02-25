@@ -13,6 +13,6 @@ urlpatterns = [
     path('profile/contacts', views.ProfileContactsUpdateView.as_view(), name='profile_contacts'),
     path('profile/password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
     path('login', views.UserLoginView.as_view(), name='login'),
-    path('register', views.register, name='register'),
+    path('register', views.UserRegisterView.as_view(), name='register'),
     path('logout', views.logout_view, name='logout')
 ]
