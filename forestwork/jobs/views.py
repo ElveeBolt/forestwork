@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.shortcuts import redirect
 from .forms import JobForm
 from .models import Job
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -58,11 +57,3 @@ class JobDeleteView(DeleteView):
         return super().get_queryset(*args, **kwargs).filter(
             user=self.request.user
         )
-
-
-# def job_delete(request, job_id):
-#     if request.method == 'POST':
-#         job = Job.objects.get(id=job_id)
-#         if job.user == request.user:
-#             Job.objects.filter(id=job_id).delete()
-#             return redirect('/users/profile/jobs')
