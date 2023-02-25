@@ -2,7 +2,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect
 from .forms import JobForm
 from .models import Job
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 
 class JobListView(ListView):
@@ -40,42 +40,14 @@ class JobAddView(CreateView):
         return super().form_valid(form)
 
 
-# def job_add(request):
-#     context = {
-#         'title': 'Добавление вакансии',
-#         'subtitle': 'Страница добавления новой вакансии',
-#     }
-#
-#     if request.method == 'POST':
-#         form = JobForm(request.POST)
-#         if form.is_valid():
-#             job = form.save(commit=False)
-#             job.user = request.user
-#             job.save()
-#             return redirect('/users/profile/jobs')
-#     else:
-#         context['form'] = JobForm()
-#
-#     return render(request, 'jobs/job_form.html', context=context)
-
-
-def job_edit(request, job_id):
-    context = {
+class JobUpdateView(UpdateView):
+    model = Job
+    form_class = JobForm
+    template_name = 'jobs/job_form.html'
+    extra_context = {
         'title': 'Редактирование вакансии',
         'subtitle': 'Страница редактирования вакансии',
     }
-
-    instance = Job.objects.get(id=job_id)
-
-    if request.method == 'POST':
-        form = JobForm(request.POST, instance=instance)
-        if form.is_valid():
-            form.save()
-            return redirect('/users/profile/jobs')
-    else:
-        context['form'] = JobForm(instance=instance)
-
-    return render(request, 'jobs/job_form.html', context=context)
 
 
 def job_delete(request, job_id):
