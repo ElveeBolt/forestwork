@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import logout, update_session_auth_hash
+from django.contrib.auth import logout
 from django.contrib.auth.models import auth
+from django.contrib.auth.views import PasswordChangeView
 from django.conf import settings
+from django.urls import reverse_lazy
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
@@ -118,23 +121,14 @@ class ProfileContactsUpdateView(UpdateView):
         return self.request.user
 
 
-def profile_password(request):
-    context = {
+class ProfilePasswordUpdateView(PasswordChangeView):
+    form_class = UserPasswordForm
+    template_name = 'profile/password.html'
+    success_url = reverse_lazy('profile')
+    extra_context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
-        'form': UserPasswordForm(request.user)
     }
-
-    if request.method == 'POST':
-        form = UserPasswordForm(request.user, request.POST)
-        if form.is_valid():
-            form.save()
-            update_session_auth_hash(request, form.user)
-            return redirect('/users/profile')
-
-        context['form'] = form
-
-    return render(request, 'profile/password.html', context=context)
 
 
 def login(request):
