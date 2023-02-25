@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
-from django.views.generic import ListView, DetailView, TemplateView
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView
 
 
 # Create your views here.
@@ -92,21 +92,17 @@ class ProfileJobListView(ListView):
         return Job.objects.filter(user=self.request.user)
 
 
-def profile_main(request):
-    context = {
+class ProfileMainUpdateView(UpdateView):
+    model = User
+    form_class = UserAboutForm
+    template_name = 'profile/main.html'
+    extra_context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
-        'form': UserAboutForm(instance=request.user)
     }
 
-    if request.method == 'POST':
-        form = UserAboutForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.save()
-            return redirect('/users/profile')
-
-    return render(request, 'profile/main.html', context=context)
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def profile_contacts(request):
