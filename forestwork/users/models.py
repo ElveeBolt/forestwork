@@ -21,3 +21,6 @@ class User(AbstractUser):
     github = models.CharField(blank=True, max_length=255, verbose_name='GitHub')
     website = models.CharField(blank=True, max_length=255, verbose_name='Веб-сайт')
     portfolio = models.CharField(blank=True, max_length=255, verbose_name='Портфолио')
+
+    class Meta:
+        ordering = ['-date_joined']
