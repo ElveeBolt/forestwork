@@ -153,7 +153,7 @@ def profile_password(request):
 def login(request):
     context = {
         'title': 'Авторизация',
-        'subtitle': 'Страница авторизации пользователя',
+        'subtitle': 'Для того, чтобы использовать сервис выполните авторизацию',
         'form': LoginForm()
     }
 

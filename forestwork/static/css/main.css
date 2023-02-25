@@ -7,6 +7,7 @@
     --color-border: #ebebeb;
     --color-green: #54d226;
     --color-green-hover: #4bbf21;
+    --color-danger: #f1416c;
 }
 
 body{
@@ -24,12 +25,30 @@ a:hover{
     text-decoration: underline;
 }
 
+/* Overriding styles */
+
+::-webkit-input-placeholder {
+   font-size: 13px!important;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+      font-size: 13px!important;
+}
+::-moz-placeholder {  /* Firefox 19+ */
+      font-size: 13px!important;
+}
+
 legend {
     background: var(--main-bg);
     font-size: 14px;
     font-weight: 500;
     padding: 5px 10px;
     border-radius: 6px;
+}
+
+.text-danger {
+    color: var(--color-danger)!important;
+    font-weight: 500;
 }
 
 .form-label {
@@ -59,6 +78,12 @@ legend {
 .btn-primary:hover{
     background: var(--color-green-hover);
     color:#fff;
+}
+
+.d-grid .btn-with-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-with-icon .fi {
@@ -277,6 +302,19 @@ font-size: 20px;
 .card-box{
     width:400px;
     margin:0;
+    padding: 40px;
+}
+
+.card-box .card-heading{
+    text-align: center;
+}
+
+.card-box .card-heading img{
+    width: 80px;
+    border-radius: 50%;
+    padding: 15px;
+    background: var(--main-bg);
+    margin-bottom: 15px;
 }
 
 .comment {
