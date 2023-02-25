@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, TemplateView
 
 
 # Create your views here.
@@ -70,12 +70,12 @@ class DeveloperDetailView(DetailView):
     }
 
 
-def profile(request):
-    context = {
+class ProfileView(TemplateView):
+    template_name = 'profile/index.html'
+    extra_context = {
         'title': 'Профиль',
         'subtitle': 'Страница профиля'
     }
-    return render(request, 'profile/index.html', context=context)
 
 
 def profile_jobs(request):
