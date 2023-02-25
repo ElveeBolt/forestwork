@@ -136,3 +136,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # More settings by ForestWork
 
 RESULTS_PER_PAGE = 10
+
+LOGIN_REDIRECT_URL = '/'

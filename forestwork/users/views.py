@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.models import auth
-from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.views import PasswordChangeView, LoginView
 from django.conf import settings
 from django.urls import reverse_lazy
 
@@ -131,29 +131,14 @@ class ProfilePasswordUpdateView(PasswordChangeView):
     }
 
 
-def login(request):
-    context = {
+class UserLoginView(LoginView):
+    form_class = LoginForm
+    template_name = 'users/login.html'
+    success_url = reverse_lazy('profile')
+    extra_context = {
         'title': 'Авторизация',
         'subtitle': 'Для того, чтобы использовать сервис выполните авторизацию',
-        'form': LoginForm()
     }
-
-    if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = request.POST['username']
-            password = request.POST['password']
-            user = auth.authenticate(username=username, password=password)
-
-            if user is not None:
-                auth.login(request, user)
-                return redirect('/')
-            else:
-                form.add_error(None, 'Пользователь с таким именем и паролем не найден')
-
-        context['form'] = form
-
-    return render(request, 'users/login.html', context=context)
 
 
 def register(request):

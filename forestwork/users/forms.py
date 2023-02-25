@@ -1,10 +1,10 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm
+from django.contrib.auth.forms import UserCreationForm, PasswordChangeForm, AuthenticationForm
 from .models import User
 from django.contrib.auth import get_user_model
 
 
-class LoginForm(forms.Form):
+class LoginForm(AuthenticationForm):
     username = forms.CharField(
         label='Логин:',
         required=True,
