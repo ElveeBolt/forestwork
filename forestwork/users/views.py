@@ -44,25 +44,19 @@ def employer(request, user_id):
     return render(request, 'users/user.html', context=context)
 
 
-def developers(request):
-    page = request.GET.get('page', 1)
-
-    users = User.objects.filter(type=0).all().values()
-
-    paginator = Paginator(users, settings.RESULTS_PER_PAGE)
-    try:
-        page_obj = paginator.page(page)
-    except PageNotAnInteger:
-        page_obj = paginator.page(1),
-    except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
-
-    context = {
+class DeveloperListView(ListView):
+    model = User
+    paginate_by = settings.RESULTS_PER_PAGE
+    template_name = 'users/developers.html'
+    context_object_name = 'developers'
+    ordering = ['-date_joined']
+    extra_context = {
         'title': 'Разработчики',
         'subtitle': 'Список разработчиков',
-        'page_obj': page_obj
     }
-    return render(request, 'users/developers.html', context=context)
+
+    def get_queryset(self):
+        return User.objects.filter(type=0)
 
 
 def developer(request, user_id):
