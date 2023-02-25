@@ -56,6 +56,25 @@ legend {
     font-weight: 500;
 }
 
+.form-check:hover,
+.form-check-label{
+    cursor: pointer;
+}
+
+.form-check-input {
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
+    margin-right: 5px;
+    background-color: #fff;
+    border: 1px solid var(--color-border);
+}
+
+.form-check-input:checked {
+    background-color: var(--color-green);
+    border-color: var(--color-green);
+}
+
 .btn {
     border: none;
     font-size: 14px;

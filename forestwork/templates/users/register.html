@@ -1,19 +1,22 @@
 {% extends 'base_blank.html' %}
+{% load static %}
 
 {% block content %}
 <section class="blank">
     <div class="card card-box">
         <div class="card-heading">
-            <h2>Регистрация</h2>
+            <img src="{% static 'img/logo_small.png' %}" alt="">
+            <h2>{{ title }}</h2>
+            <div class="subtitle">{{ subtitle }}</div>
         </div>
-        <form method="POST">
+        <form method="POST" class="mb-3">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="{{ form.username.auto_id }}" class="form-label">{{ form.username.label }}</label>
                 {{ form.username }}
                 {% if form.username.errors %}
                     {% for error in form.username.errors %}
-                        <div class="text-danger">{{ error }}</div>
+                        <div class="text-danger text-center">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -22,7 +25,7 @@
                 {{ form.email }}
                 {% if form.email.errors %}
                     {% for error in form.email.errors %}
-                        <div class="text-danger">{{ error }}</div>
+                        <div class="text-danger text-center">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
@@ -32,12 +35,16 @@
             </div>
             <div class="mb-3">
                 <label for="{{ form.type.auto_id }}" class="form-label">{{ form.type.label }}</label>
+                <div class="row">
                 {% for radio in form.type %}
-                <div class="form-check">
-                    {{ radio.tag }}
-                    <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
-                </div>
+                    <div class="col-6">
+                        <div class="form-check">
+                            {{ radio.tag }}
+                            <label class="form-check-label" for="{{ radio.id_for_label }}">{{ radio.choice_label }}</label>
+                        </div>
+                    </div>
                 {% endfor %}
+                </div>
             </div>
             <div class="mb-3">
                 <label for="{{ form.password1.auto_id }}" class="form-label">{{ form.password1.label }}</label>
@@ -48,12 +55,15 @@
                 {{ form.password2 }}
                 {% if form.password2.errors %}
                     {% for error in form.password2.errors %}
-                        <div class="text-danger">{{ error }}</div>
+                        <div class="text-danger text-center">{{ error }}</div>
                     {% endfor %}
                 {% endif %}
             </div>
-            <button class="btn btn-primary" type="submit">Регистрация</button>
+            <div class="d-grid">
+                <button class="btn btn-primary btn-with-icon" type="submit"><i class="fi fi-rr-enter"></i>Регистрация</button>
+            </div>
         </form>
+        <div class="text-muted text-center">У вас уже есть профиль на ForestWork?<br><a href="{% url 'login' %}">Выполнить вход</a></div>
     </div>
 </section>
 {% endblock content %}

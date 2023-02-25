@@ -178,7 +178,7 @@ def login(request):
 def register(request):
     context = {
         'title': 'Регистрация профиля',
-        'subtitle': 'Страница регистрации пользователя',
+        'subtitle': 'Создайте профиль для того, чтобы использовать преимущества ForestWork',
         'form': RegisterForm()
     }
 
