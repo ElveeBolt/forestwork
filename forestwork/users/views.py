@@ -78,14 +78,18 @@ class ProfileView(TemplateView):
     }
 
 
-def profile_jobs(request):
-    context = {
+class ProfileJobListView(ListView):
+    model = Job
+    template_name = 'profile/jobs.html'
+    context_object_name = 'jobs'
+    ordering = ['-date_joined']
+    extra_context = {
         'title': 'Мои вакансии',
         'subtitle': 'Опубликованные вами вакансии',
-        'jobs': Job.objects.filter(user=request.user).all().values()
     }
 
-    return render(request, 'profile/jobs.html', context=context)
+    def get_queryset(self):
+        return Job.objects.filter(user=self.request.user)
 
 
 def profile_main(request):
