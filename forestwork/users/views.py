@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import logout
 from django.contrib.auth.models import auth
-from django.contrib.auth.views import PasswordChangeView, LoginView
+from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
 from django.conf import settings
 from django.urls import reverse_lazy
 
@@ -151,6 +151,5 @@ class UserRegisterView(CreateView):
     }
 
 
-def logout_view(request):
-    logout(request)
-    return redirect('/')
+class UserLogoutView(LogoutView):
+    next_page = settings.LOGOUT_REDIRECT_URL
