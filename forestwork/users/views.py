@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
+from django.views.generic import ListView
 
 
 # Create your views here.
@@ -19,25 +20,16 @@ def index(request):
     return render(request, 'users/index.html', context=context)
 
 
-def employers(request):
-    page = request.GET.get('page', 1)
-
-    users = User.objects.filter(type=1).all().values()
-
-    paginator = Paginator(users, settings.RESULTS_PER_PAGE)
-    try:
-        page_obj = paginator.page(page)
-    except PageNotAnInteger:
-        page_obj = paginator.page(1),
-    except EmptyPage:
-        page_obj = paginator.page(paginator.num_pages)
-
-    context = {
+class EmployerListView(ListView):
+    model = User
+    paginate_by = settings.RESULTS_PER_PAGE
+    template_name = 'users/employers.html'
+    context_object_name = 'employers'
+    ordering = ['-date_joined']
+    extra_context = {
         'title': 'Работодатели',
         'subtitle': 'Список работодателей и компаний',
-        'page_obj': page_obj
     }
-    return render(request, 'users/employers.html', context=context)
 
 
 def employer(request, user_id):
