@@ -105,21 +105,17 @@ class ProfileMainUpdateView(UpdateView):
         return self.request.user
 
 
-def profile_contacts(request):
-    context = {
+class ProfileContactsUpdateView(UpdateView):
+    model = User
+    form_class = UserContactForm
+    template_name = 'profile/contacts.html'
+    extra_context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
-        'form': UserContactForm(instance=request.user)
     }
 
-    if request.method == 'POST':
-        form = UserContactForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form = form.save(commit=False)
-            form.save()
-            return redirect('/users/profile')
-
-    return render(request, 'profile/contacts.html', context=context)
+    def get_object(self, queryset=None):
+        return self.request.user
 
 
 def profile_password(request):
