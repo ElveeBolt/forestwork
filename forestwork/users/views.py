@@ -60,13 +60,14 @@ class DeveloperListView(ListView):
         return User.objects.filter(type=0)
 
 
-def developer(request, user_id):
-    context = {
+class DeveloperDetailView(DetailView):
+    model = User
+    template_name = 'users/user.html'
+    context_object_name = 'user_info'
+    extra_context = {
         'title': 'Информация о пользователе',
         'subtitle': 'Дополнительная информация о разработчике',
-        'user_info': User.objects.get(id=user_id)
     }
-    return render(request, 'users/user.html', context=context)
 
 
 def profile(request):
