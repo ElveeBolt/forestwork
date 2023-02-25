@@ -19,7 +19,7 @@
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="buttons">
                             <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm">Редактировать</a>
-                            <button type="button" class="btn btn-sm btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' job_id=job.id %}" data-title="{{ job.title }}">Удалить</button>
+                            <button type="button" class="btn btn-sm btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}">Удалить</button>
                         </div>
                     </div>
                     {% endfor %}
