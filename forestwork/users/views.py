@@ -31,6 +31,9 @@ class EmployerListView(ListView):
         'subtitle': 'Список работодателей и компаний',
     }
 
+    def get_queryset(self):
+        return User.objects.filter(type=1)
+
 
 def employer(request, user_id):
     context = {
