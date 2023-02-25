@@ -6,7 +6,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
 from jobs.models import Job
 from .models import User
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 # Create your views here.
@@ -35,13 +35,14 @@ class EmployerListView(ListView):
         return User.objects.filter(type=1)
 
 
-def employer(request, user_id):
-    context = {
+class EmployerDetailView(DetailView):
+    model = User
+    template_name = 'users/user.html'
+    context_object_name = 'user_info'
+    extra_context = {
         'title': 'Информация о пользователе',
         'subtitle': 'Дополнительная информация о работодателе или компании',
-        'user_info': User.objects.get(id=user_id)
     }
-    return render(request, 'users/user.html', context=context)
 
 
 class DeveloperListView(ListView):
