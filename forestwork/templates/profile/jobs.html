@@ -17,9 +17,12 @@
                     {% for job in jobs %}
                     <div class="job">
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
+                        <div class="subinfo text-muted d-flex mb-3">
+                            <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
+                        </div>
                         <div class="buttons">
-                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm">Редактировать</a>
-                            <button type="button" class="btn btn-sm btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}">Удалить</button>
+                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm btn-with-icon"><i class="fi fi-rr-edit"></i>Редактировать</a>
+                            <button type="button" class="btn btn-sm btn-with-icon btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}"><i class="fi fi-rr-trash"></i>Удалить</button>
                         </div>
                     </div>
                     {% endfor %}

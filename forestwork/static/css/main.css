@@ -82,6 +82,7 @@ legend {
     padding: 10px 15px;
     background: var(--main-bg);
     color: var(--color-main);
+    text-decoration:none!important;
 }
 
 .btn:hover{
@@ -116,6 +117,10 @@ legend {
 .btn-sm {
     font-size: 13px;
     padding: 5px 15px;
+}
+
+.btn-sm.btn-with-icon .fi {
+    font-size: 14px;
 }
 
 .text-muted{
