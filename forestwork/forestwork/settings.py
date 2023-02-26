@@ -137,5 +137,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 RESULTS_PER_PAGE = 10
 
+LOGIN_URL = '/users/login'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'

@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.urls import reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
 from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
 from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
@@ -69,7 +70,7 @@ class DeveloperDetailView(DetailView):
     }
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile/index.html'
     extra_context = {
         'title': 'Профиль',
@@ -77,7 +78,7 @@ class ProfileView(TemplateView):
     }
 
 
-class ProfileJobListView(ListView):
+class ProfileJobListView(LoginRequiredMixin, ListView):
     model = Job
     template_name = 'profile/jobs.html'
     context_object_name = 'jobs'
@@ -91,7 +92,7 @@ class ProfileJobListView(ListView):
         return Job.objects.filter(user=self.request.user)
 
 
-class ProfileMainUpdateView(UpdateView):
+class ProfileMainUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserAboutForm
     template_name = 'profile/main.html'
@@ -104,7 +105,7 @@ class ProfileMainUpdateView(UpdateView):
         return self.request.user
 
 
-class ProfileContactsUpdateView(UpdateView):
+class ProfileContactsUpdateView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserContactForm
     template_name = 'profile/contacts.html'
@@ -117,7 +118,7 @@ class ProfileContactsUpdateView(UpdateView):
         return self.request.user
 
 
-class ProfilePasswordUpdateView(PasswordChangeView):
+class ProfilePasswordUpdateView(LoginRequiredMixin, PasswordChangeView):
     form_class = UserPasswordForm
     template_name = 'profile/password.html'
     success_url = reverse_lazy('profile')
@@ -131,6 +132,7 @@ class UserLoginView(LoginView):
     form_class = LoginForm
     template_name = 'users/login.html'
     success_url = reverse_lazy('profile')
+    redirect_authenticated_user = True
     extra_context = {
         'title': 'Авторизация',
         'subtitle': 'Для того, чтобы использовать сервис выполните авторизацию',
@@ -138,6 +140,7 @@ class UserLoginView(LoginView):
 
 
 class UserRegisterView(CreateView):
+    model = User
     form_class = RegisterForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('login')
@@ -145,6 +148,12 @@ class UserRegisterView(CreateView):
         'title': 'Регистрация профиля',
         'subtitle': 'Создайте профиль для того, чтобы использовать преимущества ForestWork',
     }
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('index')
+        else:
+            return super().dispatch(request, *args, **kwargs)
 
 
 class UserLogoutView(LogoutView):
