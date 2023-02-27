@@ -39,6 +39,74 @@
         </div>
     </div>
 </section>
+<section id='jobs'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Недавно опубликованные вакансии</h2>
+            <div class="subtitle">Возможно именно эти вакансии подарят вам работу всей жизни и сделают понедельники счастливым</div>
+        </div>
+        <div class="row">
+            {% for job in job_list %}
+                <div class="col-6">
+                    <div class="card card-job">
+                        <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
+                        <div class="salary">{{ job.salary }}$</div>
+                        <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
+                        <div class="subinfo text-muted d-flex">
+                            <div class="location text-icon">
+                            <i class="fi fi-rr-marker"></i>
+                            {% if not job.country and not job.city %}
+                                Не указано
+                            {% else %}
+                                {{ job.country }} {{ job.city }}
+                            {% endif %}
+                            </div>
+                            <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id='employers'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Новые компании и работодатели на ForestWork</h2>
+            <div class="subtitle">Найди команду, которая подходит тебя по ценностям, культурой и профессиональным целям</div>
+        </div>
+        <div class="row">
+            {% for user in employer_list %}
+            <div class="col-6">
+                <div class="card card-user">
+                    <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                    <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
+                    <div class="description">{{ user.about | truncatewords:20 }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id='developers'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Новые кандидаты</h2>
+             <div class="subtitle">Ищите и иследуйте кандидатов со всего мира</div>
+        </div>
+        <div class="row">
+            {% for user in developer_list %}
+            <div class="col-6">
+                <div class="card card-user">
+                    <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
+                    <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
+                    <div class="description">{{ user.about | truncatewords:20 }}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
 {% endblock content %}
 
 
