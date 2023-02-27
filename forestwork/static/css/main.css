@@ -133,6 +133,38 @@ legend {
     float: left;
 }
 
+.nav-pills .nav-item {
+    margin-right: 15px;
+}
+
+
+.nav-pills .nav-link .count {
+    background: #ccc;
+    padding: 2px 6px;
+    font-size: 13px;
+    border-radius: 20px;
+    text-align: center;
+    background: var(--main-bg);
+    margin-left: 5px;
+}
+
+.nav-pills .nav-link.active .count,
+.nav-pills .show>.nav-link .count,
+.nav-pills .nav-link:hover .count{
+    background: rgb(255 255 255 / 30%);
+}
+
+.nav-pills .nav-link {
+    background: #fff;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link,
+.nav-pills .nav-link:hover{
+    color: #fff;
+    background: var(--color-green);
+}
+
 .navbar{
     background: #fff;
     margin: 0 0 20px;
@@ -379,11 +411,6 @@ font-size: 20px;
 
 .user-profile .location {
     font-weight: 500;
-}
-
-.user-profile .date{
-    margin-top: 15px;
-    font-size: 14px;
 }
 
 .list-contacts li{
