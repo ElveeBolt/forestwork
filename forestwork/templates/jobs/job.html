@@ -15,7 +15,7 @@
                         <span>{{ job.country }} {{ job.city }}</span> - <span>{{ job.date_publish }}</span>
                     </div>
                 </div>
-                <div class="description">{{ job.description }}</div>
+                <div class="description">{{ job.description | linebreaks }}</div>
                 <div class="comment">{{ job.comment }}</div>
             </div>
             <div class="card">
