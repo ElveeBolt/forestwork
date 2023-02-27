@@ -45,7 +45,6 @@ class EmployerDetailView(DetailView):
     }
 
 
-
 class DeveloperListView(ListView):
     model = User
     paginate_by = settings.RESULTS_PER_PAGE
