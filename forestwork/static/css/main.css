@@ -175,7 +175,14 @@ legend {
 .navbar .navbar-brand {
     color: var(--color-green);
     font-weight: bold;
-    text-decoration:none
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.navbar .navbar-brand img {
+    width: 26px;
+    margin-right: 5px;
 }
 
 .navbar .nav-link {
