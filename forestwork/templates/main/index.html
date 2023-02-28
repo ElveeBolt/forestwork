@@ -43,7 +43,10 @@
     <div class="container">
         <div class="section-heading">
             <h2>Недавно опубликованные вакансии</h2>
-            <div class="subtitle">Возможно именно эти вакансии подарят вам работу всей жизни и сделают понедельники счастливым</div>
+            <div class="subtitle text-muted">Возможно именно эти вакансии подарят вам работу всей жизни и сделают понедельники счастливым</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все вакансии</a>
+            </div>
         </div>
         <div class="row">
             {% for job in job_list %}
@@ -73,15 +76,26 @@
     <div class="container">
         <div class="section-heading">
             <h2>Новые компании и работодатели на ForestWork</h2>
-            <div class="subtitle">Найди команду, которая подходит тебя по ценностям, культурой и профессиональным целям</div>
+            <div class="subtitle text-muted">Найди команду, которая подходит тебя по ценностям, культурой и профессиональным целям</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все компании</a>
+            </div>
         </div>
-        <div class="row">
+        <div class="owl-carousel" id="employers-carousel">
             {% for user in employer_list %}
-            <div class="col-6">
-                <div class="card card-user">
-                    <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                    <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
-                    <div class="description">{{ user.about | truncatewords:20 }}</div>
+            <div class="card card-user card-mini-user text-center">
+                <div class="avatar">{{ user.username|slice:"2" }}</div>
+                <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
+                <i class="fi fi-rr-marker"></i>
+                {% if not user.country and not user.city %}
+                    Не указано
+                {% else %}
+                    {{ user.country }} {{ user.city }}
+                {% endif %}
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'employer' pk=user.id %}" class="btn">Смотреть профиль</a>
                 </div>
             </div>
             {% endfor %}
@@ -92,22 +106,54 @@
     <div class="container">
         <div class="section-heading">
             <h2>Новые кандидаты</h2>
-             <div class="subtitle">Ищите и иследуйте кандидатов со всего мира</div>
+             <div class="subtitle text-muted">Ищите и иследуйте кандидатов со всего мира</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все кандидаты</a>
+            </div>
         </div>
         <div class="row">
+        <div class="owl-carousel" id="developer-carousel">
             {% for user in developer_list %}
-            <div class="col-6">
-                <div class="card card-user">
-                    <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
-                    <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
-                    <div class="description">{{ user.about | truncatewords:20 }}</div>
+            <div class="card card-user card-mini-user text-center">
+                <div class="avatar">{{ user.username|slice:"2" }}</div>
+                <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
+                <i class="fi fi-rr-marker"></i>
+                {% if not user.country and not user.city %}
+                    Не указано
+                {% else %}
+                    {{ user.country }} {{ user.city }}
+                {% endif %}
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'developer' pk=user.id %}" class="btn">Смотреть профиль</a>
                 </div>
             </div>
             {% endfor %}
         </div>
+        </div>
     </div>
 </section>
 {% endblock content %}
+
+{% block scripts %}
+<script>
+var nav_text = [
+    '<i class="fi fi-rr-angle-small-left"></i>',
+    '<i class="fi fi-rr-angle-small-right"></i>'
+]
+
+$('#employers-carousel, #developer-carousel').owlCarousel({
+    nav: true,
+    navText: nav_text,
+    dots: true,
+    loop: true,
+    margin: 30,
+    items: 4,
+})
+
+</script>
+{% endblock scripts %}
 
 
 

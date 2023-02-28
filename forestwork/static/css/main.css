@@ -387,6 +387,21 @@ font-size: 20px;
     color: var(--color-muted);
 }
 
+.card-mini-user .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    background: var(--color-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    font-size: 30px;
+    text-transform: uppercase;
+    margin: 0 auto 15px;
+}
+
 .user-profile {
     padding-left: 120px;
     min-height: 100px;
@@ -464,6 +479,19 @@ section.blank {
 
 section{
     padding: 80px 0;
+}
+
+section .section-heading {
+    margin-bottom: 30px;
+    padding-right: 250px;
+    position: relative;
+}
+
+section .section-heading .btns {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -20px;
 }
 
 #home {
@@ -562,4 +590,63 @@ footer .footer-menu li a{
 
 footer .footer-menu li a:hover{
     color: var(--color-green);
+}
+
+.owl-carousel {
+    padding-bottom: 50px;
+}
+
+.owl-carousel .owl-nav {
+    display: flex;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.owl-carousel .owl-nav button.owl-next,
+.owl-carousel .owl-nav button.owl-prev{
+    background: #fff!important;
+    display: flex;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.owl-carousel .owl-nav button.owl-next{
+    margin-left: 5px;
+}
+
+.owl-carousel .owl-nav button.owl-next:hover,
+.owl-carousel .owl-nav button.owl-prev:hover{
+    background: var(--color-green)!important;
+    color: #fff;
+}
+
+.owl-carousel .owl-nav button.owl-next i,
+.owl-carousel .owl-nav button.owl-prev i{
+    font-size: 18px;
+}
+
+.owl-carousel .owl-dots {
+    display: flex;
+    position: absolute;
+    bottom: 13px;
+    left: 0;
+}
+
+.owl-carousel .owl-dot {
+    background: #fff!important;
+    display: block;
+    width: 30px;
+    height: 4px;
+    border-radius: 6px;
+    margin-right: 5px;
+}
+
+.owl-carousel .owl-dot.active,
+.owl-carousel .owl-dot:hover{
+    background: var(--color-green)!important;
 }
