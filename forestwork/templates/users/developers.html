@@ -7,7 +7,7 @@
         <div class="subtitle">{{ subtitle }}</div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8">
             {% for user in page_obj %}
             <div class="card card-user">
                 <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>

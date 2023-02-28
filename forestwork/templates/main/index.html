@@ -18,7 +18,7 @@
             <h2>Создайте профиль и начните поиск работы</h2>
         </div>
         <div class="row">
-            <div class="col-6">
+            <div class="col-lg-6">
                 <div class="card">
                     <i class="fi fi-rr-briefcase"></i>
                     <div class="title">Работодатели сами предлагают работу</div>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6">
                 <div class="card">
                     <i class="fi fi-rr-form"></i>
                     <div class="title">Все контакты в одном месте</div>
@@ -50,7 +50,7 @@
         </div>
         <div class="row">
             {% for job in job_list %}
-                <div class="col-6">
+                <div class="col-lg-6">
                     <div class="card card-job">
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="salary">{{ job.salary }}$</div>
@@ -149,7 +149,20 @@ $('#employers-carousel, #developer-carousel').owlCarousel({
     dots: true,
     loop: true,
     margin: 30,
-    items: 4,
+    responsive:{
+        0:{
+            items:1,
+        },
+        576:{
+            items:2,
+        },
+        992:{
+            items:3,
+        },
+        1200:{
+            items:4,
+        }
+    }
 })
 
 </script>

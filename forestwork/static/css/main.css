@@ -496,10 +496,10 @@ section .section-heading .btns {
 
 #home {
     margin-top: -30px;
-    background: url('../img/home_bg.jpg');
+    background: url("../img/home_bg.jpg");
     background-size: cover;
     background-position: center;
-    padding: 200px;
+    padding: 200px 0;
     text-align: center;
 }
 
@@ -649,4 +649,16 @@ footer .footer-menu li a:hover{
 .owl-carousel .owl-dot.active,
 .owl-carousel .owl-dot:hover{
     background: var(--color-green)!important;
+}
+
+
+@media (max-width: 992px) {
+    section .section-heading {
+        padding-right: 0;
+    }
+
+    section .section-heading .btns {
+        position: relative;
+        margin-top: 15px;
+    }
 }

@@ -7,7 +7,7 @@
         <div class="subtitle">{{ subtitle }}</div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8">
             <div class="card">
                 <div class="user-profile">
                     <div class="avatar">{{ user_info.username|slice:"2" }}</div>
@@ -22,7 +22,6 @@
                     </div>
                     <div class="date text-muted mt-3">Последняя активность: {{ user_info.last_login  }}</div>
                     <div class="date text-muted">На сервисе с: {{ user_info.date_joined }}</div>
-
                 </div>
             </div>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">

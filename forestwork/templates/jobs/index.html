@@ -7,7 +7,7 @@
         <div class="subtitle">{{ subtitle }}</div>
     </div>
     <div class="row">
-        <div class="col-8">
+        <div class="col-lg-8">
             {% for job in job_list %}
             <div class="card card-job">
                 <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
@@ -28,7 +28,7 @@
             {% endfor %}
             {% include 'pagination.html' %}
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             {% if user.type == 1 %}
             <div class="card">
                 <div class="card-heading">
