@@ -1,0 +1,19 @@
+{% extends 'base_blank.html' %}
+{% load static %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <img src="{% static 'img/logo_small.png' %}" alt="">
+            <h2>{{ title }}</h2>
+            <div class="subtitle">{{ subtitle }}</div>
+        </div>
+        <div class="text-center mb-3">Наши поздравления! Вы успешно зарегистрировались на ForestWork. Рекомендуем заполнить профиль.</div>
+        <div class="d-grid">
+            <a href="{% url 'profile' %}" class="btn btn-primary btn-with-icon mb-3"><i class="fi fi-rr-user"></i>Заполнить профиль</a>
+            <a href="{% url 'index' %}" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-home"></i>На главную</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

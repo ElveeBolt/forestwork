@@ -14,5 +14,9 @@ urlpatterns = [
     path('profile/password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
     path('login', views.UserLoginView.as_view(), name='login'),
     path('register', views.UserRegisterView.as_view(), name='register'),
+    path('register/activate', views.UserRegisterActivateView.as_view(), name='register_activate'),
+    path('register/verify/<uidb64>/<token>', views.UserRegisterVerifyView.as_view(), name='register_verify'),
+    path('register/verify/success', views.UserRegisterVerifySuccessView.as_view(), name='register_verify_success'),
+    path('register/verify/invalid', views.UserRegisterVerifyInvalidView.as_view(), name='register_verify_invalid'),
     path('logout', views.UserLogoutView.as_view(), name='logout')
 ]
