@@ -21,3 +21,20 @@ def send_email_for_verify(request, user):
         to=[user.email],
     )
     email.send()
+
+
+def send_email_for_forgot_password(request, user):
+    current_site = get_current_site(request)
+    context = {
+        'user': user,
+        'domain': current_site.domain,
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'token': token_generator.make_token(user),
+    }
+    message = render_to_string(template_name='emails/forgot_password.html', context=context)
+    email = EmailMessage(
+        subject='Сброс пароля на ForestWork',
+        body=message,
+        to=[user.email],
+    )
+    email.send()

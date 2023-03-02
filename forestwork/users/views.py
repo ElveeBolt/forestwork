@@ -4,14 +4,15 @@ from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordChangeView, LoginView, LogoutView
+from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmView, LoginView, LogoutView, PasswordResetView
 from django.contrib.auth.tokens import default_token_generator
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
-from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm
+from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView, FormView
+from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm, UserForgotPasswordForm, \
+    UserSetForgotPasswordForm
 from jobs.models import Job
 from .models import User
-from .utils import send_email_for_verify
+from .utils import send_email_for_verify, send_email_for_forgot_password
 
 
 # Create your views here.
@@ -141,6 +142,52 @@ class UserLoginView(LoginView):
     extra_context = {
         'title': 'Авторизация',
         'subtitle': 'Для того, чтобы использовать сервис выполните авторизацию',
+    }
+
+
+class UserForgotPasswordView(PasswordResetView):
+    email_template_name = 'emails/forgot_password.html'
+    form_class = UserForgotPasswordForm
+    template_name = 'users/forgot_password.html'
+    success_url = reverse_lazy('forgot_password_send')
+    extra_context = {
+        'title': 'Сброс пароля',
+        'subtitle': 'В случае, если вы забыли пароль вы можете его восстановить.',
+    }
+
+
+class UserForgotPasswordSendView(TemplateView):
+    template_name = 'users/forgot_password_send.html'
+    extra_context = {
+        'title': 'Спасибо',
+        'subtitle': 'Отправлены инструкции для восстановления пароля',
+    }
+
+
+class UserForgotPasswordVerifyView(PasswordResetConfirmView):
+    model = User
+    form_class = UserSetForgotPasswordForm
+    template_name = 'users/forgot_password_form.html'
+    success_url = reverse_lazy('forgot_password_verify_success')
+    extra_context = {
+        'title': 'Сброс пароля',
+        'subtitle': 'Заполните форму ниже для того чтобы сбросить пароль',
+    }
+
+
+class UserForgotPasswordVerifySuccessView(TemplateView):
+    template_name = 'users/forgot_password_verify_success.html'
+    extra_context = {
+        'title': 'Наши поздравления',
+        'subtitle': 'Сброс пароля',
+    }
+
+
+class UserForgotPasswordVerifyInvalidView(TemplateView):
+    template_name = 'users/forgot_password_verify_invalid.html'
+    extra_context = {
+        'title': 'Токен не найден',
+        'subtitle': 'Сброс пароля',
     }
 
 
