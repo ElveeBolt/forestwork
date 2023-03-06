@@ -25,6 +25,5 @@ urlpatterns = [
     path('signup/activate', views.UserSignupActivateView.as_view(), name='signup_activate'),
     path('signup/verify/<uidb64>/<token>', views.UserSignupVerifyView.as_view(), name='signup_verify'),
     path('signup/verify/success', views.UserSignupVerifySuccessView.as_view(), name='signup_verify_success'),
-    path('signup/verify/invalid', views.UserSignupVerifyInvalidView.as_view(), name='signup_verify_invalid'),
     path('logout', views.UserLogoutView.as_view(), name='logout')
 ]

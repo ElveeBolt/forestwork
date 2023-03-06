@@ -13,6 +13,7 @@ from .forms import LoginForm, SignupForm, UserContactForm, UserAboutForm, UserPa
 from jobs.models import Job
 from .models import User
 from .utils import send_email_for_verify, send_email_for_forgot_password
+from django.http import Http404
 
 
 # Create your views here.
@@ -236,21 +237,13 @@ class UserSignupVerifyView(View):
             login(request, user)
             return redirect('signup_verify_success')
 
-        return redirect('signup_verify_invalid')
+        raise Http404('Verify Token is invalid')
 
 
 class UserSignupVerifySuccessView(TemplateView):
     template_name = 'users/signup_verify_success.html'
     extra_context = {
         'title': 'Наши поздравления',
-        'subtitle': 'Подтверждение email адреса',
-    }
-
-
-class UserSignupVerifyInvalidView(TemplateView):
-    template_name = 'users/signup_verify_invalid.html'
-    extra_context = {
-        'title': 'Токен не найден',
         'subtitle': 'Подтверждение email адреса',
     }
 
