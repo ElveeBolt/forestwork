@@ -215,7 +215,7 @@ class UserSignupView(CreateView):
         return redirect('signup_activate')
 
 
-class UserSignupActivateView(TemplateView):
+class UserActivateView(TemplateView):
     template_name = 'users/signup_activate.html'
     extra_context = {
         'title': 'Подтвердите свой e-mail',
@@ -223,7 +223,7 @@ class UserSignupActivateView(TemplateView):
     }
 
 
-class UserSignupVerifyView(View):
+class UserVerifyView(View):
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64)
@@ -240,7 +240,7 @@ class UserSignupVerifyView(View):
         raise Http404('Verify Token is invalid')
 
 
-class UserSignupVerifySuccessView(TemplateView):
+class UserVerifySuccessView(TemplateView):
     template_name = 'users/signup_verify_success.html'
     extra_context = {
         'title': 'Наши поздравления',
