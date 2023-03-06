@@ -9,7 +9,10 @@
             <h2>{{ title }}</h2>
             <div class="subtitle">{{ subtitle }}</div>
         </div>
-        <div class="text-center mb-3">Неверный токен регистрации. Пожалуйста, повторите попытку ещё раз.</div>
+        <div class="text-center mb-3">Наши поздравления! Вы успешно сбросили пароль на ForestWork.</div>
+        <div class="d-grid">
+            <a href="{% url 'login' %}" class="btn btn-with-icon"><i class="fi fi-rr-home"></i>Авторизация</a>
+        </div>
     </div>
 </section>
 {% endblock content %}

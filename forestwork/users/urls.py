@@ -15,15 +15,14 @@ urlpatterns = [
     path('profile/password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
 
     path('login', views.UserLoginView.as_view(), name='login'),
-    path('login/forgot_password', views.UserForgotPasswordView.as_view(), name='forgot_password'),
-    path('login/forgot_password_send', views.UserForgotPasswordSendView.as_view(), name='forgot_password_send'),
-    path('login/forgot_password/<uidb64>/<token>', views.UserForgotPasswordVerifyView.as_view(), name='forgot_password_verify'),
-    path('login/forgot_password/success', views.UserForgotPasswordVerifySuccessView.as_view(), name='forgot_password_verify_success'),
-    path('login/forgot_password/invalid', views.UserForgotPasswordVerifyInvalidView.as_view(), name='forgot_password_verify_invalid'),
+    path('forgot', views.UserForgotView.as_view(), name='forgot'),
+    path('forgot/send', views.UserForgotSendView.as_view(), name='forgot_send'),
+    path('forgot/verify/<uidb64>/<token>', views.UserForgotVerifyView.as_view(), name='forgot_verify'),
+    path('forgot/success', views.UserForgotSuccessView.as_view(), name='forgot_verify_success'),
 
     path('signup', views.UserSignupView.as_view(), name='signup'),
     path('activate', views.UserActivateView.as_view(), name='signup_activate'),
     path('verify/<uidb64>/<token>', views.UserVerifyView.as_view(), name='signup_verify'),
-    path('verify/success', views.UserVerifySuccessView.as_view(), name='signup_verify_success'),
+    path('verify/success', views.UserVerifySuccessView.as_view(), name='signup_success'),
     path('logout', views.UserLogoutView.as_view(), name='logout')
 ]

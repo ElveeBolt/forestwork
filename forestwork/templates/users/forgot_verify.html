@@ -9,6 +9,7 @@
             <h2>{{ title }}</h2>
             <div class="subtitle">{{ subtitle }}</div>
         </div>
+        {% if validlink %}
         <form method="POST" class="mb-3">
             {% csrf_token %}
             <div class="mb-3">
@@ -28,6 +29,11 @@
                 <button class="btn btn-primary btn-with-icon" type="submit"><i class="fi fi-rr-sign-in-alt"></i>Продолжить</button>
             </div>
         </form>
+        {% else %}
+            <div class="text-center">
+                К сожалению это недействительная ссылка. Пожалуйста перейдите по ссылке которое было отправлено вам на e-mail.
+            </div>
+        {% endif %}
     </div>
 </section>
 {% endblock content %}

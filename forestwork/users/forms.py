@@ -257,7 +257,7 @@ class UserPasswordForm(PasswordChangeForm):
     )
 
 
-class UserForgotPasswordForm(PasswordResetForm):
+class UserForgotForm(PasswordResetForm):
     email = forms.CharField(
         label='E-mail:',
         required=True,
