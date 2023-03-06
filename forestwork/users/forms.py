@@ -27,7 +27,7 @@ class LoginForm(AuthenticationForm):
     )
 
 
-class RegisterForm(UserCreationForm):
+class SignupForm(UserCreationForm):
     username = forms.CharField(
         label='Логин:',
         required=True,

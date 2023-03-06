@@ -14,7 +14,7 @@ def send_email_for_verify(request, user):
         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
         'token': token_generator.make_token(user),
     }
-    message = render_to_string(template_name='emails/register_activate.html', context=context)
+    message = render_to_string(template_name='emails/signup_activate.html', context=context)
     email = EmailMessage(
         subject='Подтверждение E-mail на ForestWork',
         body=message,

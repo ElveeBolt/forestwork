@@ -8,7 +8,7 @@ from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmVi
 from django.contrib.auth.tokens import default_token_generator
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView, FormView
-from .forms import LoginForm, RegisterForm, UserContactForm, UserAboutForm, UserPasswordForm, UserForgotPasswordForm, \
+from .forms import LoginForm, SignupForm, UserContactForm, UserAboutForm, UserPasswordForm, UserForgotPasswordForm, \
     UserSetForgotPasswordForm
 from jobs.models import Job
 from .models import User
@@ -191,11 +191,11 @@ class UserForgotPasswordVerifyInvalidView(TemplateView):
     }
 
 
-class UserRegisterView(CreateView):
+class UserSignupView(CreateView):
     model = User
-    form_class = RegisterForm
-    template_name = 'users/register.html'
-    success_url = reverse_lazy('register_activate')
+    form_class = SignupForm
+    template_name = 'users/signup.html'
+    success_url = reverse_lazy('signup_activate')
     extra_context = {
         'title': 'Регистрация профиля',
         'subtitle': 'Создайте профиль для того, чтобы использовать преимущества ForestWork',
@@ -211,18 +211,18 @@ class UserRegisterView(CreateView):
         user = form.save(commit=False)
         user.save()
         send_email_for_verify(self.request, user)
-        return redirect('register_activate')
+        return redirect('signup_activate')
 
 
-class UserRegisterActivateView(TemplateView):
-    template_name = 'users/register_activate.html'
+class UserSignupActivateView(TemplateView):
+    template_name = 'users/signup_activate.html'
     extra_context = {
         'title': 'Подтвердите свой e-mail',
         'subtitle': 'Подтвердите свою учётную запись',
     }
 
 
-class UserRegisterVerifyView(View):
+class UserSignupVerifyView(View):
     def get(self, request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64)
@@ -234,21 +234,21 @@ class UserRegisterVerifyView(View):
             user.is_active = True
             user.save()
             login(request, user)
-            return redirect('register_verify_success')
+            return redirect('signup_verify_success')
 
-        return redirect('register_verify_invalid')
+        return redirect('signup_verify_invalid')
 
 
-class UserRegisterVerifySuccessView(TemplateView):
-    template_name = 'users/register_verify_success.html'
+class UserSignupVerifySuccessView(TemplateView):
+    template_name = 'users/signup_verify_success.html'
     extra_context = {
         'title': 'Наши поздравления',
         'subtitle': 'Подтверждение email адреса',
     }
 
 
-class UserRegisterVerifyInvalidView(TemplateView):
-    template_name = 'users/register_verify_invalid.html'
+class UserSignupVerifyInvalidView(TemplateView):
+    template_name = 'users/signup_verify_invalid.html'
     extra_context = {
         'title': 'Токен не найден',
         'subtitle': 'Подтверждение email адреса',
