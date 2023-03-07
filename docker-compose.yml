@@ -21,4 +21,4 @@ services:
     environment:
       POSTGRES_USER: 'postgres'
       POSTGRES_PASSWORD: 'password'
-      POSTGRES_DB: 'hello_django_dev'
+      POSTGRES_DB: 'forestwork'
