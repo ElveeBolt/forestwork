@@ -29,7 +29,6 @@ class EmployerListView(ListView):
     paginate_by = settings.RESULTS_PER_PAGE
     template_name = 'users/employers.html'
     context_object_name = 'employers'
-    ordering = ['-date_joined']
     extra_context = {
         'title': 'Работодатели',
         'subtitle': 'Список работодателей и компаний',
@@ -54,7 +53,6 @@ class DeveloperListView(ListView):
     paginate_by = settings.RESULTS_PER_PAGE
     template_name = 'users/developers.html'
     context_object_name = 'developers'
-    ordering = ['-date_joined']
     extra_context = {
         'title': 'Разработчики',
         'subtitle': 'Список разработчиков',
