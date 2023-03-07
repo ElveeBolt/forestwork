@@ -21,5 +21,6 @@ class Job(models.Model):
 
     class Meta:
         db_table = 'jobs'
-        verbose_name = 'Вакансия'
+        verbose_name = 'Вакансию'
         verbose_name_plural = 'Вакансии'
+        ordering = ['-date_publish']

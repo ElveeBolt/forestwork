@@ -10,7 +10,6 @@ class JobListView(ListView):
     paginate_by = settings.RESULTS_PER_PAGE
     template_name = 'jobs/index.html'
     context_object_name = 'job_list'
-    ordering = ['-date_publish']
     extra_context = {
         'title': 'Список вакансий',
         'subtitle': 'Доступные вакансии от работодателей'
