@@ -8,12 +8,6 @@ urlpatterns = [
     path('developers/', views.DeveloperListView.as_view(), name='developers'),
     path('developers/<int:pk>', views.DeveloperDetailView.as_view(), name='developer'),
 
-    path('profile', views.ProfileView.as_view(), name='profile'),
-    path('profile/jobs', views.ProfileJobListView.as_view(), name='profile_jobs'),
-    path('profile/main', views.ProfileMainUpdateView.as_view(), name='profile_main'),
-    path('profile/contacts', views.ProfileContactsUpdateView.as_view(), name='profile_contacts'),
-    path('profile/password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
-
     path('login', views.UserLoginView.as_view(), name='login'),
     path('forgot', views.UserForgotView.as_view(), name='forgot'),
     path('forgot/send', views.UserForgotSendView.as_view(), name='forgot_send'),

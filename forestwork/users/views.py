@@ -1,20 +1,16 @@
+from django.http import Http404
 from django.conf import settings
 from django.urls import reverse_lazy
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import login
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.views import PasswordChangeView, PasswordResetConfirmView, LoginView, LogoutView, \
-    PasswordResetView
+from django.contrib.auth.views import PasswordResetConfirmView, LoginView, LogoutView, PasswordResetView
 from django.contrib.auth.tokens import default_token_generator
 from django.views import View
-from django.views.generic import ListView, DetailView, TemplateView, UpdateView, CreateView
-from .forms import LoginForm, SignupForm, UserContactForm, UserAboutForm, UserPasswordForm, UserForgotForm, \
-    UserSetForgotPasswordForm
-from jobs.models import Job
+from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from .forms import LoginForm, SignupForm, UserForgotForm, UserSetForgotPasswordForm
 from .models import User
 from .utils import send_email_for_verify
-from django.http import Http404
 
 
 # Create your views here.
@@ -75,64 +71,6 @@ class DeveloperDetailView(DetailView):
     extra_context = {
         'title': 'Информация о пользователе',
         'subtitle': 'Дополнительная информация о разработчике',
-    }
-
-
-class ProfileView(LoginRequiredMixin, TemplateView):
-    template_name = 'profile/index.html'
-    extra_context = {
-        'title': 'Профиль',
-        'subtitle': 'Страница профиля'
-    }
-
-
-class ProfileJobListView(LoginRequiredMixin, ListView):
-    model = Job
-    template_name = 'profile/jobs.html'
-    context_object_name = 'jobs'
-    ordering = ['-date_joined']
-    extra_context = {
-        'title': 'Мои вакансии',
-        'subtitle': 'Опубликованные вами вакансии',
-    }
-
-    def get_queryset(self):
-        return Job.objects.filter(user=self.request.user)
-
-
-class ProfileMainUpdateView(LoginRequiredMixin, UpdateView):
-    model = User
-    form_class = UserAboutForm
-    template_name = 'profile/main.html'
-    extra_context = {
-        'title': 'Редактирование профиля',
-        'subtitle': 'Страница редактирования профиля',
-    }
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-class ProfileContactsUpdateView(LoginRequiredMixin, UpdateView):
-    model = User
-    form_class = UserContactForm
-    template_name = 'profile/contacts.html'
-    extra_context = {
-        'title': 'Редактирование профиля',
-        'subtitle': 'Страница редактирования профиля',
-    }
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
-
-class ProfilePasswordUpdateView(LoginRequiredMixin, PasswordChangeView):
-    form_class = UserPasswordForm
-    template_name = 'profile/password.html'
-    success_url = reverse_lazy('profile')
-    extra_context = {
-        'title': 'Редактирование профиля',
-        'subtitle': 'Страница редактирования профиля',
     }
 
 

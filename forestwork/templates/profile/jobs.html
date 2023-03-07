@@ -14,7 +14,7 @@
                     <div class="subtitle">Список опубликованных вами вакансий</div>
                 </div>
                 <div class="profile-job-list">
-                    {% for job in jobs %}
+                    {% for job in user.job_set.all %}
                     <div class="job">
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="subinfo text-muted d-flex mb-3">
