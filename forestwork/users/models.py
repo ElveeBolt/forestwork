@@ -28,4 +28,7 @@ class User(AbstractUser):
         return reverse('profile')
 
     class Meta:
+        db_table = 'users'
+        verbose_name = 'Пользователя'
+        verbose_name_plural = 'Пользователи'
         ordering = ['-date_joined']
