@@ -12,7 +12,7 @@ urlpatterns = [
     path('forgot', views.UserForgotView.as_view(), name='forgot'),
     path('forgot/send', views.UserForgotSendView.as_view(), name='forgot_send'),
     path('forgot/verify/<uidb64>/<token>', views.UserForgotVerifyView.as_view(), name='forgot_verify'),
-    path('forgot/success', views.UserForgotSuccessView.as_view(), name='forgot_verify_success'),
+    path('forgot/success', views.UserForgotSuccessView.as_view(), name='forgot_success'),
 
     path('signup', views.UserSignupView.as_view(), name='signup'),
     path('activate', views.UserActivateView.as_view(), name='signup_activate'),
