@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            {% for user in page_obj %}
+            <div class="card card-user">
+                <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
+                <div class="description">{{ user.about | truncatewords:20 }}</div>
+            </div>
+            {% endfor %}
+            {% include 'pagination.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

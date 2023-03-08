@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Общая информация</h2>
+                    <div class="subtitle">Чтобы внести изменения в общую информацию заполните форму ниже</div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="mb-3">
+                        <legend>Основное</legend>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3">
+                                    <label for="{{ form.name.auto_id }}" class="form-label">{{ form.name.label }}</label>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mb-3">
+                        <legend>Дополнительная информация</legend>
+                        <div class="mb-3">
+                            <label for="{{ form.about.auto_id }}" class="form-label">{{ form.about.label }}</label>
+                            {{ form.about }}
+                        </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-disk"></i>Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

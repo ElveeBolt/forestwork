@@ -1,0 +1,39 @@
+{% extends 'base_blank.html' %}
+{% load static %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <img src="{% static 'img/logo_small.png' %}" alt="">
+            <h2>{{ title }}</h2>
+            <div class="subtitle">{{ subtitle }}</div>
+        </div>
+        {% if validlink %}
+        <form method="POST" class="mb-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.new_password1.auto_id }}" class="form-label">{{ form.new_password1.label }}</label>
+                {{ form.new_password1 }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.new_password2.auto_id }}" class="form-label">{{ form.new_password2.label }}</label>
+                {{ form.new_password2 }}
+                {% if form.new_password2.errors %}
+                    {% for error in form.new_password2.errors %}
+                        <div class="text-danger text-center">{{ error }}</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary btn-with-icon" type="submit"><i class="fi fi-rr-sign-in-alt"></i>Продолжить</button>
+            </div>
+        </form>
+        {% else %}
+            <div class="text-center">
+                К сожалению это недействительная ссылка. Пожалуйста перейдите по ссылке которое было отправлено вам на e-mail.
+            </div>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

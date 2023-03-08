@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="user-profile">
+                    <div class="avatar">{{ user.username|slice:"2" }}</div>
+                    <div class="name">{{ user.name }}</div>
+                    <div class="location text-muted">
+                        <i class="fi fi-rr-marker"></i>
+                        {% if not user.country and not user.city %}
+                            Не указано
+                        {% else %}
+                            {{ user.country }} {{ user.city }}
+                        {% endif %}
+                    </div>
+                    <div class="date text-muted mt-3">Последняя активность: {{ user.last_login  }}</div>
+                    <div class="date text-muted">На сервисе с: {{ user.date_joined }}</div>
+
+                </div>
+            </div>
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                {% if user.about %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link btn btn-with-icon active" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="true">
+                        <i class="fi fi-rr-id-badge"></i>
+                        Обо мне
+                    </button>
+                </li>
+                {% endif %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link btn btn-with-icon" id="pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#pills-contacts" type="button" role="tab" aria-controls="pills-contacts" aria-selected="false"><i class="fi fi-rr-at"></i>Контакты</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                {% if user.about %}
+                <div class="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabindex="0">
+                    <div class="card">
+                        <div class="card-heading">
+                            <h2>Обо мне</h2>
+                            <div class="subtitle">Дополнительная информация</div>
+                        </div>
+                        {{ user.about | linebreaks }}
+                    </div>
+                </div>
+                {% endif %}
+                <div class="tab-pane fade" id="pills-contacts" role="tabpanel" aria-labelledby="pills-contacts-tab" tabindex="0">
+                    <div class="card">
+                        <div class="card-heading">
+                            <h2>Контактная информация</h2>
+                            <div class="subtitle">Список доступных контактов пользователя</div>
+                        </div>
+                        <ul class="list-unstyled list-contacts mb-0">
+                            {% if user.phone %}
+                            <li><span class="left">Телефон:</span><span class="right"><a href="tel:{{ user.phone }}">{{ user.phone }}</a></span></li>
+                            {% endif %}
+                            {% if user.email %}
+                            <li><span class="left">E-mail:</span><span class="right"><a href="mailto:{{ user.email }}">{{ user.email }}</a></span></li>
+                            {% endif %}
+                            {% if user.telegram %}
+                            <li><span class="left">Telegram:</span><span class="right">{{ user.telegram }}</span></li>
+                            {% endif %}
+                            {% if user.whatsapp %}
+                            <li><span class="left">Whatsapp:</span><span class="right">{{ user.whatsapp }}</span></li>
+                            {% endif %}
+                            {% if user.linkedin %}
+                            <li><span class="left">LinkedIn:</span><span class="right"><a href="{{ user.linkedin }}">{{ user.linkedin }}</a></span></li>
+                            {% endif %}
+                            {% if user.github %}
+                            <li><span class="left">GitHub:</span><span class="right"><a href="{{ user.github }}">{{ user.github }}</a></span></li>
+                            {% endif %}
+                            {% if user.website %}
+                            <li><span class="left">Веб-сайт:</span><span class="right"><a href="{{ user.website }}">{{ user.website }}</a></span></li>
+                            {% endif %}
+                            {% if user.portfolio %}
+                            <li><span class="left">Портфолио:</span><span class="right"><a href="{{ user.portfolio }}">{{ user.portfolio }}</a></span></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

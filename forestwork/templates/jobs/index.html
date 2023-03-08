@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            {% for job in job_list %}
+            <div class="card card-job">
+                <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
+                <div class="salary">{{ job.salary }}$</div>
+                <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
+                <div class="subinfo text-muted d-flex">
+                    <div class="location text-icon">
+                    <i class="fi fi-rr-marker"></i>
+                    {% if not job.country and not job.city %}
+                        Не указано
+                    {% else %}
+                        {{ job.country }} {{ job.city }}
+                    {% endif %}
+                    </div>
+                    <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
+                </div>
+            </div>
+            {% endfor %}
+            {% include 'pagination.html' %}
+        </div>
+        <div class="col-lg-4">
+            {% if user.type == 1 %}
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Разместите вакансию</h2>
+                </div>
+                <p>Самый простой способ найти новых сотрудника — создать вакансию.</p>
+                <div>
+                    <a class="btn btn-primary btn-with-icon" href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

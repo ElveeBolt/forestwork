@@ -1,0 +1,39 @@
+{% extends 'base_blank.html' %}
+{% load static %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <img src="{% static 'img/logo_small.png' %}" alt="">
+            <h2>{{ title }}</h2>
+            <div class="subtitle">{{ subtitle }}</div>
+        </div>
+        <form method="POST" class="mb-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.username.auto_id }}" class="form-label">{{ form.username.label }}</label>
+                {{ form.username }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.password.auto_id }}" class="form-label">{{ form.password.label }}</label>
+                {{ form.password }}
+            </div>
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class="text-danger text-center mb-3">{{ error }}</div>
+                {% endfor %}
+            {% endif %}
+            <div class="mb-3 text-center">
+
+            </div>
+            <div class="d-grid">
+                <button class="btn btn-primary btn-with-icon" type="submit"><i class="fi fi-rr-sign-in-alt"></i>Войти</button>
+            </div>
+        </form>
+        <div class="text-muted text-center">Впервые на сайте ForestWork?<br>
+            <a href="{% url 'forgot' %}">Забыли пароль?</a> · <a href="{% url 'signup' %}">Регистрация аккаунта</a>
+        </div>
+    </div>
+</section>
+{% endblock content %}

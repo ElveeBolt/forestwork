@@ -1,0 +1,17 @@
+<div class="card">
+    <div class="card-heading">
+        <h2>Меню пользователя</h2>
+        <div class="subtitle">Навигация пользователя</div>
+    </div>
+    <ul class="list-group list-menu">
+        <li class="list-group-item"><a href="{% url 'profile' %}"><i class="fi fi-rr-user"></i>Мой профиль</a></li>
+        {% if user.type == 1 %}
+        <li class="list-group-item"><a href="{% url 'profile_jobs' %}"><i class="fi fi-rr-briefcase"></i>Мои вакансии</a></li>
+        <li class="list-group-item"><a href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a></li>
+        {% endif %}
+        <li class="list-group-item"><a href="{% url 'profile_main' %}"><i class="fi fi-rr-document"></i>Общее</a></li>
+        <li class="list-group-item"><a href="{% url 'profile_contacts' %}"><i class="fi fi-rr-at"></i>Контактные данные</a></li>
+        <li class="list-group-item"><a href="{% url 'profile_password' %}"><i class="fi fi-rr-lock"></i>Сменить пароль</a></li>
+        <li class="list-group-item"><a href="{% url 'logout' %}"><i class="fi fi-rr-sign-out-alt"></i>Выйти</a></li>
+    </ul>
+</div>

@@ -1,0 +1,43 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'index' %}"><img src="{% static 'img/logo_small.png' %}" alt="">ForestWork</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="{% url 'jobs' %}">Вакансии</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'employers' %}">Работодатели</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'developers' %}">Разработчики</a></li>
+            </ul>
+            <ul class="navbar-nav ms-auto ">
+                <li class="nav-item dropdown">
+                    <a class="nav-link btn-icon dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fi fi-rr-user"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end mini-profile">
+                        {% if user.is_authenticated %}
+                        <li class="main-profile">
+                            <span class="avatar">{{ user.username|slice:":2" }}</span>
+                            <span class="name">{{ user.name }}</span>
+                            <span class="emails text-muted">{{ user.email }}</span>
+                        </li>
+                        <li class="separator"></li>
+                        <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fi fi-rr-user"></i>Мой профиль</a></li>
+                        {% if user.type == 1 %}
+                        <li><a class="dropdown-item" href="{% url 'profile_jobs' %}"><i class="fi fi-rr-briefcase"></i>Мои вакансии</a></li>
+                        <li><a class="dropdown-item" href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="{% url 'logout' %}"><i class="fi fi-rr-sign-out-alt"></i>Выход</a></li>
+                        {% else %}
+                        <li><a class="dropdown-item" href="{% url 'login' %}"><i class="fi fi-rr-sign-in-alt"></i>Авторизация</a></li>
+                        <li><a class="dropdown-item" href="{% url 'signup' %}"><i class="fi fi-rr-enter"></i>Зарегистрироватся</a></li>
+                        {% endif %}
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

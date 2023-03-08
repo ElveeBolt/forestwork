@@ -1,0 +1,15 @@
+{% extends 'base_blank.html' %}
+{% load static %}
+
+{% block content %}
+<section class="blank">
+    <div class="card card-box">
+        <div class="card-heading">
+            <img src="{% static 'img/logo_small.png' %}" alt="">
+            <h2>{{ title }}</h2>
+            <div class="subtitle">{{ subtitle }}</div>
+        </div>
+        <div class="text-center">Мы отправили письмо с инструкциями на указанную вами почту. Чтобы завершить процесс восстановления пароля, перейдите по ссылке из этого письма.</div>
+    </div>
+</section>
+{% endblock content %}

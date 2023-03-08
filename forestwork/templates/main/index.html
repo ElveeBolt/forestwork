@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section id="home">
+    <div class="container">
+        <h1>ForestWork</h1>
+        <div class="subtitle text-muted mb-3">Сервис поиска работы и кандидатов</div>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'job_add' %}" class="btn btn-primary btn-with-icon" style="margin-right: 20px"><i class="fi fi-rr-add"></i>Добавить вакансию</a>
+            <a href="{% url 'jobs' %}" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-briefcase"></i>Смотреть вакансии</a>
+        </div>
+
+    </div>
+</section>
+<section id="features">
+    <div class="container">
+        <div class="section-heading">
+            <h2>Создайте профиль и начните поиск работы</h2>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card">
+                    <i class="fi fi-rr-briefcase"></i>
+                    <div class="title">Работодатели сами предлагают работу</div>
+                    <div class="text-muted">Работодатели видят ваш профиль на сайте и могут сами связываться с вами и
+                        предложить работу.
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <i class="fi fi-rr-form"></i>
+                    <div class="title">Все контакты в одном месте</div>
+                    <div class="text-muted">Не важно, работодатель вы или разработчик, смотрите контакты потенциальных
+                        партнеров на страницах профиля
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id='jobs'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Недавно опубликованные вакансии</h2>
+            <div class="subtitle text-muted">Возможно именно эти вакансии подарят вам работу всей жизни и сделают понедельники счастливым</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все вакансии</a>
+            </div>
+        </div>
+        <div class="row">
+            {% for job in job_list %}
+                <div class="col-lg-6">
+                    <div class="card card-job">
+                        <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
+                        <div class="salary">{{ job.salary }}$</div>
+                        <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
+                        <div class="subinfo text-muted d-flex">
+                            <div class="location text-icon">
+                            <i class="fi fi-rr-marker"></i>
+                            {% if not job.country and not job.city %}
+                                Не указано
+                            {% else %}
+                                {{ job.country }} {{ job.city }}
+                            {% endif %}
+                            </div>
+                            <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id='employers'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Новые компании и работодатели на ForestWork</h2>
+            <div class="subtitle text-muted">Найди команду, которая подходит тебя по ценностям, культурой и профессиональным целям</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все компании</a>
+            </div>
+        </div>
+        <div class="owl-carousel" id="employers-carousel">
+            {% for user in employer_list %}
+            <div class="card card-user card-mini-user text-center">
+                <div class="avatar">{{ user.username|slice:"2" }}</div>
+                <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
+                <i class="fi fi-rr-marker"></i>
+                {% if not user.country and not user.city %}
+                    Не указано
+                {% else %}
+                    {{ user.country }} {{ user.city }}
+                {% endif %}
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'employer' pk=user.id %}" class="btn">Смотреть профиль</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+<section id='developers'>
+    <div class="container">
+        <div class="section-heading">
+            <h2>Новые кандидаты</h2>
+             <div class="subtitle text-muted">Ищите и иследуйте кандидатов со всего мира</div>
+            <div class="btns">
+                <a href="{% url 'employers' %}" class="btn btn-primary">Все кандидаты</a>
+            </div>
+        </div>
+        <div class="row">
+        <div class="owl-carousel" id="developer-carousel">
+            {% for user in developer_list %}
+            <div class="card card-user card-mini-user text-center">
+                <div class="avatar">{{ user.username|slice:"2" }}</div>
+                <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
+                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
+                <i class="fi fi-rr-marker"></i>
+                {% if not user.country and not user.city %}
+                    Не указано
+                {% else %}
+                    {{ user.country }} {{ user.city }}
+                {% endif %}
+                </div>
+                <div class="d-grid">
+                    <a href="{% url 'developer' pk=user.id %}" class="btn">Смотреть профиль</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block scripts %}
+<script>
+var nav_text = [
+    '<i class="fi fi-rr-angle-small-left"></i>',
+    '<i class="fi fi-rr-angle-small-right"></i>'
+]
+
+$('#employers-carousel, #developer-carousel').owlCarousel({
+    nav: true,
+    navText: nav_text,
+    dots: true,
+    loop: true,
+    margin: 30,
+    responsive:{
+        0:{
+            items:1,
+        },
+        576:{
+            items:2,
+        },
+        992:{
+            items:3,
+        },
+        1200:{
+            items:4,
+        }
+    }
+})
+
+</script>
+{% endblock scripts %}
+
+
+
