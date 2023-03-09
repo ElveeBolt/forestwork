@@ -1,5 +1,6 @@
 from django import forms
 from .models import Job
+from settings.models import Country
 
 
 class JobForm(forms.ModelForm):
@@ -24,12 +25,13 @@ class JobForm(forms.ModelForm):
             }
         )
     )
-    country = forms.CharField(
+    country = forms.ModelChoiceField(
         label='Страна:',
         required=False,
-        widget=forms.TextInput(
+        queryset=Country.objects.all(),
+        widget=forms.Select(
             attrs={
-                'class': 'form-control',
+                'class': 'form-select',
                 'placeholder': 'Укажите страну...'
             }
         )
