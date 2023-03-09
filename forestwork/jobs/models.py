@@ -5,6 +5,11 @@ from settings.models import Country
 
 
 class Job(models.Model):
+    STATAUS_CHOICES = (
+        (0, 'Не активно'),
+        (1, 'Активно')
+    )
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField(max_length=255, verbose_name='Название вакансии')
     description = models.TextField(verbose_name='Описание')
@@ -13,6 +18,7 @@ class Job(models.Model):
     salary = models.IntegerField(blank=True, null=True, verbose_name='Зарплата ($)')
     comment = models.TextField(blank=True, verbose_name='Комментарий')
     date_publish = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
+    status = models.IntegerField(blank=True, default=0, choices=STATAUS_CHOICES, verbose_name='Статус')
 
     def __str__(self):
         return self.title

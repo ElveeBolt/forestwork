@@ -15,6 +15,10 @@ class JobListView(ListView):
         'subtitle': 'Доступные вакансии от работодателей'
     }
 
+    def get_queryset(self, **kwargs):
+       queryset = super().get_queryset(**kwargs)
+       return queryset.filter(status=1)
+
 
 class JobDetailView(DetailView):
     model = Job
