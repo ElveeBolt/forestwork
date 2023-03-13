@@ -1,6 +1,6 @@
 from django import forms
 from .models import Job
-from settings.models import Country
+from settings.models import Country, Specialization
 
 
 class JobForm(forms.ModelForm):
@@ -22,6 +22,17 @@ class JobForm(forms.ModelForm):
                 'class': 'form-control',
                 'placeholder': 'Введите описание к вакансии...',
                 'rows': 5
+            }
+        )
+    )
+    specialization = forms.ModelChoiceField(
+        label='Специализация:',
+        required=False,
+        queryset=Specialization.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите специализацию...'
             }
         )
     )

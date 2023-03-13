@@ -3,7 +3,7 @@ from .models import FaqCategory, FaqQuestion
 
 
 # Register your models here.
-class HelpInline(admin.StackedInline):
+class FaqQuestionInline(admin.StackedInline):
     model = FaqQuestion
     extra = 0
 
@@ -11,9 +11,9 @@ class HelpInline(admin.StackedInline):
 @admin.register(FaqCategory)
 class FaqCategory(admin.ModelAdmin):
     list_display = ('title',)
-    inlines = (HelpInline,)
+    inlines = (FaqQuestionInline,)
 
 
 @admin.register(FaqQuestion)
-class Help(admin.ModelAdmin):
+class FaqQuestion(admin.ModelAdmin):
     list_display = ('title', 'category')
