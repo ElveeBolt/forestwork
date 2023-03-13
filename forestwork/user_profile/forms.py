@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
+from settings.models import Country
 
 
 class ProfileAboutForm(forms.ModelForm):
@@ -31,13 +32,14 @@ class ProfileAboutForm(forms.ModelForm):
 
 
 class ProfileContactForm(forms.ModelForm):
-    country = forms.CharField(
+    country = forms.ModelChoiceField(
         label='Страна:',
         required=False,
-        widget=forms.TextInput(
+        queryset=Country.objects.all(),
+        widget=forms.Select(
             attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите страну...'
+                'class': 'form-select',
+                'placeholder': 'Укажите страну...'
             }
         )
     )

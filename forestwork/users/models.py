@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 from django.contrib.auth.models import AbstractUser
+from settings.models import Country
 
 
 # Create your models here.
@@ -13,7 +14,7 @@ class User(AbstractUser):
     name = models.CharField(max_length=255, verbose_name='Имя')
     type = models.IntegerField(choices=PROFILE_CHOICES, default=0, verbose_name='Тип профиля')
     about = models.TextField(blank=True, verbose_name='Дополнительная информация')
-    country = models.CharField(blank=True, max_length=255, verbose_name='Страна')
+    country = models.ForeignKey(Country, verbose_name='Страна', on_delete=models.CASCADE, null=True)
     city = models.CharField(blank=True, max_length=255, verbose_name='Город')
     phone = models.CharField(blank=True, max_length=255, verbose_name='Телефон')
     telegram = models.CharField(blank=True, max_length=255, verbose_name='Telegram')
