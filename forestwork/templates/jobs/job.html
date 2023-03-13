@@ -10,7 +10,9 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-heading">
+                    {% if job.salary %}
                     <h2>{{ job.salary }} $</h2>
+                    {% endif %}
                     <div class="subtitle">
                         <span>{{ job.country }} {{ job.city }}</span> - <span>{{ job.date_publish }}</span>
                     </div>

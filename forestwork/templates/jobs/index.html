@@ -11,7 +11,9 @@
             {% for job in job_list %}
             <div class="card card-job">
                 <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
+                {% if job.salary %}
                 <div class="salary">{{ job.salary }}$</div>
+                {% endif %}
                 <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
                 <div class="subinfo text-muted d-flex">
                     <div class="location text-icon">

@@ -13,7 +13,7 @@ class Job(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь')
     title = models.CharField(max_length=255, verbose_name='Название вакансии')
     description = models.TextField(verbose_name='Описание')
-    country = models.ForeignKey(Country, verbose_name='Страна', on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, null=True, verbose_name='Страна', on_delete=models.CASCADE)
     city = models.CharField(blank=True, max_length=255, verbose_name='Город')
     salary = models.IntegerField(blank=True, null=True, verbose_name='Зарплата ($)')
     comment = models.TextField(blank=True, verbose_name='Комментарий')
