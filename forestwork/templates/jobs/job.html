@@ -18,7 +18,9 @@
                     </div>
                 </div>
                 <div class="description">{{ job.description | linebreaks }}</div>
+                {% if job.comment %}
                 <div class="comment">{{ job.comment }}</div>
+                {% endif %}
             </div>
             <div class="card">
                 <div class="card-heading">
