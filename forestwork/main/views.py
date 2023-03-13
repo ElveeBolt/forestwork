@@ -13,7 +13,7 @@ class IndexView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['job_list'] = Job.objects.all()[:5]
+        context['job_list'] = Job.objects.filter(status=1)[:5]
         context['employer_list'] = User.objects.filter(type=1)[:5]
         context['developer_list'] = User.objects.filter(type=0)[:5]
         return context
