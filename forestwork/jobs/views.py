@@ -1,6 +1,7 @@
 from django.conf import settings
 from .forms import JobForm
 from .models import Job
+from .utils import UserCheckTypeEmployerMixin, UserCheckJobAuthorMixin
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -30,7 +31,7 @@ class JobDetailView(DetailView):
     }
 
 
-class JobAddView(LoginRequiredMixin, CreateView):
+class JobAddView(LoginRequiredMixin, UserCheckTypeEmployerMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'jobs/job_form.html'
@@ -44,7 +45,7 @@ class JobAddView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class JobUpdateView(LoginRequiredMixin, UpdateView):
+class JobUpdateView(LoginRequiredMixin, UserCheckJobAuthorMixin, UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'jobs/job_form.html'
