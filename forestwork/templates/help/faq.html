@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-7">
+            {% for category in categories %}
+            <div class="card" id="category_{{ category.id }}">
+                <h2>{{ category.title }}</h2>
+                <div class="accordion accordion-flush" id="collapse{{ category.id }}">
+                    {% for question in category.helps.all %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading{{ category.id }}_{{ question.id }}">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapse{{ category.id }}_{{ question.id }}" aria-expanded="false"
+                                    aria-controls="collapse{{ category.id }}_{{ question.id }}">
+                                {{ question.title }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ category.id }}_{{ question.id }}" class="accordion-collapse collapse"
+                             aria-labelledby="heading{{ category.id }}_{{ question.id }}"
+                             data-bs-parent="#collapse{{ category.id }}">
+                            <div class="accordion-body">{{ question.text }}</div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock content %}
