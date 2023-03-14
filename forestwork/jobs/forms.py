@@ -17,6 +17,7 @@ class JobForm(forms.ModelForm):
     description = forms.CharField(
         label='Описание:',
         required=True,
+        help_text='Требования к кандидатам, описание проекта, команда, условия работы, пакеты помощи и другая полезная информация.',
         widget=forms.Textarea(
             attrs={
                 'class': 'form-control',
