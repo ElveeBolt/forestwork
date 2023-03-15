@@ -7,6 +7,7 @@ class JobForm(forms.ModelForm):
     title = forms.CharField(
         label='Название вакансии:',
         required=True,
+        help_text='Укажите кого пытаетесь найти. Например: Django Developer на игровой форум.',
         widget=forms.TextInput(
             attrs={
                 'class': 'form-control',
@@ -65,6 +66,28 @@ class JobForm(forms.ModelForm):
         widget=forms.NumberInput(
             attrs={
                 'class': 'form-control',
+            }
+        )
+    )
+    remote_type = forms.ChoiceField(
+        label='Удалённая работа / Офис:',
+        required=False,
+        choices=Job.REMOTE_TYPE_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите тип работы...'
+            }
+        )
+    )
+    exp = forms.ChoiceField(
+        label='Опыт работы:',
+        required=False,
+        choices=Job.EXP_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите опыт работы...'
             }
         )
     )

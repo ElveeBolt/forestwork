@@ -18,6 +18,7 @@
                     <div class="mb-3">
                         <label for="{{ form.title.auto_id }}" class="form-label">{{ form.title.label }}</label>
                         {{ form.title }}
+                        <div class="form-text">{{ form.title.help_text }}</div>
                     </div>
                     <div class="mb-3">
                         <label for="{{ form.description.auto_id }}" class="form-label">{{ form.description.label }}</label>
@@ -50,6 +51,14 @@
                                 <div class="form-text">{{ form.salary.help_text }}</div>
                             </div>
                         </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.remote_type.auto_id }}" class="form-label">{{ form.remote_type.label }}</label>
+                        {{ form.remote_type }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.exp.auto_id }}" class="form-label">{{ form.exp.label }}</label>
+                        {{ form.exp }}
                     </div>
                     <div class="mb-3">
                         <label for="{{ form.comment.auto_id }}" class="form-label">{{ form.comment.label }}</label>
