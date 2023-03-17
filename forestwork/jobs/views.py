@@ -57,7 +57,7 @@ class JobUpdateView(LoginRequiredMixin, UserCheckJobAuthorMixin, UpdateView):
 
 class JobDeleteView(DeleteView):
     model = Job
-    success_url = "/users/profile/jobs"
+    success_url = "/profile/jobs"
 
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(

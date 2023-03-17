@@ -20,7 +20,7 @@
                     <ul class="dropdown-menu dropdown-menu-end mini-profile">
                         {% if user.is_authenticated %}
                         <li class="main-profile">
-                            <span class="avatar">{{ user.username|slice:":2" }}</span>
+                            <span class="avatar avatar-mini">{{ user.username|slice:":2" }}</span>
                             <span class="name">{{ user.name }}</span>
                             <span class="emails text-muted">{{ user.email }}</span>
                         </li>

@@ -2,6 +2,7 @@
 
 :root{
     --main-bg: #eff2f6;
+    --main-light-bg: #fcfdfd;
     --color-main: #181C32;
     --color-muted: #7f8b99;
     --color-border: #ebebeb;
@@ -435,25 +436,31 @@ legend {
     top: 0;
 }
 
-.job-status{
+.status{
     display: flex;
     width: auto;
     padding: 5px 10px;
     border-radius: 20px;
-    position: absolute;
-    right: 0;
-    top: 50%;
-    margin-top: -12.5px;
     align-items: center;
     color: #fff;
     font-size: 13px;
     font-weight: 500;
     line-height: 1;
+    justify-content: center;
 }
 
-.job-status i{
+.status i{
     margin-right: 5px;
 }
+
+.job-status{
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -12.5px;
+}
+
+
 
 .status-moderate {
    background: var(--color-warning);
@@ -627,18 +634,6 @@ section .section-heading .btns {
     line-height: 1;
 }
 
-.profile-job-list .job {
-    padding-bottom: 15px;
-    margin-bottom: 15px;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.profile-job-list .job:last-child{
-    padding-bottom:0;
-    margin-bottom:0;
-    border:none;
-}
-
 footer{
     padding: 30px 0;
     background: #fff;
@@ -765,6 +760,56 @@ footer .footer-menu li a:hover{
     width: 15px;
     height: 15px;
     background-size: 15px;
+}
+
+table.dataTable {
+    font-size: 13px;
+}
+
+table.dataTable.stripe>tbody>tr.odd>*,
+table.dataTable.display>tbody>tr.odd>* {
+    box-shadow: none;
+    background: var(--main-light-bg);
+    border: none;
+}
+
+table.dataTable.row-border tbody th,
+table.dataTable.row-border tbody td,
+table.dataTable.display tbody th,
+table.dataTable.display tbody td {
+    border: none;
+}
+
+table.dataTable thead th,
+table.dataTable thead td {
+    padding: 10px;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-muted);
+    font-weight: 500;
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+    padding: 10px 10px;
+}
+
+table.dataTable.hover>tbody>tr:hover>*,
+table.dataTable.display>tbody>tr:hover>*,
+table.dataTable.display>tbody>tr.even>.sorting_1,
+table.dataTable.order-column.stripe>tbody>tr.even>.sorting_1,
+table.dataTable.display>tbody>tr.odd>.sorting_1,
+table.dataTable.order-column.stripe>tbody>tr.odd>.sorting_1,
+table.dataTable.order-column>tbody tr>.sorting_1,
+table.dataTable.order-column>tbody tr>.sorting_2,
+table.dataTable.order-column>tbody tr>.sorting_3,
+table.dataTable.display>tbody tr>.sorting_1,
+table.dataTable.display>tbody tr>.sorting_2,
+table.dataTable.display>tbody tr>.sorting_3{
+    box-shadow:none
+}
+
+table.dataTable.no-footer {
+    border: none;
 }
 
 

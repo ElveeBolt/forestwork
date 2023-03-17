@@ -13,20 +13,38 @@
                     <h2>Список вакансий</h2>
                     <div class="subtitle">Список опубликованных вами вакансий</div>
                 </div>
-                <div class="profile-job-list">
+                <table id="table-jobs" class="display">
+                    <thead>
+                        <tr>
+                            <th>Дата публикации</th>
+                            <th>Название</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                     {% for job in user.job_set.all %}
-                    <div class="job">
-                        <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
-                        <div class="subinfo text-muted d-flex mb-3">
-                            <div class="date_publish text-icon"><i class="fi fi-rr-calendar"></i>{{ job.date_publish }}</div>
-                        </div>
-                        <div class="buttons">
-                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm btn-with-icon"><i class="fi fi-rr-edit"></i>Редактировать</a>
-                            <button type="button" class="btn btn-sm btn-with-icon btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}"><i class="fi fi-rr-trash"></i>Удалить</button>
-                        </div>
-                    </div>
+                    <tr>
+                        <td>{{ job.date_publish }}</td>
+                        <td>
+                            <a href="{% url 'job' pk=job.id %}">{{ job.title }}</a>
+                            <div class="text-muted small">{{ job.description | truncatewords:10 }}</div>
+                        </td>
+                        <td style="white-space: nowrap">
+                        {% if job.status == 0 %}
+                            <div class="status status-moderate"><i class="fi fi-rr-time-add"></i>Ожидает одобрения</div>
+                        {% else %}
+                            <div class="status status-done"><i class="fi fi-rr-check"></i>Активно</div>
+                        {% endif %}
+                        </td>
+                        <td style="white-space: nowrap">
+                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm btn-with-icon"><i class="fi fi-rr-edit"></i></a>
+                            <button type="button" class="btn btn-sm btn-with-icon btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}"><i class="fi fi-rr-trash"></i></button>
+                        </td>
+                    </tr>
                     {% endfor %}
-                </div>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="col-lg-4">
@@ -64,6 +82,13 @@ $(".btn-delete-vacancy").click(function () {
 
     $('#delete-vacancy-label').text(title);
     $('form').attr('action', url);
+});
+
+
+$('#table-jobs').DataTable({
+    searching: false,
+    paging: false,
+    info: false
 });
 </script>
 {% endblock scripts %}
