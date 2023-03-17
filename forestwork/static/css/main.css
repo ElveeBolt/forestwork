@@ -8,6 +8,7 @@
     --color-green: #54d226;
     --color-green-hover: #4bbf21;
     --color-danger: #f1416c;
+    --color-warning: #ffa500
 }
 
 body{
@@ -230,8 +231,8 @@ legend {
 }
 
 .avatar.avatar-mini{
-    width: 60px;
-    height: 60px
+    width: 50px;
+    height: 50px
 }
 
 .mini-profile{
@@ -314,8 +315,9 @@ legend {
     display:none;
 }
 
-.header{
-    margin-bottom: 20px
+.header {
+    margin-bottom: 20px;
+    position: relative;
 }
 
 .header h1{
@@ -355,6 +357,16 @@ legend {
     font-weight: 600;
     margin-bottom: 10px;
     color: var(--color-green);
+}
+
+.card-salary {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.card-salary .salary{
+    font-size: 24px;
 }
 
 
@@ -411,8 +423,10 @@ legend {
 
 .card-job-contact {
     position: relative;
-    min-height: 60px;
-    padding-left: 75px;
+    min-height: 50px;
+    padding-left: 60px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
 }
 
 .card-job-contact .avatar{
@@ -420,6 +434,35 @@ legend {
     left: 0;
     top: 0;
 }
+
+.job-status{
+    display: flex;
+    width: auto;
+    padding: 5px 10px;
+    border-radius: 20px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -12.5px;
+    align-items: center;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+}
+
+.job-status i{
+    margin-right: 5px;
+}
+
+.status-moderate {
+   background: var(--color-warning);
+}
+
+.status-done {
+    background: var(--color-green);
+}
+
 
 
 
@@ -571,11 +614,13 @@ section .section-heading .btns {
     border:none;
 }
 
-.list-menu a {
+.list-menu a,
+.list-menu span{
     color: var(--color-main);
 }
 
-.list-menu a i{
+.list-menu a i,
+.list-menu span i{
     font-size: 18px;
     float: left;
     margin-right: 5px;

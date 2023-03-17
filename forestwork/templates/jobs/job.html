@@ -5,57 +5,84 @@
     <div class="header">
         <h1>{{ job.title }}</h1>
         <div class="subtitle">{{ subtitle }}</div>
+        {% if user == job.user %}
+            {% if job.status == 0 %}
+            <div class="job-status status-done"><i class="fi fi-rr-check"></i>Активно</div>
+            {% else %}
+            <div class="job-status status-moderate"><i class="fi fi-rr-time-add"></i>Ожидает одобрения</div>
+            {% endif %}
+        {% endif %}
     </div>
     <div class="row">
         <div class="col-lg-8">
             <div class="card">
-                <div class="card-heading">
-                    {% if job.salary %}
-                    <h2>{{ job.salary }} $</h2>
-                    {% endif %}
-                    <div class="subtitle">
-                        <span>{{ job.country }} {{ job.city }}</span> - <span>{{ job.date_publish }}</span>
-                    </div>
-                </div>
                 <div class="card-job-contact d-flex justify-content-between align-items-center mb-3">
                     <div class="avatar avatar-mini">{{ job.user.username|slice:":2" }}</div>
                     <div class="job-contact-info">
-                        <div class="name"><a href="{% url 'employer' pk=job.user.id %}">{{ job.user.name }}</a></div>
+                        <div class="mb-1"><a href="{% url 'employer' pk=job.user.id %}">{{ job.user.name }}</a></div>
+                        {% if job.user.website %}
+                            <div class="text-muted">{{ job.user.website }}</div>
+                        {% else %}
+                            <div class="text-muted">{{ job.user.email }}</div>
+                        {% endif %}
                     </div>
-                    <a href="{% url 'employer' pk=job.user.id %}" class="btn">Профиль работодателя</a>
+                    <a href="{% url 'employer' pk=job.user.id %}" class="btn btn-with-icon"><i class="fi fi-rr-user"></i>Профиль работодателя</a>
                 </div>
                 <div class="description">{{ job.description | linebreaks }}</div>
                 {% if job.comment %}
                 <div class="comment">{{ job.comment }}</div>
                 {% endif %}
             </div>
-            <div class="card">
-                <div class="card-heading">
-                    <h2>Контакты</h2>
-                    <div class="subtitle">Контактные данные для связи с работодателем</div>
-                </div>
-                <ul class="list-unstyled list-contacts">
-                    <li><span class="left">Название компании: </span><span class="right"><a href="{% url 'employer' pk=job.user.id %}">{{ job.user.name }}</a></span></li>
-                    <li><span class="left">Телефон: </span><span class="right"><a href="tel:{{ job.user.phone }}">{{ job.user.phone }}</a></span></li>
-                    <li><span class="left">E-mail: </span><span class="right"><a href="mailto:{{ job.user.email }}">{{ job.user.email }}</a></span></li>
-                    <li><span class="left">Telegram: </span><span class="right">{{ job.user.telegram }}</span></li>
-                    <li><span class="left">Whatsapp: </span><span class="right">{{ job.user.whatsapp }}</span></li>
-                    <li><span class="left">LinkedIn: </span><span class="right"><a href="{{ job.user.linkedin }}">{{ job.user.linkedin }}</a></span></li>
-                    <li><span class="left">Веб-сайт: </span><span class="right"><a href="{{ job.user.website }}">{{ job.user.website }}</a></span>
-                    </li>
-                </ul>
-            </div>
         </div>
         <div class="col-lg-4">
             <div class="card">
                 <div class="card-heading">
-                    <h2>{{ job.user.name }}</h2>
-                    <div class="subtitle">Описание работодателя / компании</div>
+                    <h2>Дополнительно</h2>
+                    <div class="subtitle">Дополнительные сведения, касательно вакансии</div>
                 </div>
-                <p>{{ job.user.about }}</p>
-                <a href="{% url 'employer' pk=job.user.id %}" class="btn btn-primary">Смотреть профиль</a>
+                <div class="card-salary mb-3">
+                    <div class="salary">
+                        {% if job.salary %}
+                            {{ job.salary }} $
+                        {% else %}
+                            Не указано
+                        {% endif %}
+                    </div>
+                    <div class="text-muted">Выше указана ожидаемая заработная плата потенциального кандидата в мес.</div>
+                </div>
+                <ul class="list-group list-menu">
+                    {% if job.specialization %}
+                    <li class="list-group-item">
+                        <span class="text-muted d-block small mb-1">Специализация:</span>
+                        <span><i class="fi fi-rr-id-badge"></i>{{ job.specialization }}</span>
+                    </li>
+                    {% endif %}
+                    {% if job.country or job.city %}
+                    <li class="list-group-item">
+                        <span class="text-muted d-block small mb-1">Местоположение:</span>
+                        <span><i class="fi fi-rr-marker"></i>{{ job.country }} {{ job.city }}</span>
+                    </li>
+                    {% endif %}
+                    {% if job.exp %}
+                    <li class="list-group-item">
+                        <span class="text-muted d-block small mb-1">Опыт работы:</span>
+                        <span><i class="fi fi-rr-user-time"></i>{{ job.get_exp_display }}</span>
+                    </li>
+                    {% endif %}
+                    {% if job.remote_type %}
+                    <li class="list-group-item">
+                        <span class="text-muted d-block small mb-1">Тип работы:</span>
+                        <span><i class="fi fi-rr-city"></i>{{ job.get_remote_type_display }}</span>
+                    </li>
+                    {% endif %}
+                    <li class="list-group-item">
+                        <span class="text-muted d-block small mb-1">Дата публикации:</span>
+                        <span><i class="fi fi-rr-calendar-lines-pen"></i>{{ job.date_publish }}</span>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+
 {% endblock content %}

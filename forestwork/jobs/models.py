@@ -11,18 +11,20 @@ class Job(models.Model):
     )
 
     REMOTE_TYPE_CHOICES = (
-        (0, 'На выбор кандидата'),
-        (1, 'Только офис'),
-        (2, 'Гибридная работа'),
-        (3, 'Только удалённо')
+        (0, 'Не выбрано'),
+        (1, 'На выбор кандидата'),
+        (2, 'Только офис'),
+        (3, 'Гибридная работа'),
+        (4, 'Только удалённо')
     )
 
     EXP_CHOICES = (
-        (0, 'Без опыта работы'),
-        (1, '1 год'),
-        (2, '2 года'),
-        (3, '3 года'),
-        (4, '5 лет')
+        (0, 'Не выбрано'),
+        (1, 'Без опыта работы'),
+        (2, '1 год'),
+        (3, '2 года'),
+        (4, '3 года'),
+        (5, '5 лет')
     )
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -32,11 +34,11 @@ class Job(models.Model):
     country = models.ForeignKey(Country, null=True, verbose_name='Страна', on_delete=models.CASCADE)
     city = models.CharField(blank=True, max_length=255, verbose_name='Город')
     salary = models.IntegerField(blank=True, null=True, verbose_name='Зарплата ($)')
-    remote_type = models.IntegerField(blank=True, default=0, choices=STATUS_CHOICES, verbose_name='Удалённая работа / Офис')
+    remote_type = models.IntegerField(blank=True, default=0, choices=REMOTE_TYPE_CHOICES, verbose_name='Удалённая работа / Офис')
     exp = models.IntegerField(blank=True, default=0, choices=EXP_CHOICES, verbose_name='Опыт работы')
     comment = models.TextField(blank=True, verbose_name='Комментарий')
     date_publish = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
-    status = models.IntegerField(blank=True, default=0, choices=REMOTE_TYPE_CHOICES, verbose_name='Статус')
+    status = models.IntegerField(blank=True, default=0, choices=STATUS_CHOICES, verbose_name='Статус')
 
     def __str__(self):
         return self.title
