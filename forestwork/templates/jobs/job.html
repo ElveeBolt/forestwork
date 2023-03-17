@@ -7,9 +7,9 @@
         <div class="subtitle">{{ subtitle }}</div>
         {% if user == job.user %}
             {% if job.status == 0 %}
-            <div class="job-status status-done"><i class="fi fi-rr-check"></i>Активно</div>
+                <div class="job-status status-moderate"><i class="fi fi-rr-time-add"></i>Ожидает одобрения</div>
             {% else %}
-            <div class="job-status status-moderate"><i class="fi fi-rr-time-add"></i>Ожидает одобрения</div>
+                <div class="job-status status-done"><i class="fi fi-rr-check"></i>Активно</div>
             {% endif %}
         {% endif %}
     </div>
