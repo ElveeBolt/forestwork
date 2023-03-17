@@ -208,7 +208,7 @@ legend {
 }
 
 .nav-link.btn-icon{
-font-size: 20px;
+    font-size: 20px;
     line-height: 1;
     border-radius: 50px;
     width: 36px;
@@ -216,6 +216,23 @@ font-size: 20px;
     text-align: center;
     background: var(--main-bg);
     }
+
+.avatar {
+    border-radius: 50%;
+    background: var(--color-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    text-transform: uppercase;
+}
+
+.avatar.avatar-mini{
+    width: 60px;
+    height: 60px
+}
 
 .mini-profile{
     padding: 20px;
@@ -268,20 +285,9 @@ font-size: 20px;
 }
 
 .mini-profile .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--color-green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
     position: absolute;
     left: 0;
     top: 0;
-    font-weight: 500;
-    font-size: 18px;
-    text-transform: uppercase;
 }
 
 .mini-profile .name {
@@ -401,6 +407,21 @@ font-size: 20px;
     text-transform: uppercase;
     margin: 0 auto 15px;
 }
+
+
+.card-job-contact {
+    position: relative;
+    min-height: 60px;
+    padding-left: 75px;
+}
+
+.card-job-contact .avatar{
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+
 
 .user-profile {
     padding-left: 120px;

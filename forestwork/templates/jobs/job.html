@@ -17,6 +17,13 @@
                         <span>{{ job.country }} {{ job.city }}</span> - <span>{{ job.date_publish }}</span>
                     </div>
                 </div>
+                <div class="card-job-contact d-flex justify-content-between align-items-center mb-3">
+                    <div class="avatar avatar-mini">{{ job.user.username|slice:":2" }}</div>
+                    <div class="job-contact-info">
+                        <div class="name"><a href="{% url 'employer' pk=job.user.id %}">{{ job.user.name }}</a></div>
+                    </div>
+                    <a href="{% url 'employer' pk=job.user.id %}" class="btn">Профиль работодателя</a>
+                </div>
                 <div class="description">{{ job.description | linebreaks }}</div>
                 {% if job.comment %}
                 <div class="comment">{{ job.comment }}</div>
