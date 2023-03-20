@@ -38,8 +38,8 @@
                         {% endif %}
                         </td>
                         <td style="white-space: nowrap">
-                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-sm btn-with-icon"><i class="fi fi-rr-edit"></i></a>
-                            <button type="button" class="btn btn-sm btn-with-icon btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}"><i class="fi fi-rr-trash"></i></button>
+                            <a href="{% url 'job_edit' pk=job.id %}" class="btn btn-icon btn-sm btn-with-icon"><i class="fi fi-rr-edit"></i></a>
+                            <button type="button" class="btn btn-icon btn-sm btn-with-icon btn-delete-vacancy" data-bs-toggle="modal" data-bs-target="#delete-vacancy" data-url="{% url 'job_delete' pk=job.id %}" data-title="{{ job.title }}"><i class="fi fi-rr-trash"></i></button>
                         </td>
                     </tr>
                     {% endfor %}

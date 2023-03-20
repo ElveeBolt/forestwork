@@ -125,6 +125,14 @@ legend {
     font-size: 14px;
 }
 
+.btn-sm.btn-icon{
+    padding: 5px 10px;
+}
+
+.btn-icon .fi{
+    margin: 0;
+}
+
 .text-muted{
     color: var(--color-muted)!important;
 }
