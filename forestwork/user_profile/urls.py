@@ -7,4 +7,7 @@ urlpatterns = [
     path('main', views.ProfileMainUpdateView.as_view(), name='profile_main'),
     path('contacts', views.ProfileContactsUpdateView.as_view(), name='profile_contacts'),
     path('password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
+    path('messages', views.ProfileMessageListView.as_view(), name='profile_messages'),
+    path('messages/<int:pk>', views.ProfileMessageDetailView.as_view(), name='profile_message'),
+
 ]

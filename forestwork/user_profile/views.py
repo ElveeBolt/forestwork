@@ -1,9 +1,9 @@
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
-from django.views.generic import ListView, TemplateView, UpdateView
+from django.views.generic import ListView, TemplateView, UpdateView, DetailView
 from .forms import ProfileAboutForm, ProfileContactForm, ProfilePasswordForm
-from jobs.models import Job
+from jobs.models import Job, JobMessage
 from django.contrib.auth import get_user_model
 
 
@@ -58,4 +58,24 @@ class ProfilePasswordUpdateView(LoginRequiredMixin, PasswordChangeView):
     extra_context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',
+    }
+
+
+class ProfileMessageListView(LoginRequiredMixin, ListView):
+    model = JobMessage
+    template_name = 'profile/messages.html'
+    context_object_name = 'messages'
+    extra_context = {
+        'title': 'Мои сообщения',
+        'subtitle': 'Список ваших сообщений',
+    }
+
+
+class ProfileMessageDetailView(LoginRequiredMixin, DetailView):
+    model = JobMessage
+    template_name = 'profile/message.html'
+    context_object_name = 'message'
+    extra_context = {
+        'title': 'Сообщение',
+        'subtitle': 'Детали сообщения',
     }

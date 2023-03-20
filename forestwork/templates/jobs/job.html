@@ -26,12 +26,36 @@
                             <div class="text-muted">{{ job.user.email }}</div>
                         {% endif %}
                     </div>
-                    <a href="{% url 'employer' pk=job.user.id %}" class="btn btn-with-icon"><i class="fi fi-rr-user"></i>Профиль работодателя</a>
+                    <div>
+                        <a href="{% url 'employer' pk=job.user.id %}" class="btn btn-with-icon"><i class="fi fi-rr-user"></i>Профиль работодателя</a>
+                        <a href="#job-message" class="btn btn-primary ms-3 btn-with-icon"><i class="fi fi-rr-envelope"></i>Откликнуться</a>
+                    </div>
                 </div>
                 <div class="description">{{ job.description | linebreaks }}</div>
                 {% if job.comment %}
                 <div class="comment">{{ job.comment }}</div>
                 {% endif %}
+            </div>
+            <div class="card" id="job-message">
+                <div class="card-heading">
+                    <h2>Откликнуться на вакансию</h2>
+                    <div class="subtitle">Чтобы откликнуться на вакансию, пожалуйста, заполните форму</div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.title.auto_id }}" class="form-label">{{ form.title.label }}</label>
+                        {{ form.title }}
+                        <div class="form-text">{{ form.title.help_text }}</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.message.auto_id }}" class="form-label">{{ form.message.label }}</label>
+                        {{ form.message }}
+                        <div class="form-text">{{ form.message.help_text }}</div>
+                    </div>
+                    {{ form.errors }}
+                    <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Откликнутся</button>
+                </form>
             </div>
         </div>
         <div class="col-lg-4">

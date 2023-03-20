@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Список вакансий</h2>
+                    <div class="subtitle">Список опубликованных вами вакансий</div>
+                </div>
+                <table id="table-message" class="display">
+                    <thead>
+                        <tr>
+                            <th>Дата публикации</th>
+                            <th>Название</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for message in messages %}
+                    <tr>
+                        <td>{{ message.date_publish }}</td>
+                        <td><a href="{% url 'profile_message' pk=message.id %}">{{ message.title }}</a></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+{% block scripts %}
+<script>
+$('#table-message').DataTable({
+    searching: false,
+    paging: false,
+    info: false
+});
+</script>
+{% endblock scripts %}

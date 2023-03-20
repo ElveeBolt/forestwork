@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>{{ message.title }}</h2>
+                    <div class="subtitle">Детали сообщения</div>
+                </div>
+                {{ message.message }}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

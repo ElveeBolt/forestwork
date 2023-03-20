@@ -1,9 +1,11 @@
 from django.conf import settings
-from .forms import JobForm
+from .forms import JobForm, JobMessageForm
 from .models import Job
 from .utils import UserCheckTypeEmployerMixin, UserCheckJobAuthorMixin
+from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic.edit import FormMixin
 
 
 class JobListView(ListView):
@@ -17,18 +19,38 @@ class JobListView(ListView):
     }
 
     def get_queryset(self, **kwargs):
-       queryset = super().get_queryset(**kwargs)
-       return queryset.filter(status=1)
+        queryset = super().get_queryset(**kwargs)
+        return queryset.filter(status=1)
 
 
-class JobDetailView(DetailView):
+class JobDetailView(FormMixin, DetailView):
     model = Job
     template_name = 'jobs/job.html'
     context_object_name = 'job'
+    form_class = JobMessageForm
     extra_context = {
         'title': 'Название вакансии',
         'subtitle': 'Детальная информация касательно вакансии',
     }
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.get_form()
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        form = form.save(commit=False)
+        form.user = self.request.user
+        form.job = self.object
+        form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('job', kwargs={'pk': self.object.pk})
 
 
 class JobAddView(LoginRequiredMixin, UserCheckTypeEmployerMixin, CreateView):

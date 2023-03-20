@@ -51,3 +51,20 @@ class Job(models.Model):
         verbose_name = 'Вакансию'
         verbose_name_plural = 'Вакансии'
         ordering = ['-date_publish']
+
+
+class JobMessage(models.Model):
+    job = models.ForeignKey(Job, null=True, verbose_name='Вакансия', on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, null=True, verbose_name='Автор', on_delete=models.CASCADE)
+    title = models.CharField(max_length=255, verbose_name='Заголовок письма')
+    message = models.TextField(verbose_name='Сообщение')
+    date_publish = models.DateTimeField(auto_now=True, verbose_name='Дата публикации')
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        db_table = 'jobs_message'
+        verbose_name = 'Сообщение'
+        verbose_name_plural = 'Сообщения'
+        ordering = ['-date_publish']
