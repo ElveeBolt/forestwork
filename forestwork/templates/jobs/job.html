@@ -36,6 +36,7 @@
                 <div class="comment">{{ job.comment }}</div>
                 {% endif %}
             </div>
+            {% if user.type == 0 %}
             <div class="card" id="job-message">
                 <div class="card-heading">
                     <h2>Откликнуться на вакансию</h2>
@@ -52,6 +53,7 @@
                     <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Откликнутся</button>
                 </form>
             </div>
+            {% endif %}
         </div>
         <div class="col-lg-4">
             <div class="card">
