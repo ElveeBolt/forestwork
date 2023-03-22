@@ -8,8 +8,8 @@
     </div>
     <div class="row">
         <div class="col-lg-8">
-            <div class="card">
-                <div class="card-heading d-flex justify-content-between align-items-center mb-3">
+            <div id="chat" class="card">
+                <div class="card-heading d-flex justify-content-between align-items-center">
                     <div>
                         <h2>{{ chat.title }}</h2>
                         <div class="subtitle">Детали сообщения</div>
@@ -25,36 +25,43 @@
                         {% endif %}
                     </div>
                 </div>
-                <div id="chat">
-                    <div class="chat-body">
-                        {% for message in messages %}
-                        <div class="row message-row {% if message.user == user %}justify-content-end chat-right{% endif %}">
-                            <div class="col-7">
-                                <div class="chat-message mb-3">
-                                    <div class="avatar avatar-mini">{{ message.user.username|slice:":2" }}</div>
-                                    <div class="chat-text mb-1">
-                                        <div class="text">{{ message.message }}</div>
-                                    </div>
-                                    <div class="text-muted small">{{ message.date_publish }}</div>
-                                </div>
-                            </div>
+                <div class="chat-body">
+                    <div class="chat-heading text-center">
+                        <span class="icon"><i class="fi fi-rr-comment"></i></span>
+                        <div class="mb-2">Пользователь <a href="#">{{ chat.user.username }}</a> начал новый чат с вами.</div>
+                        <div class="text-muted small">
+                            <span><i class="fi fi-rr-calendar"></i>Дата создания чата: {{ chat.date_publish }}</span>
+                            <span class="ms-3"><i class="fi fi-rr-calendar"></i>Тип диалога: {{ chat.get_type_display }}</span>
                         </div>
-                        {% endfor %}
+
                     </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                        <div class="row">
-                            <div class="col-9">
-                                {{ form.message }}
-                            </div>
-                            <div class="col-3">
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Отправить</button>
+                    {% for message in messages %}
+                    <div class="row message-row {% if message.user == user %}justify-content-end chat-right{% endif %}">
+                        <div class="col-7">
+                            <div class="chat-message mb-3">
+                                <div class="avatar avatar-mini">{{ message.user.username|slice:":2" }}</div>
+                                <div class="chat-text mb-1">
+                                    <div class="text">{{ message.message }}</div>
                                 </div>
+                                <div class="text-muted small">{{ message.date_publish }}</div>
                             </div>
                         </div>
-                    </form>
+                    </div>
+                    {% endfor %}
                 </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-9">
+                            {{ form.message }}
+                        </div>
+                        <div class="col-3">
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Отправить</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
         <div class="col-lg-4">

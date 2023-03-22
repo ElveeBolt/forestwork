@@ -824,10 +824,35 @@ table.dataTable.no-footer {
     border: none;
 }
 
+#chat .card-heading{
+    margin-bottom: 0;
+}
+
 #chat .chat-body{
-    margin-bottom: 15px;
-    padding-bottom: 15px;
     border-bottom: 1px solid var(--color-border);
+    margin: 0 -20px 20px;
+    padding: 20px;
+    overflow: auto;
+    height: 500px;
+}
+
+#chat .chat-heading {
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 30px;
+}
+
+#chat .chat-heading .icon{
+    width: 40px;
+    height: 40px;
+    margin: 0 auto 15px;
+    background: var(--main-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 16px;
+    line-height: 1;
 }
 
 #chat .chat-message{
