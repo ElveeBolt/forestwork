@@ -1,5 +1,5 @@
 from django import forms
-from .models import Job, JobMessage
+from .models import Job
 from settings.models import Country, Specialization
 
 
@@ -108,33 +108,3 @@ class JobForm(forms.ModelForm):
         model = Job
         fields = '__all__'
         exclude = ['user']
-
-
-class JobMessageForm(forms.ModelForm):
-    title = forms.CharField(
-        label='Заголовок письма:',
-        required=True,
-        help_text='Введите заголовок вашего отклика',
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите заголовок...'
-            }
-        )
-    )
-    message = forms.CharField(
-        label='Текст сообщения:',
-        required=True,
-        help_text='Укажите свои сильные стороны, навыки и почему именно вы являетесь хорошим кандидатом',
-        widget=forms.Textarea(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Введите текст сообщения...',
-                'rows': 5
-            }
-        )
-    )
-
-    class Meta:
-        model = JobMessage
-        fields = ['title', 'message',]

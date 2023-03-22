@@ -44,11 +44,6 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="mb-3">
-                        <label for="{{ form.title.auto_id }}" class="form-label">{{ form.title.label }}</label>
-                        {{ form.title }}
-                        <div class="form-text">{{ form.title.help_text }}</div>
-                    </div>
-                    <div class="mb-3">
                         <label for="{{ form.message.auto_id }}" class="form-label">{{ form.message.label }}</label>
                         {{ form.message }}
                         <div class="form-text">{{ form.message.help_text }}</div>

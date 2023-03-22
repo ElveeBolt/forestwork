@@ -1,5 +1,7 @@
 from django.conf import settings
-from .forms import JobForm, JobMessageForm
+from .forms import JobForm
+from chat.models import Chat
+from chat.forms import JobMessageForm
 from .models import Job
 from .utils import UserCheckTypeEmployerMixin, UserCheckJobAuthorMixin
 from django.urls import reverse
@@ -36,18 +38,28 @@ class JobDetailView(FormMixin, DetailView):
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = self.get_form()
-
         if form.is_valid():
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
 
     def form_valid(self, form):
+        chat = Chat.objects.create(
+            job=self.object,
+            type=1,
+            user=self.request.user,
+            title=self.object.title,
+        )
+        chat.members.add(self.request.user, self.object.user)
+
         form = form.save(commit=False)
         form.user = self.request.user
-        form.job = self.object
+        form.chat = chat
         form.save()
-        return super().form_valid(form)
+
+        form_valid = super().form_valid(form)
+
+        return form_valid
 
     def get_success_url(self):
         return reverse('job', kwargs={'pk': self.object.pk})

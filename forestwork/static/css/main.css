@@ -244,6 +244,10 @@ legend {
     height: 50px
 }
 
+.avatar.avatar-chat{
+
+}
+
 .mini-profile{
     padding: 20px;
     margin-top: 20px!important;
@@ -818,6 +822,68 @@ table.dataTable.display>tbody tr>.sorting_3{
 
 table.dataTable.no-footer {
     border: none;
+}
+
+#chat .chat-body{
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#chat .chat-message{
+    position: relative;
+}
+
+#chat .chat-message .chat-text{
+    padding: 15px;
+    border-radius: 10px;
+    background: var(--main-bg);
+}
+
+#chat .chat-right{
+    text-align: right;
+}
+
+#chat .chat-message .avatar {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#chat .chat-right .chat-message .avatar {
+    right: 0;
+    left: auto;
+}
+
+#chat .chat-message {
+    position: relative;
+    padding-left: 75px;
+}
+
+#chat .chat-right .chat-message {
+    padding-right: 75px;
+    padding-left: 0;
+}
+
+#chat .chat-text:before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid var(--main-bg);
+    position: absolute;
+    top: 15px;
+    left: 65px;
+}
+
+#chat .chat-right .chat-text:before {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid var(--main-bg);
+    border-right: 0;
+    right: 65px;
+    left: auto;
 }
 
 
