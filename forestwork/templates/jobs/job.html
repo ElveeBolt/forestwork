@@ -28,7 +28,9 @@
                     </div>
                     <div>
                         <a href="{% url 'employer' pk=job.user.id %}" class="btn btn-with-icon"><i class="fi fi-rr-user"></i>Профиль работодателя</a>
+                        {% if job.user != user and user.type != 1 %}
                         <a href="#job-message" class="btn btn-primary ms-3 btn-with-icon"><i class="fi fi-rr-envelope"></i>Откликнуться</a>
+                        {% endif %}
                     </div>
                 </div>
                 <div class="description">{{ job.description | linebreaks }}</div>
