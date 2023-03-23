@@ -12,26 +12,33 @@
                 <div class="card-heading d-flex justify-content-between align-items-center">
                     <div>
                         <h2>{{ chat.title }}</h2>
-                        <div class="subtitle">Детали сообщения</div>
+                        <div class="subtitle">Открытый диалог с пользователем</div>
                     </div>
                     <div>
                         {% if chat.type == 1 %}
                         <a href="{% url 'job' pk=chat.job.id %}" class="btn btn-with-icon"><i class="fi fi-rr-briefcase"></i>Смотреть вакансию</a>
                         {% endif %}
                         {% if chat.user.type == 1 %}
-                        <a href="{% url 'employer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Автор</a>
+                        <a href="{% url 'employer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Контакты</a>
                         {% else %}
-                        <a href="{% url 'developer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Автор</a>
+                        <a href="{% url 'developer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Контакты</a>
                         {% endif %}
                     </div>
                 </div>
                 <div class="chat-body">
                     <div class="chat-heading text-center">
                         <span class="icon"><i class="fi fi-rr-comment"></i></span>
-                        <div class="mb-2">Пользователь <a href="#">{{ chat.user.username }}</a> начал новый чат с вами.</div>
+                        <div class="mb-2">
+                            Пользователь
+                            {% if chat.user.type == 0 %}
+                                <a href="{% url 'developer' pk=chat.user.id %}">{{ chat.user.username }}</a>
+                            {% else %}
+                                <a href="{% url 'employer' pk=chat.user.id %}">{{ chat.user.username }}</a>
+                            {% endif %}
+                            начал новый чат.</div>
                         <div class="text-muted small">
-                            <span><i class="fi fi-rr-calendar"></i>Дата создания чата: {{ chat.date_publish }}</span>
-                            <span class="ms-3"><i class="fi fi-rr-calendar"></i>Тип диалога: {{ chat.get_type_display }}</span>
+                            <span><i class="fi fi-rr-calendar me-1"></i>Дата создания чата: {{ chat.date_publish }}</span>
+                            <span class="ms-3"><i class="fi fi-rr-tags me-1"></i>Тип диалога: {{ chat.get_type_display }}</span>
                         </div>
 
                     </div>
@@ -43,7 +50,9 @@
                                 <div class="chat-text mb-1">
                                     <div class="text">{{ message.message }}</div>
                                 </div>
-                                <div class="text-muted small">{{ message.date_publish }}</div>
+                                <div class="text-muted small">
+                                    {{ message.date_publish }}
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -863,6 +863,7 @@ table.dataTable.no-footer {
     padding: 15px;
     border-radius: 10px;
     background: var(--main-bg);
+    display: inline-block;
 }
 
 #chat .chat-right{
@@ -882,11 +883,11 @@ table.dataTable.no-footer {
 
 #chat .chat-message {
     position: relative;
-    padding-left: 75px;
+    padding-left: 70px;
 }
 
 #chat .chat-right .chat-message {
-    padding-right: 75px;
+    padding-right: 70px;
     padding-left: 0;
 }
 
@@ -899,7 +900,7 @@ table.dataTable.no-footer {
     border-right: 10px solid var(--main-bg);
     position: absolute;
     top: 15px;
-    left: 65px;
+    left: 60px;
 }
 
 #chat .chat-right .chat-text:before {
@@ -907,7 +908,7 @@ table.dataTable.no-footer {
     border-bottom: 10px solid transparent;
     border-left: 10px solid var(--main-bg);
     border-right: 0;
-    right: 65px;
+    right: 60px;
     left: auto;
 }
 
