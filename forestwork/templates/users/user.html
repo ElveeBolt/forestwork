@@ -45,6 +45,11 @@
                     <button class="nav-link btn btn-with-icon" id="pills-jobs-tab" data-bs-toggle="pill" data-bs-target="#pills-jobs" type="button" role="tab" aria-controls="pills-jobs" aria-selected="false"><i class="fi fi-rr-briefcase"></i>Вакансии<span class="count">{{ user_info.job_set.count }}</span></button>
                 </li>
                 {% endif %}
+                {% if user_info.type == 0 and user.type == 1 %}
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link btn btn-with-icon" id="pills-jobs-tab" data-bs-toggle="pill" data-bs-target="#pills-jobs" type="button" role="tab" aria-controls="pills-jobs" aria-selected="false"><i class="fi fi-rr-envelope"></i>Предложить вакансию</button>
+                </li>
+                {% endif %}
             </ul>
             <div class="tab-content" id="pills-tabContent">
                 {% if user_info.about %}
@@ -112,6 +117,31 @@
                         </div>
                     </div>
                     {% endfor %}
+                </div>
+                {% endif %}
+                {% if user_info.type == 0 and user.type == 1 %}
+                <div class="tab-pane fade" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab" tabindex="0">
+                    <div class="card">
+                        <div class="card-heading">
+                            <h2>Предложить вакансию</h2>
+                            <div class="subtitle">Для того, чтобы предложить вакансию заполните форму ниже</div>
+                        </div>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label for="{{ form.job.auto_id }}" class="form-label">{{ form.job.label }}</label>
+                                {{ form.job }}
+                                <div class="form-text">{{ form.job.help_text }}</div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="{{ form.message.auto_id }}" class="form-label">{{ form.message.label }}</label>
+                                {{ form.message }}
+                                <div class="form-text">{{ form.message.help_text }}</div>
+                            </div>
+                            {{ form.errors }}
+                            <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Отправить предложение</button>
+                        </form>
+                    </div>
                 </div>
                 {% endif %}
             </div>

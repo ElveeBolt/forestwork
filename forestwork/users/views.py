@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.conf import settings
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, redirect
 from django.utils.http import urlsafe_base64_decode
 from django.contrib.auth import login
@@ -8,8 +8,12 @@ from django.contrib.auth.views import PasswordResetConfirmView, LoginView, Logou
 from django.contrib.auth.tokens import default_token_generator
 from django.views import View
 from django.views.generic import ListView, DetailView, TemplateView, CreateView
+from django.views.generic.edit import FormMixin
 from .forms import LoginForm, SignupForm, UserForgotForm, UserSetForgotPasswordForm
 from .models import User
+from chat.models import Chat
+from chat.forms import JobOfferForm
+from jobs.models import Job
 from .utils import send_email_for_verify
 
 
@@ -62,14 +66,49 @@ class DeveloperListView(ListView):
         return User.objects.filter(type=0)
 
 
-class DeveloperDetailView(DetailView):
+class DeveloperDetailView(FormMixin, DetailView):
     model = User
     template_name = 'users/user.html'
     context_object_name = 'user_info'
+    form_class = JobOfferForm
     extra_context = {
         'title': 'Информация о пользователе',
         'subtitle': 'Дополнительная информация о разработчике',
     }
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['current_user'] = self.request.user
+        return kwargs
+
+    def post(self, request, *args, **kwargs):
+        self.object = Job.objects.get(id=request.POST.get('job'))
+        form = self.get_form()
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
+
+    def form_valid(self, form):
+        chat = Chat.objects.create(
+            job=self.object,
+            type=1,
+            user=self.request.user,
+            title=self.object.title,
+        )
+        chat.members.add(self.request.user, self.object.user)
+
+        form = form.save(commit=False)
+        form.user = self.request.user
+        form.chat = chat
+        form.save()
+
+        form_valid = super().form_valid(form)
+
+        return form_valid
+
+    def get_success_url(self):
+        return reverse('index')
 
 
 class UserLoginView(LoginView):
