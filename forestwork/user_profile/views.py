@@ -1,6 +1,7 @@
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import PasswordChangeView
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, TemplateView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 from .forms import ProfileAboutForm, ProfileContactForm, ProfilePasswordForm
@@ -110,6 +111,7 @@ class ProfileMessageDetailView(LoginRequiredMixin, FormMixin, TemplateView):
         return reverse('profile_message', kwargs={'pk': self.object.pk})
 
 
-class ProfileMessageDeleteView(DeleteView):
+class ProfileMessageDeleteView(SuccessMessageMixin, DeleteView):
     model = Chat
+    success_message = 'Чат успешно удалён'
     success_url = "/profile/messages"

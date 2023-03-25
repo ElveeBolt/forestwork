@@ -13,6 +13,15 @@
 </head>
 <body class="d-flex flex-column h-100">
     {% include 'navbar.html' %}
+    {% if messages %}
+    <div class="container">
+        <div class="alert alert-success">
+            {% for m in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ m }}</li>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
     {% block content %}{% endblock content %}
     {% include 'footer.html' %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
