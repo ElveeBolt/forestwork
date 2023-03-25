@@ -9,5 +9,5 @@ urlpatterns = [
     path('password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
     path('messages', views.ProfileMessageListView.as_view(), name='profile_messages'),
     path('messages/<int:pk>', views.ProfileMessageDetailView.as_view(), name='profile_message'),
-
+    path('messages/delete/<int:pk>', views.ProfileMessageDeleteView.as_view(), name='profile_message_delete'),
 ]

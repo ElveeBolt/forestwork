@@ -56,10 +56,7 @@ class JobDetailView(FormMixin, DetailView):
         form.user = self.request.user
         form.chat = chat
         form.save()
-
-        form_valid = super().form_valid(form)
-
-        return form_valid
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('job', kwargs={'pk': self.object.pk})

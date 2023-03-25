@@ -19,10 +19,11 @@
                         <a href="{% url 'job' pk=chat.job.id %}" class="btn btn-with-icon"><i class="fi fi-rr-briefcase"></i>Смотреть вакансию</a>
                         {% endif %}
                         {% if chat.user.type == 1 %}
-                        <a href="{% url 'employer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Контакты</a>
+                        <a href="{% url 'employer' pk=chat.user.id %}" class="btn btn-icon btn-with-icon"><i class="fi fi-rr-user"></i></a>
                         {% else %}
-                        <a href="{% url 'developer' pk=chat.user.id %}" class="btn ms-3 btn-with-icon"><i class="fi fi-rr-user"></i>Контакты</a>
+                        <a href="{% url 'developer' pk=chat.user.id %}" class="btn btn-icon btn-with-icon"><i class="fi fi-rr-user"></i></a>
                         {% endif %}
+                        <button type="button" class="btn btn-icon btn-with-icon btn-delete-message" data-bs-toggle="modal" data-bs-target="#delete-message"><i class="fi fi-rr-trash"></i></button>
                     </div>
                 </div>
                 <div class="chat-body">
@@ -77,5 +78,25 @@
             {% include 'profile/menu.html' %}
         </div>
     </div>
+</div>
+<div class="modal fade" id="delete-message" tabindex="-1" aria-labelledby="delete-vacancy-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5">{{ chat.title }}</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Данная операция приведет к удалению чата без возможности восстановления. Подтвердите это действие.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
+          <form method="post" action="{% url 'profile_message_delete' pk=chat.id %}">
+              {% csrf_token %}
+              <button type="submit" class="btn">Подтвердить</button>
+          </form>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock content %}
