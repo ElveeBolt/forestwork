@@ -51,6 +51,11 @@ class EmployerDetailView(DetailView):
         'subtitle': 'Дополнительная информация о работодателе или компании',
     }
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['jobs'] = Job.objects.filter(user=self.object, status=1)
+        return context
+
 
 class DeveloperListView(ListView):
     model = User

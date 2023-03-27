@@ -42,7 +42,7 @@
                 </li>
                 {% if user_info.type == 1 %}
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link btn btn-with-icon" id="pills-jobs-tab" data-bs-toggle="pill" data-bs-target="#pills-jobs" type="button" role="tab" aria-controls="pills-jobs" aria-selected="false"><i class="fi fi-rr-briefcase"></i>Вакансии<span class="count">{{ user_info.job_set.count }}</span></button>
+                    <button class="nav-link btn btn-with-icon" id="pills-jobs-tab" data-bs-toggle="pill" data-bs-target="#pills-jobs" type="button" role="tab" aria-controls="pills-jobs" aria-selected="false"><i class="fi fi-rr-briefcase"></i>Вакансии<span class="count">{{ jobs.count }}</span></button>
                 </li>
                 {% endif %}
                 {% if user_info.type == 0 and user.type == 1 %}
@@ -99,7 +99,7 @@
                 </div>
                 {% if user_info.type == 1 %}
                 <div class="tab-pane fade" id="pills-jobs" role="tabpanel" aria-labelledby="pills-jobs-tab" tabindex="0">
-                    {% for job in user_info.job_set.all %}
+                    {% for job in jobs %}
                     <div class="card card-job">
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="salary">{{ job.salary }}$</div>
