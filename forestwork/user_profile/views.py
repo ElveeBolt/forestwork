@@ -113,5 +113,5 @@ class ProfileChatDetailView(LoginRequiredMixin, FormMixin, TemplateView):
 
 class ProfileChatDeleteView(SuccessMessageMixin, DeleteView):
     model = Chat
-    success_message = 'Чат успешно удалён'
+    success_message = 'Выбранный вами чат был успешно удалён'
     success_url = "/profile/chats"

@@ -912,6 +912,33 @@ table.dataTable.no-footer {
     left: auto;
 }
 
+.alert {
+    background: #fff;
+    padding: 20px 20px 20px 70px;
+    border: none;
+    -webkit-box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
+    box-shadow: 0 0 2px rgb(5 20 41 / 6%), 0 2px 3px rgb(5 20 41 / 8%);
+    border-radius: 10px;
+}
+
+.alert .alert-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 40px;
+    height: 40px;
+    background: var(--color-green);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: #fff;
+}
+
+.alert .title {
+    font-weight: 500;
+}
+
 
 @media (max-width: 992px) {
     section .section-heading {
