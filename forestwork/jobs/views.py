@@ -6,6 +6,7 @@ from .models import Job
 from .utils import UserCheckTypeEmployerMixin, UserCheckJobAuthorMixin
 from django.urls import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
 
@@ -62,10 +63,11 @@ class JobDetailView(FormMixin, DetailView):
         return reverse('job', kwargs={'pk': self.object.pk})
 
 
-class JobAddView(LoginRequiredMixin, UserCheckTypeEmployerMixin, CreateView):
+class JobAddView(LoginRequiredMixin, UserCheckTypeEmployerMixin, SuccessMessageMixin, CreateView):
     model = Job
     form_class = JobForm
     template_name = 'jobs/job_form.html'
+    success_message = 'Ваша вакансия была успешно отправлена на проверку. После завершения проверки она станет доступна для просмотра.'
     extra_context = {
         'title': 'Добавление вакансии',
         'subtitle': 'Страница добавления новой вакансии',
@@ -76,10 +78,11 @@ class JobAddView(LoginRequiredMixin, UserCheckTypeEmployerMixin, CreateView):
         return super().form_valid(form)
 
 
-class JobUpdateView(LoginRequiredMixin, UserCheckJobAuthorMixin, UpdateView):
+class JobUpdateView(LoginRequiredMixin, UserCheckJobAuthorMixin, SuccessMessageMixin, UpdateView):
     model = Job
     form_class = JobForm
     template_name = 'jobs/job_form.html'
+    success_message = 'Вы успешно внесли изменения в вакансию.'
     extra_context = {
         'title': 'Редактирование вакансии',
         'subtitle': 'Страница редактирования вакансии',
