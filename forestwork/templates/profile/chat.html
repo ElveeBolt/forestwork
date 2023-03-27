@@ -43,7 +43,7 @@
                         </div>
 
                     </div>
-                    {% for message in messages %}
+                    {% for message in chat_messages %}
                     <div class="row message-row {% if message.user == user %}justify-content-end chat-right{% endif %}">
                         <div class="col-7">
                             <div class="chat-message mb-3">
@@ -91,7 +91,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Закрыть</button>
-          <form method="post" action="{% url 'profile_message_delete' pk=chat.id %}">
+          <form method="post" action="{% url 'profile_chat_delete' pk=chat.id %}">
               {% csrf_token %}
               <button type="submit" class="btn">Подтвердить</button>
           </form>

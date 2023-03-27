@@ -22,7 +22,7 @@ class JobMessageForm(forms.ModelForm):
         fields = ['message', ]
 
 
-class AnswerMessageForm(forms.ModelForm):
+class AnswerChatForm(forms.ModelForm):
     message = forms.CharField(
         required=True,
         widget=forms.Textarea(

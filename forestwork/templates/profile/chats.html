@@ -30,10 +30,10 @@
                         <td>{{ chat.title }}</td>
                         <td>{{ chat.get_type_display }}</td>
                         <td>
-                            <a href="{% url 'profile_message' pk=chat.id %}">{{ chat.message_set.last.user }}</a>
+                            <a href="{% url 'profile_chat' pk=chat.id %}">{{ chat.message_set.last.user }}</a>
                             <div class="text-muted small">{{ chat.message_set.last.message | truncatewords:10}}</div>
                         </td>
-                        <td style="white-space: nowrap"><a href="{% url 'profile_message' pk=chat.id %}" class="btn btn-with-icon"><i class="fi fi-rr-envelope-open"></i>Читать</a></td>
+                        <td style="white-space: nowrap"><a href="{% url 'profile_chat' pk=chat.id %}" class="btn btn-with-icon"><i class="fi fi-rr-envelope-open"></i>Читать</a></td>
                     </tr>
                     {% endfor %}
                     </tbody>

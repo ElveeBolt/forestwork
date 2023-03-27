@@ -7,7 +7,7 @@ from django.views.generic.edit import FormMixin
 from .forms import ProfileAboutForm, ProfileContactForm, ProfilePasswordForm
 from jobs.models import Job
 from chat.models import Chat, Message
-from chat.forms import AnswerMessageForm
+from chat.forms import AnswerChatForm
 from django.contrib.auth import get_user_model
 
 
@@ -65,9 +65,9 @@ class ProfilePasswordUpdateView(LoginRequiredMixin, PasswordChangeView):
     }
 
 
-class ProfileMessageListView(LoginRequiredMixin, ListView):
+class ProfileChatListView(LoginRequiredMixin, ListView):
     model = Chat
-    template_name = 'profile/messages.html'
+    template_name = 'profile/chats.html'
     context_object_name = 'chats'
     extra_context = {
         'title': 'Мои сообщения',
@@ -78,9 +78,9 @@ class ProfileMessageListView(LoginRequiredMixin, ListView):
         return Chat.objects.filter(members=self.request.user)
 
 
-class ProfileMessageDetailView(LoginRequiredMixin, FormMixin, TemplateView):
-    template_name = 'profile/message.html'
-    form_class = AnswerMessageForm
+class ProfileChatDetailView(LoginRequiredMixin, FormMixin, TemplateView):
+    template_name = 'profile/chat.html'
+    form_class = AnswerChatForm
     extra_context = {
         'title': 'Сообщение',
         'subtitle': 'Детали сообщения',
@@ -103,15 +103,15 @@ class ProfileMessageDetailView(LoginRequiredMixin, FormMixin, TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['messages'] = Message.objects.filter(chat=self.kwargs['pk'])
+        context['chat_messages'] = Message.objects.filter(chat=self.kwargs['pk'])
         context['chat'] = Chat.objects.get(id=self.kwargs['pk'])
         return context
 
     def get_success_url(self):
-        return reverse('profile_message', kwargs={'pk': self.object.pk})
+        return reverse('profile_chat', kwargs={'pk': self.object.pk})
 
 
-class ProfileMessageDeleteView(SuccessMessageMixin, DeleteView):
+class ProfileChatDeleteView(SuccessMessageMixin, DeleteView):
     model = Chat
     success_message = 'Чат успешно удалён'
-    success_url = "/profile/messages"
+    success_url = "/profile/chats"

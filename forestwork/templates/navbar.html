@@ -26,7 +26,7 @@
                         </li>
                         <li class="separator"></li>
                         <li><a class="dropdown-item" href="{% url 'profile' %}"><i class="fi fi-rr-user"></i>Мой профиль</a></li>
-                        <li><a class="dropdown-item" href="{% url 'profile_messages' %}"><i class="fi fi-rr-envelope"></i>Мои сообщения</a></li>
+                        <li><a class="dropdown-item" href="{% url 'profile_chats' %}"><i class="fi fi-rr-envelope"></i>Мои сообщения</a></li>
                         {% if user.type == 1 %}
                         <li><a class="dropdown-item" href="{% url 'profile_jobs' %}"><i class="fi fi-rr-briefcase"></i>Мои вакансии</a></li>
                         <li><a class="dropdown-item" href="{% url 'job_add' %}"><i class="fi fi-rr-add"></i>Добавить вакансию</a></li>
