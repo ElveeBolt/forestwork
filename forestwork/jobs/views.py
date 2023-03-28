@@ -89,9 +89,10 @@ class JobUpdateView(LoginRequiredMixin, UserCheckJobAuthorMixin, SuccessMessageM
     }
 
 
-class JobDeleteView(DeleteView):
+class JobDeleteView(LoginRequiredMixin, SuccessMessageMixin, DeleteView):
     model = Job
-    success_url = "/profile/jobs"
+    success_url = '/profile/jobs'
+    success_message = 'Вы успешно удалили вакансию.'
 
     def get_queryset(self, *args, **kwargs):
         return super().get_queryset(*args, **kwargs).filter(
