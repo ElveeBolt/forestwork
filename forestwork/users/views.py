@@ -76,6 +76,7 @@ class DeveloperDetailView(FormMixin, DetailView):
     template_name = 'users/user.html'
     context_object_name = 'user_info'
     form_class = JobOfferForm
+    success_url = '/profile/chats'
     extra_context = {
         'title': 'Информация о пользователе',
         'subtitle': 'Дополнительная информация о разработчике',
@@ -111,9 +112,6 @@ class DeveloperDetailView(FormMixin, DetailView):
         form_valid = super().form_valid(form)
 
         return form_valid
-
-    def get_success_url(self):
-        return reverse('index')
 
 
 class UserLoginView(LoginView):
