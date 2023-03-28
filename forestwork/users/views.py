@@ -98,7 +98,7 @@ class DeveloperDetailView(FormMixin, DetailView):
     def form_valid(self, form):
         chat = Chat.objects.create(
             job=self.object,
-            type=1,
+            type=0,
             user=self.request.user,
             title=self.object.title,
         )

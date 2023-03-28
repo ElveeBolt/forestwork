@@ -5,7 +5,7 @@ from django.conf import settings
 
 class Chat(models.Model):
     TYPE_CHOICES = (
-        (0, 'Личное сообщение'),
+        (0, 'Предложение'),
         (1, 'Отклик на вакансию')
     )
     title = models.CharField(max_length=255, verbose_name='Заголовок чата')
