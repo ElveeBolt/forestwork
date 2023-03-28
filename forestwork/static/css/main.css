@@ -351,6 +351,12 @@ legend {
     border-radius: 10px;
 }
 
+.card-border{
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border: 1px solid var(--color-border);
+}
+
 .card .card-heading {
     margin-bottom: 15px;
     padding-bottom: 15px;
@@ -577,13 +583,17 @@ section .section-heading .btns {
     margin-top: -20px;
 }
 
+section .section-heading .subtitle {
+    font-size: 16px;
+    font-weight: 500;
+}
+
 #home {
     margin-top: -30px;
-    background: url("../img/home_bg.jpg");
+    background: url(../img/home_bg.jpg);
     background-size: cover;
     background-position: center;
-    padding: 200px 0;
-    text-align: center;
+    padding: 150px 0;
 }
 
 #home h1{
@@ -596,17 +606,25 @@ section .section-heading .btns {
     font-weight: 500;
 }
 
-#features .card{
-        padding-left: 100px;
+#features img{
+    width: 100%;
 }
 
-#features .card .title{
+#features .card-featured {
+    position: relative;
+    padding-left: 80px;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--color-border);
+}
+
+#features .card-featured .title{
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
-#features .card i {
+#features .card-featured i {
     font-size: 34px;
     width: 60px;
     height: 60px;
@@ -618,8 +636,12 @@ section .section-heading .btns {
     justify-content: center;
     color: var(--color-green);
     position: absolute;
-    left: 20px;
-    top: 20px;
+    left: 0;
+    top: 0;
+}
+
+#jobs{
+    background: #fff;
 }
 
 .list-menu li {

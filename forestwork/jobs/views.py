@@ -23,6 +23,11 @@ class JobListView(ListView):
 
     def get_queryset(self, **kwargs):
         queryset = super().get_queryset(**kwargs)
+        query = self.request.GET.get('query')
+
+        if query:
+            return queryset.filter(title__icontains=query, status=1)
+
         return queryset.filter(status=1)
 
 

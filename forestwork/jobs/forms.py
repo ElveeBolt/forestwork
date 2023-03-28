@@ -108,3 +108,19 @@ class JobForm(forms.ModelForm):
         model = Job
         fields = '__all__'
         exclude = ['user']
+
+
+class JobSearchForm(forms.Form):
+    query = forms.CharField(
+        label='Поиск:',
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Введите поисковый запрос...'
+            }
+        )
+    )
+
+    class Meta:
+        fields = ('query', )
