@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="header">
+        <h1>{{ title }}</h1>
+        <div class="subtitle">{{ subtitle }}</div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-heading">
+                    <h2>Контактная информация</h2>
+                    <div class="subtitle">Чтобы внести изменения в контактную информацию заполните форму ниже</div>
+                </div>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="{{ form.specialization.auto_id }}" class="form-label">{{ form.specialization.label }}</label>
+                        {{ form.specialization }}
+                    </div>
+                     <div class="mb-3">
+                        <label for="{{ form.remote_type.auto_id }}" class="form-label">{{ form.remote_type.label }}</label>
+                        {{ form.remote_type }}
+                    </div>
+                    <div class="mb-3">
+                        <label for="{{ form.exp.auto_id }}" class="form-label">{{ form.exp.label }}</label>
+                        {{ form.exp }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-disk"></i>Сохранить изменения</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            {% include 'profile/menu.html' %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

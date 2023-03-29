@@ -6,6 +6,7 @@ urlpatterns = [
     path('jobs', views.ProfileJobListView.as_view(), name='profile_jobs'),
     path('main', views.ProfileMainUpdateView.as_view(), name='profile_main'),
     path('contacts', views.ProfileContactsUpdateView.as_view(), name='profile_contacts'),
+    path('specializations', views.ProfileSpecializationUpdateView.as_view(), name='profile_specializations'),
     path('password', views.ProfilePasswordUpdateView.as_view(), name='profile_password'),
     path('chats', views.ProfileChatListView.as_view(), name='profile_chats'),
     path('chat/<int:pk>', views.ProfileChatDetailView.as_view(), name='profile_chat'),

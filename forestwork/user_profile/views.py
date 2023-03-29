@@ -4,7 +4,7 @@ from django.contrib.auth.views import PasswordChangeView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import ListView, TemplateView, UpdateView, DeleteView
 from django.views.generic.edit import FormMixin
-from .forms import ProfileAboutForm, ProfileContactForm, ProfilePasswordForm
+from .forms import ProfileAboutForm, ProfileContactForm, ProfileSpecializationForm, ProfilePasswordForm
 from jobs.models import Job
 from chat.models import Chat, Message
 from chat.forms import AnswerChatForm
@@ -46,6 +46,19 @@ class ProfileContactsUpdateView(LoginRequiredMixin, UpdateView):
     model = get_user_model
     form_class = ProfileContactForm
     template_name = 'profile/contacts.html'
+    extra_context = {
+        'title': 'Редактирование профиля',
+        'subtitle': 'Страница редактирования профиля',
+    }
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class ProfileSpecializationUpdateView(LoginRequiredMixin, UpdateView):
+    model = get_user_model
+    form_class = ProfileSpecializationForm
+    template_name = 'profile/specializations.html'
     extra_context = {
         'title': 'Редактирование профиля',
         'subtitle': 'Страница редактирования профиля',

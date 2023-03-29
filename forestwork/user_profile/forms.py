@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import PasswordChangeForm
-from settings.models import Country
+from settings.models import Country, Specialization
+from users.models import User
 
 
 class ProfileAboutForm(forms.ModelForm):
@@ -127,6 +128,46 @@ class ProfileContactForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['country', 'city', 'phone', 'telegram', 'whatsapp', 'linkedin', 'github', 'website', 'portfolio']
+
+
+class ProfileSpecializationForm(forms.ModelForm):
+    remote_type = forms.ChoiceField(
+        label='Удалённая работа / Офис:',
+        required=False,
+        choices=User.REMOTE_TYPE_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите тип работы...'
+            }
+        )
+    )
+    exp = forms.ChoiceField(
+        label='Опыт работы:',
+        required=False,
+        choices=User.EXP_CHOICES,
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите опыт работы...'
+            }
+        )
+    )
+    specialization = forms.ModelChoiceField(
+        label='Специализация:',
+        required=False,
+        queryset=Specialization.objects.all(),
+        widget=forms.Select(
+            attrs={
+                'class': 'form-select',
+                'placeholder': 'Укажите специализацию...'
+            }
+        )
+    )
+
+    class Meta:
+        model = get_user_model()
+        fields = ['remote_type', 'exp', 'specialization']
 
 
 class ProfilePasswordForm(PasswordChangeForm):
