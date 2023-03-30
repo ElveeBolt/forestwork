@@ -91,8 +91,8 @@
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="salary">{{ job.salary }}$</div>
                         <div class="description mb-3">{{ job.description | truncatewords:20 }}</div>
-                        <div class="subinfo text-muted d-flex">
-                            <div class="location text-icon">
+                        <div class="subinfo text-bold text-muted d-flex">
+                            <div class="text-icon">
                             <i class="fi fi-rr-marker"></i>
                             {% if not job.country and not job.city %}
                                 Не указано
@@ -117,21 +117,28 @@
                 <a href="{% url 'employers' %}" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-user"></i>Все компании</a>
             </div>
         </div>
-        <div class="owl-carousel" id="employers-carousel">
+        <div class="row">
             {% for user in employer_list %}
-            <div class="card card-user card-mini-user text-center">
-                <div class="avatar">{{ user.username|slice:"2" }}</div>
-                <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
-                <i class="fi fi-rr-marker"></i>
-                {% if not user.country and not user.city %}
-                    Не указано
-                {% else %}
-                    {{ user.country }} {{ user.city }}
-                {% endif %}
-                </div>
-                <div class="d-grid">
-                    <a href="{% url 'employer' pk=user.id %}" class="btn">Смотреть профиль</a>
+            <div class="col-6">
+                <div class="card card-user">
+                    <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
+                    <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                    <div class="subinfo text-muted d-flex">
+                        <div class="text-bold text-icon">
+                            <i class="fi fi-rr-marker"></i>
+                            {% if not user.country and not user.city %}
+                                Не указано
+                            {% else %}
+                                {{ user.country }} {{ user.city }}
+                            {% endif %}
+                        </div>
+                        {% if user.job_set.count > 0 %}
+                        <div class="text-bold text-icon">
+                            <i class="fi fi-rr-e-learning"></i>
+                            Опубликованных вакансий: {{ user.job_set.count }}
+                        </div>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -148,61 +155,39 @@
             </div>
         </div>
         <div class="row">
-        <div class="owl-carousel" id="developer-carousel">
             {% for user in developer_list %}
-            <div class="card card-user card-mini-user text-center">
-                <div class="avatar">{{ user.username|slice:"2" }}</div>
-                <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
-                <div class="subinfo text-icon text-muted mb-2 d-flex justify-content-center">
-                <i class="fi fi-rr-marker"></i>
-                {% if not user.country and not user.city %}
-                    Не указано
-                {% else %}
-                    {{ user.country }} {{ user.city }}
-                {% endif %}
-                </div>
-                <div class="d-grid">
-                    <a href="{% url 'developer' pk=user.id %}" class="btn">Смотреть профиль</a>
+            <div class="col-6">
+                <div class="card card-user">
+                    <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
+                    <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
+                    <div class="subinfo text-muted d-flex">
+                        <div class="text-bold text-icon">
+                            <i class="fi fi-rr-marker"></i>
+                            {% if not user.country and not user.city %}
+                                Не указано
+                            {% else %}
+                                {{ user.country }} {{ user.city }}
+                            {% endif %}
+                        </div>
+                        {% if user.exp %}
+                        <div class="text-bold text-icon">
+                            <i class="fi fi-rr-e-learning"></i>
+                            Опыт работы: {{ user.get_exp_display }}
+                        </div>
+                        {% endif %}
+                    </div>
+                    {% if user.specialization %}
+                    <div class="tags d-flex mt-2">
+                        <span class="tag">{{ user.specialization }}</span>
+                    </div>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}
         </div>
-        </div>
     </div>
 </section>
 {% endblock content %}
-
-{% block scripts %}
-<script>
-var nav_text = [
-    '<i class="fi fi-rr-angle-small-left"></i>',
-    '<i class="fi fi-rr-angle-small-right"></i>'
-]
-
-$('#employers-carousel, #developer-carousel').owlCarousel({
-    nav: true,
-    navText: nav_text,
-    dots: true,
-    loop: true,
-    margin: 30,
-    responsive:{
-        0:{
-            items:1,
-        },
-        576:{
-            items:2,
-        },
-        992:{
-            items:3,
-        },
-        1200:{
-            items:4,
-        }
-    }
-})
-
-</script>
-{% endblock scripts %}
 
 
 

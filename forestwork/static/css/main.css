@@ -438,22 +438,6 @@ legend {
     color: var(--color-muted);
 }
 
-.card-mini-user .avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 10px;
-    background: var(--color-green);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: 500;
-    font-size: 30px;
-    text-transform: uppercase;
-    margin: 0 auto 15px;
-}
-
-
 .card-job-contact {
     position: relative;
     min-height: 50px;

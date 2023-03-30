@@ -15,7 +15,7 @@
                 <div class="salary">{{ job.salary }}$</div>
                 {% endif %}
                 <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
-                <div class="subinfo text-muted d-flex">
+                <div class="subinfo text-bold text-muted d-flex">
                     <div class="location text-icon">
                     <i class="fi fi-rr-marker"></i>
                     {% if not job.country and not job.city %}
