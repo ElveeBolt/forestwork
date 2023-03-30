@@ -10,9 +10,31 @@
         <div class="col-lg-8">
             {% for user in page_obj %}
             <div class="card card-user">
+                <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                 <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                <div class="subinfo mb-2">{{ user.country }} {{ user.city }}</div>
-                <div class="description">{{ user.about | truncatewords:20 }}</div>
+                <div class="subinfo text-muted d-flex">
+                    <div class="text-bold text-icon">
+                        <i class="fi fi-rr-marker"></i>
+                        {% if not user.country and not user.city %}
+                            Не указано
+                        {% else %}
+                            {{ user.country }} {{ user.city }}
+                        {% endif %}
+                    </div>
+                    {% if user.job_set.count > 0 %}
+                    <div class="text-bold text-icon">
+                        <i class="fi fi-rr-e-learning"></i>
+                        Опубликованных вакансий: {{ user.job_set.count }}
+                    </div>
+                    {% endif %}
+                    <div class="text-bold text-icon">
+                        <i class="fi fi-rr-time-oclock"></i>
+                        Последняя активность: {{ user.last_login }}
+                    </div>
+                </div>
+                {% if user.about %}
+                    <div class="text-muted mt-2">{{ user.about | truncatewords:30 }}</div>
+                {% endif %}
             </div>
             {% endfor %}
             {% include 'pagination.html' %}
