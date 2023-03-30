@@ -12,7 +12,7 @@
             <div class="card card-user">
                 <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                 <h2><a href="{% url 'developer' pk=user.id %}">{{ user.name }}</a></h2>
-                <div class="subinfo text-muted d-flex mb-3">
+                <div class="subinfo text-muted d-flex flex-wrap">
                     <div class="text-bold text-icon">
                         <i class="fi fi-rr-marker"></i>
                         {% if not user.country and not user.city %}
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 {% if user.specialization %}
-                <div class="tags d-flex">
+                <div class="tags d-flex mt-2">
                     <span class="tag">{{ user.specialization }}</span>
                 </div>
                 {% endif %}

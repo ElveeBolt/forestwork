@@ -36,7 +36,7 @@
             <div class="subtitle text-muted">Несколько преимуществ нашего сервиса по поиску работы</div>
         </div>
         <div class="card">
-            <div class="row">
+            <div class="row align-items-center">
                 <div class="col-lg-6">
                     <div class="card-featured">
                         <i class="fi fi-rr-briefcase"></i>
@@ -91,7 +91,7 @@
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="salary">{{ job.salary }}$</div>
                         <div class="description mb-3">{{ job.description | truncatewords:20 }}</div>
-                        <div class="subinfo text-bold text-muted d-flex">
+                        <div class="subinfo text-bold text-muted d-flex flex-wrap">
                             <div class="text-icon">
                             <i class="fi fi-rr-marker"></i>
                             {% if not job.country and not job.city %}
@@ -123,7 +123,7 @@
                 <div class="card card-user">
                     <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                     <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                    <div class="subinfo text-muted d-flex">
+                    <div class="subinfo text-muted d-flex flex-wrap">
                         <div class="text-bold text-icon">
                             <i class="fi fi-rr-marker"></i>
                             {% if not user.country and not user.city %}
@@ -160,7 +160,7 @@
                 <div class="card card-user">
                     <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                     <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                    <div class="subinfo text-muted d-flex">
+                    <div class="subinfo text-muted d-flex flex-wrap">
                         <div class="text-bold text-icon">
                             <i class="fi fi-rr-marker"></i>
                             {% if not user.country and not user.city %}

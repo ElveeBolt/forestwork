@@ -12,7 +12,7 @@
             <div class="card card-user">
                 <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                 <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
-                <div class="subinfo text-muted d-flex">
+                <div class="subinfo text-muted d-flex flex-wrap">
                     <div class="text-bold text-icon">
                         <i class="fi fi-rr-marker"></i>
                         {% if not user.country and not user.city %}
