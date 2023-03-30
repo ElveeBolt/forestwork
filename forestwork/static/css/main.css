@@ -143,6 +143,10 @@ legend {
     float: left;
 }
 
+.text-bold{
+    font-weight: 500;
+}
+
 .nav-pills .nav-item {
     margin-right: 15px;
 }
@@ -388,13 +392,8 @@ legend {
     font-size: 24px;
 }
 
-
-.card .subinfo {
-    font-weight: 500;
-}
-
 .card .subinfo div{
-    margin-right: 20px;
+    margin-right: 15px;
 }
 
 
@@ -415,6 +414,23 @@ legend {
     padding: 15px;
     background: var(--main-bg);
     margin-bottom: 15px;
+}
+
+.card-user {
+    padding-left: 90px;
+}
+
+.card-user .avatar {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.card-user .tag {
+    display: block;
+    background: var(--main-bg);
+    padding: 5px 15px;
+    border-radius: 6px;
 }
 
 .comment {
@@ -517,10 +533,6 @@ legend {
 
 .user-profile .name {
     font-size: 22px;
-    font-weight: 500;
-}
-
-.user-profile .location {
     font-weight: 500;
 }
 
