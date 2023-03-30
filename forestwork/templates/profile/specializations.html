@@ -10,22 +10,28 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-heading">
-                    <h2>Контактная информация</h2>
-                    <div class="subtitle">Чтобы внести изменения в контактную информацию заполните форму ниже</div>
+                    <h2>Специализация</h2>
+                    <div class="subtitle">Чтобы внести изменения в специализацию заполните форму ниже</div>
                 </div>
                 <form method="POST">
                     {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="{{ form.specialization.auto_id }}" class="form-label">{{ form.specialization.label }}</label>
-                        {{ form.specialization }}
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="mb-3">
+                                <label for="{{ form.specialization.auto_id }}" class="form-label">{{ form.specialization.label }}</label>
+                                {{ form.specialization }}
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-3">
+                                <label for="{{ form.exp.auto_id }}" class="form-label">{{ form.exp.label }}</label>
+                                {{ form.exp }}
+                            </div>
+                        </div>
                     </div>
-                     <div class="mb-3">
+                    <div class="mb-3">
                         <label for="{{ form.remote_type.auto_id }}" class="form-label">{{ form.remote_type.label }}</label>
                         {{ form.remote_type }}
-                    </div>
-                    <div class="mb-3">
-                        <label for="{{ form.exp.auto_id }}" class="form-label">{{ form.exp.label }}</label>
-                        {{ form.exp }}
                     </div>
                     <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-disk"></i>Сохранить изменения</button>
                 </form>

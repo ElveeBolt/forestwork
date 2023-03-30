@@ -26,21 +26,39 @@
                 </div>
             </div>
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                {% if user.about %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link btn btn-with-icon active" id="pills-about-tab" data-bs-toggle="pill" data-bs-target="#pills-about" type="button" role="tab" aria-controls="pills-about" aria-selected="true">
                         <i class="fi fi-rr-id-badge"></i>
                         Обо мне
                     </button>
                 </li>
-                {% endif %}
                 <li class="nav-item" role="presentation">
                     <button class="nav-link btn btn-with-icon" id="pills-contacts-tab" data-bs-toggle="pill" data-bs-target="#pills-contacts" type="button" role="tab" aria-controls="pills-contacts" aria-selected="false"><i class="fi fi-rr-at"></i>Контакты</button>
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                {% if user.about %}
                 <div class="tab-pane fade show active" id="pills-about" role="tabpanel" aria-labelledby="pills-about-tab" tabindex="0">
+                    {% if user.type == 0 %}
+                    <div class="card">
+                        <div class="card-heading">
+                            <h2>Специализация и опыт работы</h2>
+                            <div class="subtitle">Информация касательно направления и опыта работы</div>
+                        </div>
+                        {% if user.exp or user.specialization %}
+                        <ul class="list-unstyled list-contacts mb-0">
+                            {% if user.exp %}
+                            <li><span class="left">Опыт работы:</span><span class="right">{{ user.get_exp_display }}</span></li>
+                            {% endif %}
+                            {% if user.specialization %}
+                            <li><span class="left">Специализация:</span><span class="right">{{ user.specialization }}</span></li>
+                            {% endif %}
+                        </ul>
+                        {% else %}
+                        Пользователь не указал данную информацию
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                    {% if user.about %}
                     <div class="card">
                         <div class="card-heading">
                             <h2>Обо мне</h2>
@@ -48,8 +66,8 @@
                         </div>
                         {{ user.about | linebreaks }}
                     </div>
+                    {% endif %}
                 </div>
-                {% endif %}
                 <div class="tab-pane fade" id="pills-contacts" role="tabpanel" aria-labelledby="pills-contacts-tab" tabindex="0">
                     <div class="card">
                         <div class="card-heading">
