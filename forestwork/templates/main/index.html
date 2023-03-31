@@ -23,7 +23,7 @@
                     <a href="{% url 'jobs' %}" class="btn btn-with-icon"><i class="fi fi-rr-briefcase"></i>Смотреть вакансии</a>
                 </div>
             </div>
-        <div class="col-5">
+        <div class="col-lg-5 d-none d-lg-block">
             <img style="width: 100%" src="{% static 'img/home_image.png' %}" alt="">
         </div>
         </div>
@@ -119,7 +119,7 @@
         </div>
         <div class="row">
             {% for user in employer_list %}
-            <div class="col-6">
+            <div class="col-lg-6">
                 <div class="card card-user">
                     <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                     <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>
@@ -156,7 +156,7 @@
         </div>
         <div class="row">
             {% for user in developer_list %}
-            <div class="col-6">
+            <div class="col-lg-6">
                 <div class="card card-user">
                     <div class="avatar avatar-mini">{{ user.username|slice:"2" }}</div>
                     <h2><a href="{% url 'employer' pk=user.id %}">{{ user.name }}</a></h2>

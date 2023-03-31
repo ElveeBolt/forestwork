@@ -122,7 +122,7 @@
                         <h2><a href="{% url 'job' pk=job.id %}">{{ job.title }}</a></h2>
                         <div class="salary">{{ job.salary }}$</div>
                         <div class="description mb-3">{{ job.description | truncatewords:30 }}</div>
-                        <div class="subinfo text-muted d-flex">
+                        <div class="subinfo text-bold text-muted d-flex">
                             <div class="location text-icon">
                             <i class="fi fi-rr-marker"></i>
                             {% if not job.country and not job.city %}

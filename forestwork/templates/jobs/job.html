@@ -17,8 +17,8 @@
         <div class="col-lg-8">
             <div class="card">
                 <div class="card-job-contact d-flex justify-content-between align-items-center mb-3">
-                    <div class="avatar avatar-mini">{{ job.user.username|slice:":2" }}</div>
                     <div class="job-contact-info">
+                        <div class="avatar avatar-mini">{{ job.user.username|slice:":2" }}</div>
                         <div class="mb-1"><a href="{% url 'employer' pk=job.user.id %}">{{ job.user.name }}</a></div>
                         {% if job.user.website %}
                             <div class="text-muted">{{ job.user.website }}</div>

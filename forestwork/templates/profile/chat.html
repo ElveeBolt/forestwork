@@ -45,7 +45,7 @@
                     </div>
                     {% for message in chat_messages %}
                     <div class="row message-row {% if message.user == user %}justify-content-end chat-right{% endif %}">
-                        <div class="col-7">
+                        <div class="col-lg-7">
                             <div class="chat-message mb-3">
                                 <div class="avatar avatar-mini">{{ message.user.username|slice:":2" }}</div>
                                 <div class="chat-text mb-1">
@@ -62,10 +62,10 @@
                 <form method="POST">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-9">
+                        <div class="col-md-9 mb-sm-3 mb-md-0">
                             {{ form.message }}
                         </div>
-                        <div class="col-3">
+                        <div class="col-md-3">
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-primary btn-with-icon"><i class="fi fi-rr-envelope"></i>Отправить</button>
                             </div>

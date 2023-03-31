@@ -439,11 +439,16 @@ legend {
 }
 
 .card-job-contact {
-    position: relative;
     min-height: 50px;
-    padding-left: 60px;
     padding-bottom: 15px;
     border-bottom: 1px solid var(--color-border);
+    flex-wrap: wrap;
+}
+
+.job-contact-info{
+    position: relative;
+    padding-left: 60px;
+    min-height: 50px;
 }
 
 .card-job-contact .avatar{
@@ -451,6 +456,8 @@ legend {
     left: 0;
     top: 0;
 }
+
+
 
 .status{
     display: flex;
@@ -964,5 +971,40 @@ table.dataTable.no-footer {
     section .section-heading .btns {
         position: relative;
         margin-top: 15px;
+    }
+}
+
+@media (max-width: 768px){
+    .header h1 {
+        font-size: 22px;
+    }
+    .header .subtitle {
+        font-size: 13px;
+    }
+    .card h2 {
+        font-size: 18px;
+    }
+    .card .card-heading .subtitle {
+        font-size: 13px;
+    }
+    .job-contact-info {
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .job-status {
+        position: relative;
+        right: 0;
+        top: 0;
+        margin-top: 10px;
+        display: flex;
+    }
+
+    .list-contacts li {
+        display: block;
+    }
+
+    .list-contacts li span{
+        display: block;
     }
 }
